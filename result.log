@@ -1,0 +1,173 @@
+ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_bzero:      [OK] [OK] [OK] [OK] 
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memmove:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_isalpha:    [OK] 
+ft_isdigit:    [OK] 
+ft_isalnum:    [OK] 
+ft_isascii:    [OK] 
+ft_isprint:    [OK] 
+ft_toupper:    [OK] 
+ft_tolower:    [OK] 
+ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strrchr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strnstr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_calloc:     [OK] [OK] [OK] [OK] [OK] 
+ft_strdup:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_substr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {not protected}[OK] 
+ft_strjoin:    [OK] [OK] [OK] [OK] [OK] {not protected}
+ft_strtrim:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {not protected}
+ft_split:      [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {not protected}
+ft_itoa:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strmapi:    [OK] [OK] [FAILED] [OK] [CRASH] {not protected}
+[fail]: your strmapi did not set \0 at the end of the string
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmapi(i, b[i]);
+	b2[size] = 0;
+	char *ret = ft_strmapi(b, f_strmapi);
+	if (!memcmp(b2, ret, size + 1))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strmapi: |owguvnjl(}rt-/A|
+  ft_strmapi: |owguvnjl(}rt-/|
+
+[crash]: you did not protect your malloc return
+Test code:
+	char *b = "override this !";
+
+	char *newstr = ft_strmapi(b, f_strmapi);
+	if (newstr == ((void*)0))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+ft_putchar_fd: [OK] [OK] 
+ft_putstr_fd:  [OK] [OK] {not protected}
+ft_putendl_fd: [OK] [OK] {not protected}
+ft_putnbr_fd:  [OK] [OK] [OK] [OK] [OK] 
+ft_lstnew:     [OK] [OK] [OK] [OK] 
+ft_lstadd_front: [FAILED] [FAILED] [CRASH] 
+[fail]: your lstadd_front does not work with basic input
+Test code:
+	t_list *l = lstnew(strdup("nyacat"));
+	t_list *n = lstnew(strdup("OK"));
+
+	ft_lstadd_front(&l, n);
+	if (l == n && !strcmp(l->content, "OK"))
+	{
+		exit(TEST_SUCCESS);
+	}
+	exit(TEST_FAILED);
+
+Diffs:
+lstadd_front: |0x5eb857bb77f0|
+ft_lstadd_front: |0x5eb857bb77b0|
+
+[fail]: your lstadd_front does not work with basic input
+Test code:
+	t_list *l = lstnew(strdup("nyacat"));
+	t_list *n = lstnew(strdup("OK"));
+
+	ft_lstadd_front(&l, n);
+	if (l == n && !strcmp(l->content, "OK"))
+	{
+		free(l->next);
+		free(l);
+		exit(TEST_SUCCESS);
+	}
+	free(l->next);
+	free(l);
+	exit(TEST_FAILED);
+
+Diffs:
+lstadd_front: |0x5eb857bb77f0|
+ft_lstadd_front: |0x5eb857bb77b0|
+
+[crash]: your lstadd_front does not work with null node input
+Test code:
+	t_list *l = ((void*)0);
+	t_list *n = lstnew(strdup("OK"));
+
+	ft_lstadd_front(&l, n);
+	if (l == n && !strcmp(l->content, "OK"))
+	{
+		free(l->next);
+		free(l);
+		exit(TEST_SUCCESS);
+	}
+	free(l->next);
+	free(l);
+	exit(TEST_FAILED);
+
+
+ft_lstsize:    [OK] [OK] 
+ft_lstlast:    [OK] [OK] 
+ft_lstadd_back:[OK] [OK] [CRASH] 
+[crash]: your lstadd_back does not work with null node input
+Test code:
+	t_list *l = ((void*)0);
+	t_list *n = lstnew(strdup("OK"));
+
+	ft_lstadd_back(&l, n);
+	if (l == n && !strcmp(l->content, "OK"))
+	{
+		free(l->next);
+		free(l);
+		exit(TEST_SUCCESS);
+	}
+	free(l->next);
+	free(l);
+	exit(TEST_FAILED);
+
+
+ft_lstdelone:  [OK] {not protected}
+ft_lstclear:   [FAILED] [NO CRASH] [OK] {not protected}
+[fail]: your lstclear does not work with basic input
+Test code:
+	t_list *l = lstnew(strdup("nyancat"));
+
+	l->next = lstnew(strdup("#TEST#"));
+	ft_lstclear(&l, lstdelone_f);
+	write(2, "", 1);
+	if (!l)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+    lstclear: |(nil)|
+ ft_lstclear: |0x5eb857bb7800|
+
+[no crash]: your lstclear does not free the list
+Test code:
+	t_list *l = lstnew(strdup("nyancat"));
+	t_list *tmp;
+
+	l->next = lstnew(strdup("#TEST#"));
+	tmp = l->next;
+	ft_lstclear(&l, lstdelone_f);
+	write(2, "", 1);
+	if (!l)
+	{
+		free(tmp);
+		exit(TEST_SUCCESS);
+	}
+	exit(TEST_FAILED);
+
+
+ft_lstiter:    [OK] {protected}
+ft_lstmap:     [OK] {protected}
+ft_striteri:   [OK] [OK] {not protected}
