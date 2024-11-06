@@ -19,28 +19,28 @@ OBJS = ${SRCS:.c=.o}
 
 OBJSALL = ${SRCSALL:.c=.o} 
 
-LIB = libft.a
+NAME = libft.a
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -I ./
 
+all: ${NAME}
+
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${LIB}:	${OBJS}
-	ar -rsc ${LIB} ${OBJS}
+${NAME}: ${OBJS}
+	ar -rsc ${NAME} ${OBJS}
 
 bonus:	${OBJSALL}
-	ar -rsc ${LIB} ${OBJSALL}
-
-all:	${LIB}
+	ar -rsc ${NAME} ${OBJSALL}
 
 clean:
 	rm -f ${OBJSALL}
 
-fclean:	clean;
-	rm -f ${LIB}
+fclean:	clean
+	rm -f ${NAME}
 
 re:	fclean all
 

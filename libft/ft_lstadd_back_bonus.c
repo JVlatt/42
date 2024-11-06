@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:48:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/03 22:38:11 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:10:41 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -15,9 +15,13 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*end;
 
-	if (lst && new)
+	if (!lst)
+		return ;
+	if (!*lst)
 	{
-		end = ft_lstlast(*lst);
-		end->next = new;
+		*lst = new;
+		return ;
 	}
+	end = ft_lstlast(*lst);
+	end->next = new;
 }
