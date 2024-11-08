@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 20:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/03 22:02:55 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/10/21 15:09:11 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/11/08 20:04:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	char	*destcpy;
-	char	*srccpy;
-	int		i;
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-	if (!dest && !src)
-		return (NULL);
-	destcpy = (char *) dest;
-	srccpy = (char *) src;
-	i = 0;
-	if (dest <= src)
-	{
-		while (n--)
-			*destcpy++ = *srccpy++;
-	}
-	else if (dest > src)
-	{
-		i = n - 1;
-		while (i >= 0)
-		{
-			destcpy[i] = srccpy[i];
-			i--;
-		}
-	}
-	return (dest);
-}
+# include <unistd.h>
+# include <stdarg.h>
+
+size_t	ft_strlen(const char *str);
+int		ft_putuinbr_base(unsigned int nbr, char *base);
+int		ft_putulnbr_base(unsigned long nbr, char *base);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+int		ft_putnbr(int n);
+int		ft_putunbr(unsigned int n);
+int		ft_putptr(void *ptr);
+int		ft_printf(const char *str, ...);
+
+#endif

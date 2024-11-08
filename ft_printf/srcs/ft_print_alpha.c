@@ -1,33 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_print_alpha.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 11:29:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/03 22:09:58 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/11/08 11:37:12 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/11/08 18:51:54 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_putchar(char c)
 {
-	size_t	i;
+	write (1, &c, 1);
+	return (1);
+}
 
+int	ft_putstr(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (ft_putstr("(null)"));
 	i = 0;
-	if (size > 0)
+	while (str[i])
 	{
-		while (src[i] && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	while (src[i])
-	{
+		ft_putchar(str[i]);
 		i++;
 	}
 	return (i);
+}
+
+int	ft_putptr(void *ptr)
+{
+	int	len;
+
+	len = 0;
+	if (!ptr)
+		len += ft_putstr("(nil)");
+	else
+	{
+		len += ft_putstr("0x");
+		len += ft_putulnbr_base((unsigned long) ptr, "0123456789abcdef");
+	}
+	return (len);
 }

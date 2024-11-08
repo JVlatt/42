@@ -1,51 +1,36 @@
-LIBC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-		ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
-		ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
-		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
-		ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c 
+SRC =	ft_print_alpha.c ft_printf.c ft_print_num.c
 
-ADDITIONAL =	ft_itoa.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-				ft_split.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_striteri.c
+SRCS = ${addprefix ${CDIR},${SRC}}
 
-BONUS =	ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
-		ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
-		ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
+NAME = libftprintf.a
 
-SRCS = ${LIBC} ${ADDITIONAL}
+CDIR = ./srcs/
 
-SRCSALL = ${LIBC} ${ADDITIONAL} ${BONUS}
+HEADDIR = ./includes/
 
 OBJS = ${SRCS:.c=.o}
 
-OBJSALL = ${SRCSALL:.c=.o} 
-
-LIB = libft.a
-
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I ./
+CFLAGS = -Wall -Werror -Wextra
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c -I ${HEADDIR} $< -o ${<:.c=.o}
 
-${LIB}:	${OBJS}
-	ar -rsc ${LIB} ${OBJS}
+${NAME}: ${OBJS}
+	ar -rsc ${NAME} ${OBJS}
 
-bonus:	${OBJSALL}
-	ar -rsc ${LIB} ${OBJSALL}
+all: ${NAME} 
 
-all:	${LIB}
+exec: ${OBJS}
+	${CC} ${CFLAGS} -I ${HEADDIR} ${OBJS} -o printf_test
 
 clean:
-	rm -f ${OBJSALL}
+	rm -f ${OBJS}
 
 fclean:	clean;
-	rm -f ${LIB}
+	rm -f ${NAME}
 
 re:	fclean all
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCSALL)
-	gcc -nostartfiles -shared -o libft.so $(OBJSALL)
 
 .PHONY: all clean fclean re bonus
