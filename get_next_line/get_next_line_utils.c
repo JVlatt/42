@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:13:59 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/12 17:17:31 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:49:55 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -24,7 +24,7 @@ int	ft_strchr_index(const char *str, int c)
 			return (i);
 		i++;
 	}
-	if (str[i] == i)
+	if (str[i] == uc)
 		return (i);
 	else
 		return (-1);
@@ -84,4 +84,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = 0;
 	return (str);
+}
+
+void	*ft_calloc_bzero(size_t nmemb, size_t size)
+{
+	void	*ptr;
+	size_t	n;
+
+	n = nmemb * size;
+	ptr = malloc(n);
+	if (!ptr)
+		return (NULL);
+	while(n--)
+	{
+		*((char *)(ptr)) = 0;
+		ptr++;
+	}
+	return (ptr);
 }

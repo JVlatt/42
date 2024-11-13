@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/12 18:27:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:46:48 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strndup(const char *src, size_t size);
 int		ft_strchr_index(const char *str, int c);
-
+void	*ft_calloc_bzero(size_t nmemb, size_t size);
 #endif

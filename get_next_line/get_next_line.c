@@ -6,49 +6,47 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:38:36 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/12 18:49:49 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:49:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	char		buffer [BUFFER_SIZE];
+	char		buffer [BUFFER_SIZE + 1];
 	char		*out;
-	static char	*savedbuffer;
+	static char	*stash;
 	size_t		len;
 	int			i;
 	
-	if(!savedbuffer)
+	if(!stash)
+		stash = ft_calloc_bzero(1,1);
+	else if (stash[0] && ((i = ft_strchr_index(stash, '\n')) >= 0))
 	{
-		savedbuffer = malloc (1);
-		savedbuffer[0] = 0;
-	}
-	else if (savedbuffer[0] && ((i = ft_strchr_index(savedbuffer, '\n')) >= 0))
-	{
-		out = ft_strndup(savedbuffer, i + 1);
-		savedbuffer = ft_strndup(savedbuffer + i + 1, ft_strlen(savedbuffer) - i);
+		out = ft_strndup(stash, i + 1);
+		stash = ft_strndup(stash + i + 1, ft_strlen(stash) - i);
 		return (out);
 	}
 	i = 0;
-	len = read(fd, buffer, sizeof(buffer));
+	len = read(fd, buffer, BUFFER_SIZE);
+	buffer[BUFFER_SIZE] = 0;
 	if (len <= 0)
 		return (NULL);
 	if ((i = ft_strchr_index(buffer, '\n')) >= 0)
 	{
-		if (savedbuffer[0])
-			out = ft_strjoin(savedbuffer, ft_strndup(buffer, i));
+		if (stash[0])
+			out = ft_strjoin(stash, ft_strndup(buffer, i + 1));
 		else
 			out = ft_strndup(buffer, i + 1);
 		if (!out)
 			return (NULL);
-		if (buffer[i + 1] != 0)
-			savedbuffer = ft_strndup(buffer + i + 1, BUFFER_SIZE - i);
+		if (buffer[i] != 0)
+			stash = ft_strndup(buffer + i + 1, BUFFER_SIZE + 1 - i);
 		else
-			free(savedbuffer);
+			free(stash);
 		return (out);
 	}
-	savedbuffer = ft_strjoin(savedbuffer, ft_strndup(buffer, BUFFER_SIZE));
+	stash = ft_strjoin(stash, ft_strndup(buffer, BUFFER_SIZE));
 	return (get_next_line(fd));
 }
 
