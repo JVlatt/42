@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:13:59 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/13 16:47:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:58:01 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -35,7 +35,7 @@ int	ft_strchr_index(char *str, int c)
 size_t	ft_strlen(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!str)
 		return (0);
@@ -46,13 +46,17 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strndup(char *src, size_t size)
+char	*ft_strtrim(char *src, int start, int end)
 {
 	unsigned int	i;
 	char			*dup;
+	size_t			size;
 
-	i = 0;
-	dup = malloc(sizeof(char) * (size + 1));
+	size = end - start;
+	if (!src)
+		return (NULL);
+	i = start;
+	dup = ft_calloc(size + 1, sizeof(char));
 	if (!dup)
 		return (NULL);
 	while (src[i] && i < size)
@@ -61,11 +65,10 @@ char	*ft_strndup(char *src, size_t size)
 		i++;
 	}
 	dup[i] = '\0';
-//	free(src);
 	return (dup);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *stash, char *buffer)
 {
 	char	*str;
 	int		i;
@@ -73,26 +76,22 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	if (!s1)
-		s1 = ft_calloc(1, sizeof(char));
-	if (!s1 || !s2)
+	if (!stash)
+		stash = ft_calloc(1, sizeof(char));
+	if (!stash || !buffer)
 		return (NULL);
-	str = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	str = ft_calloc(ft_strlen(stash) + ft_strlen(buffer) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
-	while (s1[i])
+	if (stash[i])
+		while (stash[i++])
+			str[i] = stash[i];
+	while (buffer[j])
 	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
+		str[i++] = buffer[j++];
 	}
 	str[i] = 0;
-	free(s1);
+	free(stash);
 	return (str);
 }
 
@@ -107,7 +106,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ptr = malloc(n);
 	if (!ptr)
 		return (NULL);
-	while(n--)
+	while (n--)
 	{
 		((char *)ptr)[i] = 0;
 		i++;

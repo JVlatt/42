@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:46:58 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/08 20:03:55 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:29:47 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -60,3 +60,38 @@ int	ft_printf(const char *str, ...)
 	}
 	return (len);
 }
+/*
+#include <stdio.h>
+int main()
+{
+	int p = 0;
+	p = printf("prinft : %X\n", 0);
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %X\n", 0);
+	printf("%d\n", p);
+	
+	p = printf("prinft : %x\n", 0);
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %x\n", 0);
+	printf("%d\n", p);
+	
+	p = printf("prinft : %d\n", 0);
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %d\n", 0);
+	printf("%d\n", p);
+	
+	p = printf("prinft : %u\n", 0);
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %u\n", 0);
+	printf("%d\n", p);
+	
+	p = printf("prinft : %p\n", &p);
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %p\n", &p);
+	printf("%d\n", p);
+	
+	p = printf("prinft : %s\n", "0");
+	printf("%d\n", p);
+	p = ft_printf("ft_prinft : %s\n", "0");
+	printf("%d\n", p);
+}*/

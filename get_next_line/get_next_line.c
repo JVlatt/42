@@ -6,15 +6,16 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:38:36 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/13 17:17:58 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:58:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+
 static char	*read_to_next_line(int fd, char *stash)
 {
 	char		*buffer;
 	size_t		len;
-	
+
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
@@ -34,24 +35,28 @@ static char	*read_to_next_line(int fd, char *stash)
 	return (stash);
 }
 
-
 char	*get_next_line(int fd)
 {
 	char		*out;
 	static char	*stash;
 	int			i;
-	
+
 	if (!fd || fd < 0 || BUFFER_SIZE < 1)
-			return (NULL);
+		return (NULL);
 	stash = read_to_next_line(fd, stash);
 	if (!stash)
 		return (NULL);
 	i = ft_strchr_index(stash, '\n') + 1;
-	out = ft_strndup(stash, i);
-	stash = ft_strndup(stash + i, ft_strlen(stash) - i);
+	if (i <= 0)
+	{
+		free(stash);
+		return (NULL);
+	}
+	out = ft_strtrim(stash, 0, i);
+	stash = ft_strtrim(stash, i, ft_strlen(stash));
 	return (out);
 }
-/*
+
 #include <stdio.h>
 #include <fcntl.h>
 int	main(int argc, char **argv)
@@ -66,7 +71,7 @@ int	main(int argc, char **argv)
 			i = atoi(argv[2]);
 			while (i--)
 			{
-				line = get_next_line(NULL);
+				line = get_next_line(fd);
 				if (line)
 					printf("%s", line);
 				free(line);
@@ -74,4 +79,4 @@ int	main(int argc, char **argv)
 		close(fd);
 		return (0);
 	}
-}*/
+}
