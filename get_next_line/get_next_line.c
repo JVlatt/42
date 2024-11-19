@@ -6,22 +6,76 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:38:36 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/18 12:58:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:57:50 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+static char	*extract_line(char *stash)
+{
+	int		i;
+	char	*out;
+	int		len;
+	
+	len = 0;
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		i++;
+	len = i;
+	out = ft_calloc(len + 1, sizeof(char));
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		out[i] = stash[i];
+		i++;
+	}
+	out[i] = 0;
+	return (out);
+}
+
+static char	*get_remaining_buffer(char *stash)
+{
+	int		i;
+	int		j;
+	char	*out;
+	int		len;
+	
+	len = 0;
+	i = 0;
+	j = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		i++;
+	len = ft_strlen(stash + i);
+	out = ft_calloc(len + 1, sizeof(char));
+	if (!out)
+		return (NULL);
+	while (j < len)
+	{
+		out[j] = stash[i];
+		i++;
+		j++;
+	}
+	out[j] = 0;
+	free(stash);
+	return (out);
+}
 
 static char	*read_to_next_line(int fd, char *stash)
 {
 	char		*buffer;
 	size_t		len;
 
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buffer)
-		return (NULL);
 	len = 1;
 	while (len > 0 && (ft_strchr_index(stash, '\n') < 0))
 	{
+		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		if (!buffer)
+			return (NULL);
 		len = read(fd, buffer, BUFFER_SIZE);
 		if (len <= 0)
 		{
@@ -31,7 +85,6 @@ static char	*read_to_next_line(int fd, char *stash)
 		buffer[len] = 0;
 		stash = ft_strjoin(stash, buffer);
 	}
-	free (buffer);
 	return (stash);
 }
 
@@ -39,21 +92,14 @@ char	*get_next_line(int fd)
 {
 	char		*out;
 	static char	*stash;
-	int			i;
 
 	if (!fd || fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	stash = read_to_next_line(fd, stash);
 	if (!stash)
 		return (NULL);
-	i = ft_strchr_index(stash, '\n') + 1;
-	if (i <= 0)
-	{
-		free(stash);
-		return (NULL);
-	}
-	out = ft_strtrim(stash, 0, i);
-	stash = ft_strtrim(stash, i, ft_strlen(stash));
+	out = extract_line(stash);
+	stash = get_remaining_buffer(stash);
 	return (out);
 }
 

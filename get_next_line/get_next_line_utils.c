@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:13:59 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/18 12:58:01 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:16:26 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -45,28 +45,31 @@ size_t	ft_strlen(char *str)
 	}
 	return (i);
 }
-
+/*
 char	*ft_strtrim(char *src, int start, int end)
 {
-	unsigned int	i;
-	char			*dup;
-	size_t			size;
+	int		i;
+	int		j;
+	char	*dup;
+	size_t	size;
 
-	size = end - start;
 	if (!src)
 		return (NULL);
-	i = start;
+	size = end - start;
 	dup = ft_calloc(size + 1, sizeof(char));
 	if (!dup)
 		return (NULL);
-	while (src[i] && i < size)
+	j = start;
+	i = 0;
+	while (src[j] && j < end)
 	{
-		dup[i] = src[i];
+		dup[i] = src[j];
 		i++;
+		j++;
 	}
 	dup[i] = '\0';
 	return (dup);
-}
+}*/
 
 char	*ft_strjoin(char *stash, char *buffer)
 {
@@ -84,14 +87,18 @@ char	*ft_strjoin(char *stash, char *buffer)
 	if (!str)
 		return (NULL);
 	if (stash[i])
-		while (stash[i++])
+		while (stash[i])
+		{
 			str[i] = stash[i];
+			i++;
+		}
 	while (buffer[j])
 	{
 		str[i++] = buffer[j++];
 	}
 	str[i] = 0;
 	free(stash);
+	free(buffer);
 	return (str);
 }
 
