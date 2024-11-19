@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:46:58 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/18 11:29:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:24:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -40,6 +40,8 @@ int	ft_printf(const char *str, ...)
 	int		len;
 	va_list	parameters;
 
+	if (!str)
+		return (-1);
 	va_start(parameters, str);
 	len = 0;
 	i = 0;
@@ -93,5 +95,17 @@ int main()
 	p = printf("prinft : %s\n", "0");
 	printf("%d\n", p);
 	p = ft_printf("ft_prinft : %s\n", "0");
+	printf("%d\n", p);
+
+	char test[] = "\0";
+	p = printf("%s", test);
+	printf("%d\n", p);
+	p = ft_printf("%s", test);
+	printf("%d\n", p);
+
+	char *test2 = NULL; 
+	p = printf(test2);
+	printf("%d\n", p);
+	p = ft_printf(test2);
 	printf("%d\n", p);
 }*/
