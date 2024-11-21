@@ -15,7 +15,7 @@ char	*ft_strchr(char *str, int c)
 {
 	unsigned char	uc;
 
-	if (!str || !*str)
+	if (!str)
 		return (NULL);
 	uc = (unsigned char)c;
 	while (*str)
@@ -34,13 +34,11 @@ size_t	ft_strlen(char *str)
 {
 	int	i;
 
-	i = 0;
 	if (!str)
 		return (0);
+	i = 0;
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -54,8 +52,10 @@ char	*ft_strjoin(char *stash, char *buffer)
 	j = 0;
 	if (!stash)
 		stash = ft_calloc(1, sizeof(char));
+	if (!stash || !buffer)
+		return (NULL);
 	str = ft_calloc(ft_strlen(stash) + ft_strlen(buffer) + 1, sizeof(char));
-	if (!str || !stash || !buffer)
+	if (!str)
 		return (NULL);
 	while (stash[i])
 	{

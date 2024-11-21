@@ -19,6 +19,8 @@ static char	*extract_line(char *stash)
 
 	len = 0;
 	i = 0;
+	if (stash == NULL)
+		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
@@ -106,54 +108,32 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	out = extract_line(stash);
+	if (!out)
+		return (NULL);
 	stash = get_remaining_buffer(stash);
 	return (out);
 }
 
-/*#include <stdio.h>
-#include <fcntl.h>
-int	main(int argc, char **argv)
-{
-	int	fd;
-	int	i;
-	char *line;
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main(int argc, char **argv)
+// {
+// 	int	fd;
+// 	int	i;
+// 	char *line;
 
-	if (argc == 3)
-	{
-		fd = open(argv[1], O_RDONLY);
-			i = atoi(argv[2]);
-			while (i--)
-			{
-				line = get_next_line(fd);
-				if (line)
-					printf("%s", line);
-				free(line);
-			}
-		close(fd);
-		return (0);
-	}
-}*/
-/*
-#include <stdio.h>
-#include <fcntl.h>
-int    main(void)
-{
-    char *line;
-    char *name = "read_error.txt";
-    int fd = open(name, O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    line = get_next_line(10);
-    printf("%s\n", line);
-    free(line);
-    close(fd);
-    fd = open(name, O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    return (0);
-}*/
+// 	if (argc == 3)
+// 	{
+// 		fd = open(argv[1], O_RDONLY);
+// 			i = atoi(argv[2]);
+// 			while (i--)
+// 			{
+// 				line = get_next_line(fd);
+// 				if (line)
+// 					printf("%s", line);
+// 				free(line);
+// 			}
+// 		close(fd);
+// 		return (0);
+// 	}
+// }
