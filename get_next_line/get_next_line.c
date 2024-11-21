@@ -6,16 +6,17 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:38:36 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/20 18:26:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:26:18 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+
 static char	*extract_line(char *stash)
 {
 	int		i;
 	char	*out;
 	int		len;
-	
+
 	len = 0;
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
@@ -42,7 +43,7 @@ static char	*get_remaining_buffer(char *stash)
 	int		j;
 	char	*out;
 	int		len;
-	
+
 	len = 0;
 	i = 0;
 	j = 0;
@@ -61,7 +62,6 @@ static char	*get_remaining_buffer(char *stash)
 		return (NULL);
 	while (j < len)
 		out[j++] = stash[i++];
-	out[j] = 0;
 	free(stash);
 	return (out);
 }
