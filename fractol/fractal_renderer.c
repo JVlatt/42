@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/11/29 18:31:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:41:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,38 @@ static void	pixel_render(int x, int y, t_fractal *fractal)
 	int			color;
 	
 	i = 0;
+	//printf("C START X = %f\n C START Y = %f\n C STEP X = %f\n C STEP Y = %f\n ", fractal->c_start.x, fractal->c_start.y, fractal->c_step.x, fractal->c_step.y);
+
 	z.x = 0.0;
 	z.y = 0.0;
-
-	c.x = linear_interpolation(x, -2, 2, 0, WDW_WIDTH);
-	c.y = linear_interpolation(y, 2, -2, 0, WDW_HEIGHT);
-
+	
+	c.x = fractal->c_start.x + (x * fractal->c_step.x);
+	c.y = fractal->c_start.y - (y * fractal->c_step.y);
+	//printf("Rendering Pixel: x = %d, y = %d, c.x = %f, c.y = %f\n", x, y, c.x, c.y);
 	while (i < fractal->max_iteration)
 	{
 		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
-			color = linear_interpolation(i, BLACK, WHITE, 0, fractal->max_iteration);
-			ft_pixel_put(x, y, &fractal->img, color);
+			ft_pixel_put(x, y, &fractal->img, fractal->color_map[i]);
+			//printf ("Putting color %d at index %d in coordinates {%d,%d} \n", fractal->color_map[i], i, x, y);
 			return ;
 		}
 		i++;
 	}
-	ft_pixel_put(x, y, &fractal->img, NEON_ORANGE);
+	ft_pixel_put(x, y, &fractal->img, WHITE);
 }
 void	fractal_render(t_fractal *fractal)
 {
 	int	x;
 	int	y;
 
+	fractal->c_start.x = (linear_interpolation(0, -2, 2, 0, WDW_WIDTH) * fractal->zoom) + fractal->shift_x;
+    fractal->c_start.y = (linear_interpolation(0, 2, -2, 0, WDW_HEIGHT) * fractal->zoom) + fractal->shift_y;
+	//fractal->c_start.x = fractal->shift_x + (-2 * fractal->zoom);
+    //fractal->c_start.y = fractal->shift_y + (2 * fractal->zoom);
+    fractal->c_step.x = (4.0 * fractal->zoom) / WDW_WIDTH;
+    fractal->c_step.y = (4.0 * fractal->zoom) / WDW_HEIGHT;
 	y = -1;
 	while(++y < WDW_HEIGHT)
 	{
