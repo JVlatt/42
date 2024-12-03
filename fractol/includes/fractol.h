@@ -48,7 +48,7 @@
 #define ACID_YELLOW     0xFFFF33 // Acid Yellow (R=255, G=255, B=51)
 #define TURQUOISE       0x40E0D0 // Turquoise (R=64, G=224, B=208)
 
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <stdio.h>

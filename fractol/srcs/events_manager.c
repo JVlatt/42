@@ -46,10 +46,12 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
 	if (button == Button4)
 	{
+		printf("Mouse Coords are {%d,%d}\n", x , y);
 		fractal->zoom *= 0.95;
 	}
 	else if (button == Button5)
 	{
+		printf("Mouse Coords are {%d,%d}\n", x , y);
 		fractal->zoom *= 1.05;
 	}
 	else

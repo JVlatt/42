@@ -23,7 +23,7 @@ static void	pixel_render(int x, int y, t_fractal *fractal)
 	t_complex	z;
 	t_complex	c;
 	int			i;
-	int			color;
+	//int			color;
 	
 	i = 0;
 	//printf("C START X = %f\n C START Y = %f\n C STEP X = %f\n C STEP Y = %f\n ", fractal->c_start.x, fractal->c_start.y, fractal->c_step.x, fractal->c_step.y);
