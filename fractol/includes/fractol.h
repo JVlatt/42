@@ -92,7 +92,7 @@ void	fractal_render(t_fractal *fractal);
 int	key_handler(int keysym, t_fractal *fractal);
 int close_handler(t_fractal *fractal);
 int	mouse_handler(int button, int x, int y, t_fractal *fractal);
-void	init_color_map(t_fractal *fractal) ;
+void	update_color_map(t_fractal *fractal) ;
 
 double	linear_interpolation(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex	sum_complex(t_complex z1, t_complex z2);

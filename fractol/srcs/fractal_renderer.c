@@ -45,7 +45,7 @@ static void	pixel_render(int x, int y, t_fractal *fractal)
 		}
 		i++;
 	}
-	ft_pixel_put(x, y, &fractal->img, WHITE);
+	ft_pixel_put(x, y, &fractal->img, BLACK);
 }
 void	fractal_render(t_fractal *fractal)
 {
