@@ -4,7 +4,10 @@ SRC =	arg_parser.c \
 		main.c \
 		print_values.c \
 		basic_stack_operations.c \
-		stack_sorter.c
+		stack_sorter.c \
+		stack_move_precalc.c \
+		execute_actions.c \
+		utils.c
 
 SRCS = ${addprefix ${CDIR},${SRC}}
 

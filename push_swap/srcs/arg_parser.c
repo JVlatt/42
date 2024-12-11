@@ -61,9 +61,9 @@ t_list  *parse_args(int argc, char **args)
         if (is_valid_arg(arg_list, args[i]))
         {
             if(!arg_list)
-                arg_list = ft_lstnew(ft_atoi(args[i]));
+                arg_list = ft_lstnew(ft_atoi(args[i]), 'a');
             else
-                ft_lstadd_back(&arg_list, ft_lstnew(ft_atoi(args[i])));
+                ft_lstadd_back(&arg_list, ft_lstnew(ft_atoi(args[i]), 'a'));
         }
         else
         {

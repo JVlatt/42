@@ -10,11 +10,11 @@ int main (int argc, char **argv)
         argv++;
         stack_a = parse_args(argc - 1, argv);
         stack_b = NULL;
-        ft_print_stacks(stack_a, stack_b);
+        ft_print_stacks(&stack_a, &stack_b);
 		ft_stack_push(&stack_a, &stack_b);
 		ft_stack_push(&stack_a, &stack_b);
-        ft_print_stacks(stack_a, stack_b);
-		
+        ft_print_stacks(&stack_a, &stack_b);
+		sort_loop(&stack_a, &stack_b);
 		// ft_stack_swap(&stack_a);     
         // ft_print_stacks(stack_a, stack_b);  
 		// ft_stack_push(&stack_a, &stack_b);    

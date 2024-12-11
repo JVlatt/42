@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/10 17:27:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:51:57 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_lstadd_front(t_list **begin_list, t_list *new)
 	}
 }
 
-t_list	*ft_lstnew(int value)
+t_list	*ft_lstnew(int value, char stackid)
 {
 	t_list	*list_elem;
 
@@ -45,6 +45,7 @@ t_list	*ft_lstnew(int value)
 		return (NULL);
 	list_elem->value = value;
 	list_elem->next = NULL;
+	list_elem->stack_id = stackid;
 	return (list_elem);
 }
 

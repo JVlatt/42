@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:44:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/10 17:32:13 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:50:10 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,22 @@ void	ft_stack_swap(t_list **stack)
 void	ft_stack_push(t_list **from, t_list **to)
 {
 	t_list	*tmp;
-	
+
 	if (from)
 	{
 		tmp = (*from)->next;
 		(*from)->next = *to;
 		*to = *from;
-		*from = tmp;		
+		if (tmp)
+		{
+			*from = tmp;
+			if ((*from)->stack_id == 'a')
+				(*to)->stack_id = 'b';
+			else
+				(*to)->stack_id = 'a';
+		}
+		else
+			*from = NULL;
 	}
 }
 

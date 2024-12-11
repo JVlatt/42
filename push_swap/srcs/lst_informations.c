@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:26:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/10 18:43:46 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:40:54 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_lstsize(t_list *lst)
 	return (size);
 }
 
-int	ft_getlst_index(t_list *lst, int value)
+int	ft_getlst_index(t_list *lst, t_list *node_to_find)
 {
 	int		index;
 	t_list*	node;
@@ -45,7 +45,7 @@ int	ft_getlst_index(t_list *lst, int value)
 	node = lst;
 	while (node)
 	{
-		if (node->value == value)
+		if (node == node_to_find)
 			return (index);
 		index++;
 		node = node->next;
@@ -53,39 +53,33 @@ int	ft_getlst_index(t_list *lst, int value)
 	return (-1);
 }
 
-int	ft_lst_max_value(t_list *lst)
+t_list	*ft_lst_max_value(t_list *lst)
 {
-	int		max;
+	t_list	*max;
 	t_list	*node;
 	
 	node = lst;
-	if(node)
-		max = node->value;
-	else
-		return (0);
+	max = node;
 	while(node)
 	{
-		if(node->value > max)
-			max = node->value;
+		if(node->value > max->value)
+			max = node;
 		node = node -> next;
 	}
 	return (max);
 }
 
-int	ft_lst_min_value(t_list *lst)
+t_list	*ft_lst_min_value(t_list *lst)
 {
-	int		min;
+	t_list	*min;
 	t_list	*node;
 	
 	node = lst;
-	if(node)
-		min = node->value;
-	else
-		return (0);
+	min = node;
 	while(node)
 	{
-		if(node->value < min)
-			min = node->value;
+		if(node->value < min->value)
+			min = node;
 		node = node -> next;
 	}
 	return (min);
