@@ -36,7 +36,6 @@ static t_list	*get_cheapest_action(t_list *stack_source)
 	return (cheapest_node);	
 }
 
-#include <stdio.h>
 static void	execute_action(char *action_name, int count, t_list **stack_a, t_list **stack_b)
 {
 	int	i;
@@ -75,7 +74,7 @@ static void	execute_action(char *action_name, int count, t_list **stack_a, t_lis
 			ft_reverse_rotate(stack_a);
 			ft_reverse_rotate(stack_b);
 		}
-		printf("%s\n", action_name); //TEMP
+		ft_printf("%s\n", action_name); //TEMP
 		i++;
 	}
 	

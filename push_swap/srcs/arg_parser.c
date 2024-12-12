@@ -1,29 +1,5 @@
 #include "../includes/push_swap.h"
 
-static int ft_atoi(char *str)
-{
-    int result;
-    int sign;
-
-    result = 0;
-    sign = 1;
-    while ((*str >= 9 && *str <= 13) || *str == 32)
-        str++;
-    if (*str == '-' || *str == '+')
-    {
-        if(*str == '-')
-            sign *= -1;
-        str++;
-    }
-    while (*str >= '0' && *str <= '9')
-    {
-        result *= 10;
-        result += *str - '0';
-        str++;
-    }
-    return (result * sign);
-}
-
 static int ft_isnum(char *str)
 {
     while(*str)
@@ -67,7 +43,7 @@ t_list  *parse_args(int argc, char **args)
         }
         else
         {
-            ft_lstclear(&arg_list);
+            ft_lstclear(&arg_list, &delete_node_content);
             write(1,"Error\n",6);
             return (NULL);
         }

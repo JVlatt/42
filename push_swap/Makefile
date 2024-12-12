@@ -1,4 +1,14 @@
-SRC =	arg_parser.c \
+NAME = push_swap
+
+CC = gcc 
+CFLAGS = -Wall -Werror -Wextra
+LIBS = -Llibft -lft
+
+DIR_SRCS = srcs
+DIR_INCS = includes
+DIR_OBJS = .objs
+
+LST_SRCS =	arg_parser.c \
 		lst_operations.c \
 		lst_informations.c \
 		main.c \
@@ -9,37 +19,45 @@ SRC =	arg_parser.c \
 		execute_actions.c \
 		utils.c
 
-SRCS = ${addprefix ${CDIR},${SRC}}
+LST_OBJS = $(LST_SRCS:.c=.o)
+LST_INCS = push_swap.h
 
-NAME = push_swap
+SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})
+OBJS = $(addprefix $(DIR_OBJS)/, ${LST_OBJS})
+INCS = $(addprefix $(DIR_INCS)/, ${LST_INCS})
 
-CDIR = ./srcs/
+ERASE		=	\033[2K\r
+BLUE		=	\033[34m
+YELLOW		=	\033[33m
+GREEN		=	\033[32m
+END			=	\033[0m
 
-HEADDIR = ./includes/
+$(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
+	@ mkdir -p $(DIR_OBJS)
+	@ $(CC) -I $(DIR_INCS) -c $< -o $@
+	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
-OBJS = ${SRCS:.c=.o}
+all : libft ${NAME}
 
-CC = gcc
+$(NAME):	$(OBJS)
+	@ $(CC) $(OBJS) $(CFLAGS) ${LIBS} -o $@
+	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
-CFLAGS = -Wall -Werror -Wextra
-
-.c.o:
-	${CC} ${CFLAGS} -c -I ${HEADDIR} $< -o ${<:.c=.o}
-
-${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
-
-all: ${NAME} 
-
-debug:
-	${CC} ${CFLAGS} ${SRCS} -I ${HEADDIR} -g3 -o ${NAME}
+libft/libft.a :
+	@ make -C libft
 
 clean:
-	rm -f ${OBJS}
+	@ printf "$(YELLOW)$(DIR_OBJS) removed$(END)\n"
+	@ rm -rdf $(DIR_OBJS)
+	@ printf "libft : "
+	@ make clean -C libft
 
-fclean:	clean;
-	rm -f ${NAME}
+fclean:		clean
+	@ printf "$(YELLOW)$(NAME) removed$(END)\n"
+	@ rm -rf $(NAME) checker
+	@ printf "libft : "
+	@ make fclean -C libft
 
 re:	fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus libft

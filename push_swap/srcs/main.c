@@ -31,7 +31,7 @@ int main (int argc, char **argv)
 		// ft_stack_push(&stack_a, &stack_b);    
 		// ft_stack_push(&stack_a, &stack_b);    
         // ft_print_stacks(stack_a, stack_b);
-		ft_lstclear(&stack_a);  
-		ft_lstclear(&stack_b);  
+		ft_lstclear(&stack_a, &delete_node_content);  
+		ft_lstclear(&stack_b, &delete_node_content);  
     }
 }

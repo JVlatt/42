@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/10/30 15:21:22 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:50:27 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+void	ft_putstr_fd(char *s, int fd)
 {
-		free(node->actions);
-}
-
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
-		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	if (*s)
+		write(fd, s, ft_strlen(s));
 }

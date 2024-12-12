@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 16:54:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:23:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+# ifndef S_LIST
+#  define S_LIST
 typedef struct s_list
 {
     int     			value;
@@ -23,6 +25,10 @@ typedef struct s_list
 	struct s_actions	*actions;
 	char				stack_id;
 }   t_list;
+# endif
+
+#include "../libft/includes/ft_printf.h"
+#include "../libft/includes/libft.h"
 
 typedef struct s_actions
 {
@@ -45,10 +51,11 @@ t_list  *parse_args(int argc, char **args);
 
 //  Stack Custom Operations 
 
-void	ft_lstadd_back(t_list **lst, t_list *new_elem);
-void	ft_lstadd_front(t_list **begin_list, t_list *new);
+//void	ft_lstadd_back(t_list **lst, t_list *new_elem);
+//void	ft_lstadd_front(t_list **begin_list, t_list *new);
 t_list	*ft_lstnew(int value, char stackid);
-void	ft_lstclear(t_list **lst);
+void	delete_node_content(t_list *node);
+//void	ft_lstclear(t_list **lst);
 
 //	Stack Base Operations
 

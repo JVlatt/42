@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/23 16:53:02 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:50:46 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-		free(node->actions);
-}
+	size_t	i;
+	size_t	j;
 
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
-		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	if (size == 0)
+		return (ft_strlen(src));
+	i = 0;
+	while (dest[i] != '\0' && i < size)
+		i++;
+	j = i;
+	while (src[i - j] != '\0' && i < size - 1)
+	{
+		dest[i] = src[i - j];
+		i++;
+	}
+	if (j < size)
+		dest[i] = '\0';
+	return (j + ft_strlen(src));
 }

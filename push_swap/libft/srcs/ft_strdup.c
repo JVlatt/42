@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/27 10:20:52 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:50:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+char	*ft_strdup(const char *src)
 {
-		free(node->actions);
-}
+	unsigned int	i;
+	char			*dup;
 
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
+	i = 0;
+	dup = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!dup)
 		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	while (src[i])
+	{
+		dup[i] = src[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

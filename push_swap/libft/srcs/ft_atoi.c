@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/23 16:24:41 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:47:28 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+int	ft_atoi(const char *str)
 {
-		free(node->actions);
-}
+	int		result;
+	int		sign;
 
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
-		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	sign = 1;
+	result = 0;
+	while (*str != '\0' && ((*str >= 9 && *str <= 13) || *str == 32))
+		str++;
+	if (*str != '\0' && (*str == '+' || *str == '-'))
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - 48;
+		str++;
+	}
+	return (sign * result);
 }

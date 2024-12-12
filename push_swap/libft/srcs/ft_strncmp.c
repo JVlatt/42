@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/23 16:53:02 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:50:56 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-		free(node->actions);
-}
+	size_t			i;
+	unsigned char	*cp1;
+	unsigned char	*cp2;
 
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
-		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	cp1 = (unsigned char *) s1;
+	cp2 = (unsigned char *) s2;
+	i = 0;
+	while (cp1[i] && cp2[i] && i < n)
+	{
+		if (cp1[i] != cp2[i])
+		{
+			return (cp1[i] - cp2[i]);
+		}
+		i++;
+	}
+	if (i == n)
+		return (0);
+	return (cp1[i] - cp2[i]);
 }

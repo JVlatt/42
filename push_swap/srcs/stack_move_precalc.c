@@ -49,7 +49,6 @@ static void	get_moves_to_bottom(t_actions *actions, t_list *node_to_move, t_list
 			actions->rb = stack_position + 1;
 	} 
 }
-#include <stdio.h>
 static t_list	*get_biggest_inferior_value(t_list *stack, int value)
 {
 	t_list	*tmp;

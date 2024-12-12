@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_operations.c                                   :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:42:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/10/24 17:51:15 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/12 17:51:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libft.h"
 
-void	delete_node_content(t_list *node)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-		free(node->actions);
-}
+	char			*sub;
+	unsigned int	i;
 
-t_list	*ft_lstnew(int value, char stackid)
-{
-	t_list	*list_elem;
-
-	list_elem = malloc(sizeof (t_list));
-	if (!list_elem)
+	if (start >= ft_strlen(s))
+		len = 0;
+	else if (len > ft_strlen(s + start))
+		len = ft_strlen (s + start);
+	sub = malloc(sizeof (char) * (len + 1));
+	if (!sub)
 		return (NULL);
-	list_elem->value = value;
-	list_elem->next = NULL;
-	list_elem->stack_id = stackid;
-	return (list_elem);
+	i = 0;
+	while (len--)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = 0;
+	return (sub);
 }
