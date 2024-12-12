@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/11 18:53:16 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:54:17 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ t_list	*ft_lst_min_value(t_list *lst);
 t_list	*ft_lst_max_value(t_list *lst);
 
 //	Pre-Calculation
-t_actions	*get_actions(t_list *node_to_move, t_list *stack_a, t_list *stack_b);
+t_actions	*get_actions(t_list *node_to_move, t_list *stack_a, t_list *stack_b, int sort_order);
 
 //	Solver
-void	sort_loop(t_list **stack_a, t_list **stack_b);
+void	sort_stacks(t_list **stack_a, t_list **stack_b);
 void	execute_cheapest_action(t_list **source_stack, t_list **dest_stack);
 void	execute_node_action(t_list **stack_a, t_list **stack_b, t_list *node);
 

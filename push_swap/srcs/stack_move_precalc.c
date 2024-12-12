@@ -5,6 +5,8 @@ static void	get_moves_to_top(t_actions *actions, t_list *node_to_move, t_list *s
 	int		stack_position;
 	int		lst_center;
 
+	if (ft_getlst_index(stack, node_to_move) == 0)
+		return ;
 	lst_center = ft_lstsize(stack) / 2;
 	stack_position = ft_getlst_index(stack, node_to_move);
 	if (stack_position > lst_center)
@@ -28,14 +30,16 @@ static void	get_moves_to_bottom(t_actions *actions, t_list *node_to_move, t_list
 	int		stack_position;
 	int		lst_center;
 
+	if (ft_getlst_index(stack, node_to_move) == ft_lstsize(stack) - 1)
+		return ;
 	lst_center = ft_lstsize(stack) / 2;
 	stack_position = ft_getlst_index(stack, node_to_move);
 	if (stack_position > lst_center)
 	{
 		if (stack_id == 'a')
-			actions->rra = ft_lstsize(stack) - stack_position + 1;
+			actions->rra = ft_lstsize(stack) - stack_position - 1;
 		else if (stack_id == 'b')
-			actions->rrb = ft_lstsize(stack) - stack_position + 1;
+			actions->rrb = ft_lstsize(stack) - stack_position - 1;
 	}
 	else
 	{
@@ -45,20 +49,18 @@ static void	get_moves_to_bottom(t_actions *actions, t_list *node_to_move, t_list
 			actions->rb = stack_position + 1;
 	} 
 }
-
+#include <stdio.h>
 static t_list	*get_biggest_inferior_value(t_list *stack, int value)
 {
 	t_list	*tmp;
 	t_list	*max_inferior_node;
-	int		max_inferior_value;
 
 	tmp = stack;
-	max_inferior_value = 0;
+	max_inferior_node = ft_lst_min_value(stack);
 	while (tmp)
 	{
-		if	(value > tmp->value && max_inferior_value < tmp->value)
+		if	(value > tmp->value && max_inferior_node->value < tmp->value)
 		{
-			max_inferior_value = tmp->value;
 			max_inferior_node = tmp;
 		}
 		tmp = tmp->next;
@@ -88,7 +90,7 @@ static t_actions	*optimize_actions(t_actions *actions)
 	return (actions);
 }
 
-t_actions	*get_actions(t_list *node_to_move, t_list *stack_source, t_list *stack_dest)
+t_actions	*get_actions(t_list *node_to_move, t_list *stack_source, t_list *stack_dest, int sort_order)
 {
 	t_actions *actions;
 	size_t n;
@@ -110,12 +112,25 @@ t_actions	*get_actions(t_list *node_to_move, t_list *stack_source, t_list *stack
 		get_moves_to_top(actions, node_to_move, stack_source, stack_source->stack_id);
 	if (stack_dest)
 	{
-		if (node_to_move->value > ft_lst_max_value(stack_dest)->value)
-			get_moves_to_top(actions, ft_lst_max_value(stack_dest), stack_dest, stack_dest->stack_id);
-		else if (node_to_move->value < ft_lst_min_value(stack_dest)->value)
-			get_moves_to_bottom(actions, ft_lst_min_value(stack_dest), stack_dest, stack_dest->stack_id);
+		if (sort_order < 0)
+		{
+			if (node_to_move->value > ft_lst_max_value(stack_dest)->value)
+				get_moves_to_top(actions, ft_lst_max_value(stack_dest), stack_dest, stack_dest->stack_id);
+			else if (node_to_move->value < ft_lst_min_value(stack_dest)->value)
+				get_moves_to_bottom(actions, ft_lst_min_value(stack_dest), stack_dest, stack_dest->stack_id);
+			else
+				get_moves_to_top(actions, get_biggest_inferior_value(stack_dest, node_to_move->value), stack_dest, stack_dest->stack_id);
+		}
 		else
-			get_moves_to_top(actions, get_biggest_inferior_value(stack_dest, node_to_move->value), stack_dest, stack_dest->stack_id);
+		{
+			if (node_to_move->value > ft_lst_max_value(stack_dest)->value)
+				get_moves_to_bottom(actions, ft_lst_max_value(stack_dest), stack_dest, stack_dest->stack_id);
+			else if (node_to_move->value < ft_lst_min_value(stack_dest)->value)
+				get_moves_to_top(actions, ft_lst_min_value(stack_dest), stack_dest, stack_dest->stack_id);
+			else
+				get_moves_to_bottom(actions, get_biggest_inferior_value(stack_dest, node_to_move->value), stack_dest, stack_dest->stack_id);
+		}
+		
 	}
 	return (optimize_actions(actions));
 }

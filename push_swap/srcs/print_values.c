@@ -56,19 +56,19 @@ void    ft_print_stacks(t_list **stack_a, t_list **stack_b)
 	write(1, "A\tB\n\n", 5);
 }
 
-#include <stdio.h>
-void	ft_print_actions(t_list *node)
-{
-	printf("\n\nValue : %d\n", node->value);
-	printf("sa : %d\n", node->actions->sa);
-	printf("sb : %d\n", node->actions->sb);
-	printf("ss : %d\n", node->actions->ss);
-	printf("pa : %d\n", node->actions->pa);
-	printf("pb : %d\n", node->actions->pb);
-	printf("ra : %d\n", node->actions->ra);
-	printf("rb : %d\n", node->actions->rb);
-	printf("rr : %d\n", node->actions->rr);
-	printf("rra : %d\n", node->actions->rra);
-	printf("rrb: %d\n", node->actions->rrb);
-	printf("rrr: %d\n", node->actions->rrr);
-}
+// #include <stdio.h>
+// void	ft_print_actions(t_list *node)
+// {
+// 	printf("\n\nValue : %d\n", node->value);
+// 	printf("sa : %d\n", node->actions->sa);
+// 	printf("sb : %d\n", node->actions->sb);
+// 	printf("ss : %d\n", node->actions->ss);
+// 	printf("pa : %d\n", node->actions->pa);
+// 	printf("pb : %d\n", node->actions->pb);
+// 	printf("ra : %d\n", node->actions->ra);
+// 	printf("rb : %d\n", node->actions->rb);
+// 	printf("rr : %d\n", node->actions->rr);
+// 	printf("rra : %d\n", node->actions->rra);
+// 	printf("rrb: %d\n", node->actions->rrb);
+// 	printf("rrr: %d\n", node->actions->rrr);
+// }

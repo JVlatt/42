@@ -107,14 +107,12 @@ void	execute_node_action(t_list **source_stack, t_list **dest_stack, t_list *nod
 	execute_action("rrr",node->actions->rrr, stack_a, stack_b);
 	execute_action("pa",node->actions->pa, stack_a, stack_b);
 	execute_action("pb",node->actions->pb, stack_a, stack_b);
-
-	ft_print_stacks(stack_a, stack_b);
+	//ft_print_stacks(stack_a, stack_b);
 }
 void	execute_cheapest_action(t_list **source_stack, t_list **dest_stack)
 {
 	t_list	*cheapest_action;
 	cheapest_action = get_cheapest_action(*source_stack);
-	printf("Cheapest Action on value %d cost %d\n", cheapest_action->value, get_action_cost(cheapest_action)); //TEMP
-	
+	//printf("Cheapest Action on value %d cost %d\n", cheapest_action->value, get_action_cost(cheapest_action)); //TEMP
 	execute_node_action(source_stack, dest_stack, cheapest_action);
 }

@@ -14,7 +14,7 @@ int main (int argc, char **argv)
 		ft_stack_push(&stack_a, &stack_b);
 		ft_stack_push(&stack_a, &stack_b);
         ft_print_stacks(&stack_a, &stack_b);
-		sort_loop(&stack_a, &stack_b);
+		sort_stacks(&stack_a, &stack_b);
 		// ft_stack_swap(&stack_a);     
         // ft_print_stacks(stack_a, stack_b);  
 		// ft_stack_push(&stack_a, &stack_b);    
