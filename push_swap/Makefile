@@ -14,9 +14,11 @@ LST_SRCS =	arg_parser.c \
 		main.c \
 		print_values.c \
 		basic_stack_operations.c \
-		stack_sorter.c \
+		complex_stack_sorter.c \
+		basic_stack_sorter.c \
 		stack_move_precalc.c \
 		execute_actions.c \
+		execute_commands.c \
 		utils.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
@@ -60,4 +62,6 @@ fclean:		clean
 
 re:	fclean all
 
+debug : libft/libft.a
+	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 .PHONY: all clean fclean re bonus libft

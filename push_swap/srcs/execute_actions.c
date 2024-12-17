@@ -43,38 +43,14 @@ static void	execute_action(char *action_name, int count, t_list **stack_a, t_lis
 	i = 0;
 	while (i < count)
 	{
-		if(ft_strcmp(action_name,"sa") == 0)
-			ft_stack_swap(stack_a);
-		else if(ft_strcmp(action_name,"sb") == 0)
-			ft_stack_swap(stack_b);
-		else if(ft_strcmp(action_name,"ss") == 0)
-		{
-			ft_stack_swap(stack_b);
-			ft_stack_swap(stack_a);
-		}
-		else if(ft_strcmp(action_name,"pa") == 0)
-			ft_stack_push(stack_b, stack_a);
-		else if(ft_strcmp(action_name,"pb") == 0)
-			ft_stack_push(stack_a, stack_b);
-		else if(ft_strcmp(action_name,"ra") == 0)
-			ft_rotate(stack_a);
-		else if(ft_strcmp(action_name,"rb") == 0)
-			ft_rotate(stack_b);
-		else if(ft_strcmp(action_name,"rr") == 0)
-		{
-			ft_rotate(stack_a);
-			ft_rotate(stack_b);
-		}
-		else if(ft_strcmp(action_name,"rra") == 0)
-			ft_reverse_rotate(stack_a);
-		else if(ft_strcmp(action_name,"rrb") == 0)
-			ft_reverse_rotate(stack_b);
-		else if(ft_strcmp(action_name,"rrr") == 0)
-		{
-			ft_reverse_rotate(stack_a);
-			ft_reverse_rotate(stack_b);
-		}
-		ft_printf("%s\n", action_name); //TEMP
+		if (action_name[0] == 's')
+			execute_swap(action_name[1], stack_a, stack_b);
+		else if(action_name[0] == 'p')
+			execute_push(action_name[1], stack_a, stack_b);
+		else if(action_name[0] == 'r' && ft_strlen(action_name) == 2)
+			execute_rotate(action_name[1], stack_a, stack_b);
+		else if(action_name[0] == 'r' && ft_strlen(action_name) == 3)
+			execute_reverse_rotate(action_name[2], stack_a, stack_b);
 		i++;
 	}
 	
@@ -106,12 +82,11 @@ void	execute_node_action(t_list **source_stack, t_list **dest_stack, t_list *nod
 	execute_action("rrr",node->actions->rrr, stack_a, stack_b);
 	execute_action("pa",node->actions->pa, stack_a, stack_b);
 	execute_action("pb",node->actions->pb, stack_a, stack_b);
-	//ft_print_stacks(stack_a, stack_b);
 }
+
 void	execute_cheapest_action(t_list **source_stack, t_list **dest_stack)
 {
 	t_list	*cheapest_action;
 	cheapest_action = get_cheapest_action(*source_stack);
-	//printf("Cheapest Action on value %d cost %d\n", cheapest_action->value, get_action_cost(cheapest_action)); //TEMP
 	execute_node_action(source_stack, dest_stack, cheapest_action);
 }

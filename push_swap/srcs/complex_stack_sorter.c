@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_sorter.c                                     :+:      :+:    :+:   */
+/*   complex_stack_sorter.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:11:56 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 16:58:11 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:02:33 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void push_to_a(t_list **stack_a, t_list **stack_b)
 {
 	t_list *node;
 	
-	while (ft_lstsize(*stack_b) > 0)
+	while (*stack_b)
 	{
 	 	node = *stack_b;
 		while (node)
@@ -31,28 +31,13 @@ static void push_to_a(t_list **stack_a, t_list **stack_b)
 
 void	sort_a(t_list **stack_a)
 {
-	t_list *node;
-	
-	node = *stack_a;
-	while (node->next)
-	{
-		if(node->value > node->next->value)
-		{
-			if (node == *stack_a)
-			{
-				ft_stack_swap(stack_a);
-				write(1,"sa\n",3);
-			}
-			else
-			{
-				ft_reverse_rotate(stack_a);
-				write(1,"rra\n",4);
-			}
-			node = *stack_a;
-		}
-		node = node->next;
-	}
+	t_list *min_value_a;
+
+	min_value_a = ft_lst_min_value(*stack_a);
+	min_value_a->actions = get_actions(min_value_a, *stack_a, NULL, 1);
+	execute_node_action(stack_a, NULL, min_value_a);
 }
+
 void 	sort_b(t_list **stack_b)
 {
 	t_list *max_value_b;
@@ -81,14 +66,18 @@ void push_to_b(t_list **stack_a, t_list **stack_b)
 
 void	sort_stacks(t_list **stack_a, t_list **stack_b)
 {
+	execute_push('b', stack_a, stack_b);
+	execute_push('b', stack_a, stack_b);
 	push_to_b(stack_a, stack_b);
-	ft_print_stacks(stack_a, stack_b);
+	//ft_print_stacks(stack_a, stack_b);
 	sort_b(stack_b);
-	ft_print_stacks(stack_a, stack_b);
-	sort_a(stack_a);
-	ft_print_stacks(stack_a, stack_b);
+	//ft_print_stacks(stack_a, stack_b);
+	sort_three(stack_a);
+	//ft_print_stacks(stack_a, stack_b);
 	push_to_a(stack_a, stack_b);
-	ft_print_stacks(stack_a, stack_b);
+	//ft_print_stacks(stack_a, stack_b);
+	sort_a(stack_a);
+	//ft_print_stacks(stack_a, stack_b);
 }
 
 

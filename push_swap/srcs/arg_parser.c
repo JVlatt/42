@@ -14,6 +14,7 @@ static int ft_isnum(char *str)
 static int is_valid_arg(t_list *head, char *arg)
 {
     t_list  *node;
+
     if (!ft_isnum(arg))
         return (0);
     node = head;
@@ -26,12 +27,34 @@ static int is_valid_arg(t_list *head, char *arg)
     return (1);
 }
 
+t_list	*parse_string(char *str)
+{
+	char	**args;
+	int		argc;
+	t_list  *arg_list;
+
+	args = ft_split(str, ' ');
+	argc = 0;
+	while (args[argc])
+		argc++;
+	arg_list = parse_args(argc, args);
+	argc--;
+	while (argc >= 0)
+	{
+		free(args[argc]);
+		argc--;
+	}
+	free (args);
+	return (arg_list);
+}
+
 t_list  *parse_args(int argc, char **args)
 {
     t_list  *arg_list;
     int     i;
 
     i = 0;
+	arg_list = NULL;
     while (i < argc)
     {
         if (is_valid_arg(arg_list, args[i]))

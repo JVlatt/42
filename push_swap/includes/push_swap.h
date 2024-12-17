@@ -6,15 +6,12 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:23:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:03:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-#include <unistd.h>
-#include <stdlib.h>
 
 # ifndef S_LIST
 #  define S_LIST
@@ -48,6 +45,7 @@ typedef struct s_actions
 //  Parser
 
 t_list  *parse_args(int argc, char **args);
+t_list	*parse_string(char *str);
 
 //  Stack Custom Operations 
 
@@ -56,6 +54,12 @@ t_list  *parse_args(int argc, char **args);
 t_list	*ft_lstnew(int value, char stackid);
 void	delete_node_content(t_list *node);
 //void	ft_lstclear(t_list **lst);
+
+// 	Execute Actions 
+void	execute_swap(char arg, t_list **stack_a, t_list **stack_b);
+void	execute_push(char arg, t_list **stack_a, t_list **stack_b);
+void	execute_rotate(char arg, t_list **stack_a, t_list **stack_b);
+void	execute_reverse_rotate(char arg, t_list **stack_a, t_list **stack_b);
 
 //	Stack Base Operations
 
@@ -74,6 +78,9 @@ t_list	*ft_lst_max_value(t_list *lst);
 
 //	Pre-Calculation
 t_actions	*get_actions(t_list *node_to_move, t_list *stack_a, t_list *stack_b, int sort_order);
+
+//	Basic Sorter
+void	sort_three(t_list **stack);
 
 //	Solver
 void	sort_stacks(t_list **stack_a, t_list **stack_b);

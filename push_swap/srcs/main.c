@@ -5,33 +5,23 @@ int main (int argc, char **argv)
     t_list  *stack_a;
     t_list  *stack_b;
 
-    if(argc >= 3)
-    {
-        argv++;
-        stack_a = parse_args(argc - 1, argv);
-        stack_b = NULL;
-        ft_print_stacks(&stack_a, &stack_b);
-		ft_stack_push(&stack_a, &stack_b);
-		ft_stack_push(&stack_a, &stack_b);
-        ft_print_stacks(&stack_a, &stack_b);
-		sort_stacks(&stack_a, &stack_b);
-		// ft_stack_swap(&stack_a);     
-        // ft_print_stacks(stack_a, stack_b);  
-		// ft_stack_push(&stack_a, &stack_b);    
-		// ft_stack_push(&stack_a, &stack_b);    
-		// ft_stack_push(&stack_a, &stack_b);    
-        // ft_print_stacks(stack_a, stack_b);  
-		// ft_rotate(&stack_a);
-		// ft_rotate(&stack_b);
-        // ft_print_stacks(stack_a, stack_b);  
-		// ft_reverse_rotate(&stack_a);
-		// ft_reverse_rotate(&stack_b);
-        // ft_print_stacks(stack_a, stack_b);  
-		// ft_stack_push(&stack_a, &stack_b);    
-		// ft_stack_push(&stack_a, &stack_b);    
-		// ft_stack_push(&stack_a, &stack_b);    
-        // ft_print_stacks(stack_a, stack_b);
-		ft_lstclear(&stack_a, &delete_node_content);  
-		ft_lstclear(&stack_b, &delete_node_content);  
-    }
+    stack_b = NULL;
+	if (argc >= 2)
+	{
+		if (argc == 2)
+			stack_a = parse_string(argv[1]);
+		else
+	    {
+        	argv++;
+        	stack_a = parse_args(argc - 1, argv);
+    	}
+		if (!stack_a)
+			return (1);
+		if (ft_lstsize(stack_a) == 3)
+			sort_three(&stack_a);
+		else if (ft_lstsize(stack_a) > 3)
+			sort_stacks(&stack_a, &stack_b);
+
+	}
+    
 }
