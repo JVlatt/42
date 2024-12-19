@@ -16,10 +16,10 @@ LST_SRCS =	arg_parser.c \
 		basic_stack_operations.c \
 		complex_stack_sorter.c \
 		basic_stack_sorter.c \
-		stack_move_precalc.c \
+		actions_precalc.c \
+		moves_precalc.c \
 		execute_actions.c \
-		execute_commands.c \
-		utils.c
+		execute_commands.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = push_swap.h

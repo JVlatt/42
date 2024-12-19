@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 19:34:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 17:49:16 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:23:55 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_lstiter(t_list *begin, void (*f)(void *))
 	tmpnode = begin;
 	while (tmpnode)
 	{
-		f(tmpnode->content);
+		f(tmpnode);
 		tmpnode = tmpnode->next;
 	}
 }

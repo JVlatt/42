@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:35:27 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:23:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 # include <stdlib.h>
 # include <string.h>
 
-# ifndef S_LIST
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
+	int					value;
+	struct s_list		*next;
+	struct s_actions	*actions;
+	char				stack_id;
 }		t_list;
-# endif
 
 int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_isalnum(int c);
@@ -64,7 +65,7 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(t_list*));
 void	ft_lstdelone(t_list *lst, void (*del)(t_list*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
+//void	ft_lstiter(t_list *lst, void (*f)(void *));
 //t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 

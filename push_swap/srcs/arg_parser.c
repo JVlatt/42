@@ -1,37 +1,52 @@
-#include "../includes/push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 16:07:32 by mmanuell          #+#    #+#             */
+/*   Updated: 2024/12/19 16:14:56 by mmanuell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int ft_isnum(char *str)
+#include "../includes/push_swap.h"
+#include <limits.h>
+
+static int	ft_isnum(char *str)
 {
-    while(*str)
-    {
-        if(!(*str >= '0' && *str <= '9') && *str != '-')
-            return (0);
-        str++;
-    }
-    return (1);
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9') && *str != '-')
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
-static int is_valid_arg(t_list *head, char *arg)
+static int	is_valid_arg(t_list *head, char *arg)
 {
-    t_list  *node;
+	t_list	*node;
 
-    if (!ft_isnum(arg))
-        return (0);
-    node = head;
-    while (node)
-    {
-        if(node->value == ft_atoi(arg))
-            return (0);
-        node = node->next;
-    }
-    return (1);
+	if (!ft_isnum(arg))
+		return (0);
+	if (ft_atol(arg) > INT_MAX || ft_atol(arg) < INT_MIN)
+		return (0);
+	node = head;
+	while (node)
+	{
+		if (node->value == ft_atoi(arg))
+			return (0);
+		node = node->next;
+	}
+	return (1);
 }
 
 t_list	*parse_string(char *str)
 {
 	char	**args;
 	int		argc;
-	t_list  *arg_list;
+	t_list	*arg_list;
 
 	args = ft_split(str, ' ');
 	argc = 0;
@@ -44,33 +59,33 @@ t_list	*parse_string(char *str)
 		free(args[argc]);
 		argc--;
 	}
-	free (args);
+	free(args);
 	return (arg_list);
 }
 
-t_list  *parse_args(int argc, char **args)
+t_list	*parse_args(int argc, char **args)
 {
-    t_list  *arg_list;
-    int     i;
+	t_list	*arg_list;
+	int		i;
 
-    i = 0;
+	i = 0;
 	arg_list = NULL;
-    while (i < argc)
-    {
-        if (is_valid_arg(arg_list, args[i]))
-        {
-            if(!arg_list)
-                arg_list = ft_lstnew(ft_atoi(args[i]), 'a');
-            else
-                ft_lstadd_back(&arg_list, ft_lstnew(ft_atoi(args[i]), 'a'));
-        }
-        else
-        {
-            ft_lstclear(&arg_list, &delete_node_content);
-            write(1,"Error\n",6);
-            return (NULL);
-        }
-        i++;
-    }
-    return (arg_list);
+	while (i < argc)
+	{
+		if (is_valid_arg(arg_list, args[i]))
+		{
+			if (!arg_list)
+				arg_list = ft_lstnew(ft_atoi(args[i]), 'a');
+			else
+				ft_lstadd_back(&arg_list, ft_lstnew(ft_atoi(args[i]), 'a'));
+		}
+		else
+		{
+			ft_lstclear(&arg_list, &delete_node_content);
+			write(1, "Error\n", 6);
+			return (NULL);
+		}
+		i++;
+	}
+	return (arg_list);
 }

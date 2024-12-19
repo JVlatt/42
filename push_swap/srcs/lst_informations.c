@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:26:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/11 14:40:54 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:37:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	ft_lstsize(t_list *lst)
 int	ft_getlst_index(t_list *lst, t_list *node_to_find)
 {
 	int		index;
-	t_list*	node;
-	
+	t_list	*node;
+
 	index = 0;
 	node = lst;
 	while (node)
@@ -57,12 +57,12 @@ t_list	*ft_lst_max_value(t_list *lst)
 {
 	t_list	*max;
 	t_list	*node;
-	
+
 	node = lst;
 	max = node;
-	while(node)
+	while (node)
 	{
-		if(node->value > max->value)
+		if (node->value > max->value)
 			max = node;
 		node = node -> next;
 	}
@@ -73,12 +73,12 @@ t_list	*ft_lst_min_value(t_list *lst)
 {
 	t_list	*min;
 	t_list	*node;
-	
+
 	node = lst;
 	min = node;
-	while(node)
+	while (node)
 	{
-		if(node->value < min->value)
+		if (node->value < min->value)
 			min = node;
 		node = node -> next;
 	}
