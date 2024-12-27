@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:08:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 17:50:35 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:42:16 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 char	*ft_strchr(const char *str, int c)
 {
 	unsigned char	uc;
-
+	
+	if (!str)
+		return (NULL);
 	uc = (unsigned char)c;
 	while (*str)
 	{

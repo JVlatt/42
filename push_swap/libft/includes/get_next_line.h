@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 17:27:26 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:48:09 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <unistd.h>
-# include <stdlib.h>
+# include "libft.h"
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(char *str);
-char	*ft_strjoin(char *stash, char *buffer);
-char	*ft_strchr(char *str, int c);
-void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strjoinbuffer(char *stash, char *buffer);
+
 #endif

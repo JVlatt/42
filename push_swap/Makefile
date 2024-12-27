@@ -28,6 +28,24 @@ SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})
 OBJS = $(addprefix $(DIR_OBJS)/, ${LST_OBJS})
 INCS = $(addprefix $(DIR_INCS)/, ${LST_INCS})
 
+DIR_CHECKERINCS = includes/checker
+DIR_CHECKERSRCS = srcs/checker
+DIR_CHECKEROBJS = .objs/checker
+
+LST_CHECKERSRCS = 	main.c \
+					arg_parser.c \
+					basic_stack_operations.c \
+					execute_commands.c \
+					lst_operations.c \
+					print_values.c
+
+LST_CHECKERINCS = checker.h
+LST_CHECKEROBJS = $(LST_CHECKERSRCS:.c=.o)
+
+CHECKERSRCS = $(addprefix ${DIR_CHECKERSRCS}/, ${LST_CHECKERSRCS})
+CHECKEROBJS = $(addprefix $(DIR_CHECKEROBJS)/, ${LST_CHECKEROBJS})
+CHECKERINCS = $(addprefix $(DIR_CHECKERINCS)/, ${LST_CHECKERINCS})
+
 ERASE		=	\033[2K\r
 BLUE		=	\033[34m
 YELLOW		=	\033[33m
@@ -64,4 +82,17 @@ re:	fclean all
 
 debug : libft/libft.a
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
-.PHONY: all clean fclean re bonus libft
+
+checker : $(CHECKEROBJS)
+	@ $(CC) $(CHECKEROBJS) $(CFLAGS) ${LIBS} -o $@
+	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
+
+debugchecker : libft/libft.a
+	$(CC) -g3 $(CHECKERSRCS) -I $(DIR_CHECKERINCS) $(CFLAGS) ${LIBS} -o $@
+
+$(DIR_CHECKEROBJS)/%.o: ${DIR_CHECKERSRCS}/%.c $(CHECKERINCS) Makefile libft/libft.a
+	@ mkdir -p $(DIR_CHECKEROBJS)
+	@ $(CC) -I $(DIR_CHECKERINCS) -c $< -o $@
+	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
+
+.PHONY: all clean fclean re checker libft
