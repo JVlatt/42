@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:54:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/24 14:57:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/06 19:53:55 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-char	*merge_path(char *env_path, char * cmd)
-{
-	char	*out;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	out = malloc (ft_strlen(env_path) + ft_strlen(cmd) + 2);
-	while (env_path[++i])
-		out[i] = env_path[i];
-	out[i] = '/';
-	while (cmd[j])
-		out[++i] = cmd[j++];
-	out[++i] = 0;
-	ft_printf("%s\n", out);
-	if (access(out, F_OK) == 0)
-		return (out);
-	free (out);
-	return (NULL);
-}
 
 void	ft_exit(t_pipe *pipe, int code, char *msg, int exitcode)
 {
@@ -68,16 +47,58 @@ void	ft_free_tab(int size, char **tab)
 
 void	ft_free_pipe(t_pipe *pipe, int code)
 {
+	int	i;
+
+	i = 0;
 	if (code >= 2)
 	{
 		ft_free_tab(pipe->count, pipe->cmd_paths);
 	}
 	if (code >= 1)
 	{
-		ft_free_tab(pipe->count, pipe->cmd_args);
+		while (i < pipe->count)
+		{
+			ft_free_tab(pipe->count, pipe->cmd_args[i]);
+			i++;			
+		}
+		free(pipe->cmd_args);
 	}
 	if (code >= 0)
 	{
 		free(pipe);
 	}
+}
+
+void	ft_print_pipe_infos(t_pipe *pipe)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	ft_printf("Input : %d \t Output : %d\n", pipe->infile, pipe->outfile);
+	ft_printf("Commands : %d \n", pipe->count);
+	while (i < pipe->count)
+	{
+		j = 0;
+		ft_printf("%d - \t %s \t", i, pipe->cmd_paths[i]);
+		while (pipe->cmd_args[i][j])
+		{
+			ft_printf("%d:%s ", j, pipe->cmd_args[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+}
+
+int	ft_isemptystr(char *str)
+{
+	while (*str != '\0')
+	{
+		if (!((*str >= 9 && *str <= 13) || *str == 32))
+			return (0);
+		str++;
+	}
+	return (1);
 }

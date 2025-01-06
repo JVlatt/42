@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:15:22 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/24 14:59:49 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/06 19:54:48 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 t_pipe	*init_pipe(int argc)
 {
 	t_pipe	*pipe;
-	
+
 	pipe = malloc(sizeof(t_pipe));
 	if (!pipe)
 		ft_exit(pipe, -1, "Malloc Error", EXIT_FAILURE);
-	pipe->cmd_args = ft_calloc(sizeof(char *), argc - 2);
+	pipe->cmd_args = ft_calloc(sizeof(char **), argc - 2);
 	if (!pipe->cmd_args)
 		ft_exit(pipe, 0, "Malloc Error", EXIT_FAILURE);
 	pipe->cmd_paths = ft_calloc(sizeof(char *), argc - 2);
@@ -48,16 +48,10 @@ void	get_paths(t_pipe *pipe, char **envp)
 {
 	int		i;
 	int		j;
-	char	*envp_path;
 	char	**paths_list;
 	char	*path;
 
-	i = 0;
-	while (envp[i] && !(envp_path = ft_strnstr(envp[i], "PATH=", 5)))
-		i++;
-	if (!envp_path)
-		ft_exit(pipe, 2, "Env Error", EXIT_FAILURE);
-	paths_list = ft_split((envp_path + 5), ':');
+	paths_list = get_path_list(pipe, envp);
 	i = 0;
 	while (i < pipe->count)
 	{
@@ -85,22 +79,16 @@ void	get_commands(t_pipe *pipe, char **commands, int argc)
 	j = 0;
 	while (i < argc)
 	{
-		j = 1;
-		split_cmd = ft_split(commands[i], ' ');
-		if (!split_cmd)
-			ft_exit(pipe, 2, "Split Error", EXIT_FAILURE);
-		pipe->cmd_paths[i] = split_cmd[0];
+		j = 0;
+		if (ft_isemptystr(commands[i]))
+			ft_exit(pipe, 2, "Empty Argument", EXIT_FAILURE);
+		pipe->cmd_args[i] = ft_split(commands[i], ' ');
 		if (!pipe->cmd_args[i])
-				pipe->cmd_args[i] = ft_calloc(sizeof(char), 1);
-		while (split_cmd[j])
-		{
-			pipe->cmd_args[i] = ft_strjoin(pipe->cmd_args[i], split_cmd[j]);
-			j++;
-		}
-		free(split_cmd);
+			ft_exit(pipe, 2, "Split Error", EXIT_FAILURE);
+		pipe->cmd_paths[i] = ft_strdup(pipe->cmd_args[i][0]);
 		i++;
+		pipe->count = i;
 	}
-	pipe->count = i;	
 }
 
 t_pipe	*parse_args(int argc, char **args, char **envp)

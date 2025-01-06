@@ -10,7 +10,8 @@ DIR_OBJS = .objs
 
 LST_SRCS =	args_parser.c \
 		main.c \
-		utils.c
+		utils.c \
+		env_path_parser.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = pipex.h
