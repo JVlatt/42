@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:38:36 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/12 19:27:00 by mmanuell         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:47:58 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static char	*read_to_next_line(int fd, char *stash)
 			return (stash);
 		}
 		buffer[len] = 0;
-		stash = ft_strjoin(stash, buffer);
+		stash = ft_strjoinbuffer(stash, buffer);
 	}
 	return (stash);
 }

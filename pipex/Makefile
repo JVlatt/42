@@ -1,4 +1,4 @@
-NAME = push_swap
+NAME = pipex
 
 CC = gcc 
 CFLAGS = -Wall -Werror -Wextra
@@ -8,8 +8,10 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS =	main.c
-		
+LST_SRCS =	args_parser.c \
+		main.c \
+		utils.c
+
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = pipex.h
 
@@ -53,4 +55,5 @@ re:	fclean all
 
 debug : libft/libft.a
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
-.PHONY: all clean fclean re bonus libft
+
+.PHONY: all clean fclean re checker libft
