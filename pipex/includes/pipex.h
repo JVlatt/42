@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:34:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/06 19:52:07 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:47:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../libft/includes/ft_printf.h"
 # include <fcntl.h>
 # include <stdio.h>
+#include <sys/wait.h>
 
 typedef struct s_pipe
 {
@@ -37,6 +38,9 @@ int		ft_isemptystr(char *str);
 void	ft_exit(t_pipe *pipe, int code, char *msg, int exitcode);
 void	ft_free_tab(int size, char **tab);
 void	ft_free_pipe(t_pipe *pipe, int code);
+
+// Pipe Execution
+void	execute_pipe(t_pipe	*pipe_infos);
 
 // Debug
 void	ft_print_pipe_infos(t_pipe *pipe);

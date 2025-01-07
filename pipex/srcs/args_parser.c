@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:15:22 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/06 19:54:48 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:35:09 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_pipe	*init_pipe(int argc)
 	pipe->cmd_paths = ft_calloc(sizeof(char *), argc - 2);
 	if (!pipe->cmd_paths)
 		ft_exit(pipe, 1, "Malloc Error", EXIT_FAILURE);
-	pipe->count = 0;
+	pipe->count = argc;
 	return (pipe);
 }
 
@@ -35,11 +35,11 @@ void	get_files(t_pipe *pipe, char *file1, char *file2)
 	int	outfd;
 
 	infd = open(file1, O_RDONLY, 0777);
-	if (infd == -1)
-		ft_exit(pipe, -1, "Infile Error", EXIT_FAILURE);
+	// if (infd == -1)
+	// 	ft_exit(pipe, -1, "Infile Error", EXIT_FAILURE);
 	outfd = open(file2, O_WRONLY | O_CREAT, 0644);
-	if (outfd == -1)
-		ft_exit(pipe, -1, "Infile Error", EXIT_FAILURE);
+	// if (outfd == -1)
+	// 	ft_exit(pipe, -1, "Outfile Error", EXIT_FAILURE);
 	pipe->infile = infd;
 	pipe->outfile = outfd;
 }
@@ -59,8 +59,8 @@ void	get_paths(t_pipe *pipe, char **envp)
 		while ((path = merge_path(paths_list[j], pipe->cmd_paths[i])) == NULL)
 		{
 			j++;
-			if (!paths_list[j])
-				ft_exit(pipe, 2, "Env Error", EXIT_FAILURE);
+			// if (!paths_list[j])
+			// 	ft_exit(pipe, 2, "Env Error", EXIT_FAILURE);
 		}
 		free(pipe->cmd_paths[i]);
 		pipe->cmd_paths[i] = path;
@@ -80,8 +80,8 @@ void	get_commands(t_pipe *pipe, char **commands, int argc)
 	while (i < argc)
 	{
 		j = 0;
-		if (ft_isemptystr(commands[i]))
-			ft_exit(pipe, 2, "Empty Argument", EXIT_FAILURE);
+		// if (ft_isemptystr(commands[i]))
+		// 	ft_exit(pipe, 2, "Empty Argument", EXIT_FAILURE);
 		pipe->cmd_args[i] = ft_split(commands[i], ' ');
 		if (!pipe->cmd_args[i])
 			ft_exit(pipe, 2, "Split Error", EXIT_FAILURE);

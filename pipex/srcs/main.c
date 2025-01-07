@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:41:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/06 19:56:32 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:01:50 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		//Compute commands
 		argv++;
 		pipe = parse_args(argc - 1, argv, envp);
-		ft_print_pipe_infos(pipe);
-		execve(pipe->cmd_paths[0], pipe->cmd_args[0], NULL);
+		execute_pipe(pipe);
 		ft_free_pipe(pipe, 2);
 		return (0);
 	}
