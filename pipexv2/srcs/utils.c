@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/08 22:16:03 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:18:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int		ft_open(char *path, int mode)
 	else if (mode == 1)
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
+	{
+		perror("File opening issue");
 		exit(EXIT_FAILURE);
+	}
 	return (fd);
 }
 
