@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/09 14:18:53 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:14:24 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,20 @@ char	*get_path(char **env_paths, char *cmd)
 
 	paths_list = ft_getenvpathlist(env_paths);
 	i = 0;
-	while (env_paths[i])
+	while (paths_list[i])
 	{	
 		tmp = ft_strjoin(paths_list[i], "/");
 		path = ft_strjoin(tmp, cmd);
 		free(tmp);
 		if (access(path, F_OK | X_OK) == 0)
+		{
+			ft_free_tab(paths_list);
 			return (path);
+		}
 		free (path);
 		i++;
 	}
+	ft_free_tab(paths_list);
 	return (NULL);
 }
 
