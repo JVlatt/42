@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/09 21:14:24 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:36:18 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static char	**ft_getenvpathlist(char **envp)
 	int		i;
 
 	i = 0;
-	while (envp[i] && !(envp_path = ft_strnstr(envp[i], "PATH=", 5)))
-		i++;
+	envp_path = NULL;
+	while (envp[i] && !envp_path)
+		envp_path = ft_strnstr(envp[i++], "PATH=", 5);
 	if (!envp_path)
 	{
 		perror("Env Error");
@@ -63,7 +64,7 @@ char	*get_path(char **env_paths, char *cmd)
 
 void	ft_free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -74,7 +75,7 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-int		ft_open(char *path, int mode)
+int	ft_open(char *path, int mode)
 {
 	int	fd;
 
@@ -82,11 +83,5 @@ int		ft_open(char *path, int mode)
 		fd = open(path, O_RDONLY, 0777);
 	else if (mode == 1)
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd == -1)
-	{
-		perror("File opening issue");
-		exit(EXIT_FAILURE);
-	}
 	return (fd);
 }
-

@@ -1,6 +1,6 @@
 NAME = pipex
 
-CC = gcc 
+CC = cc 
 CFLAGS = -Wall -Werror -Wextra
 LIBS = -Llibft -lft
 
@@ -32,7 +32,7 @@ $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 all : libft ${NAME}
 
 $(NAME):	$(OBJS)
-	@ $(CC) $(OBJS) $(CFLAGS) ${LIBS} -o $@
+	@ $(CC) $(CFLAGS) $(OBJS) ${LIBS} -o $@
 	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
 libft/libft.a :

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:34:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/09 20:30:05 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:57:29 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/includes/ft_printf.h"
 # include <fcntl.h>
 # include <stdio.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
 //File management
 int		ft_open(char *path, int mode);
