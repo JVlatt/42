@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/13 16:36:18 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:40:41 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_path(char **env_paths, char *cmd)
 	paths_list = ft_getenvpathlist(env_paths);
 	i = 0;
 	while (paths_list[i])
-	{	
+	{
 		tmp = ft_strjoin(paths_list[i], "/");
 		path = ft_strjoin(tmp, cmd);
 		free(tmp);

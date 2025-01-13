@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:28:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/13 20:09:27 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:40:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ static void	try_exec_cmd(char *cmd, char **envp)
 {
 	char	**cmd_args;
 	char	*cmd_path;
+	int		ispath;
 
+	ispath = 0;
 	cmd_args = ft_split(cmd, ' ');
-	if (strchr(cmd_args[0], '/'))
+	if (ft_strchr(cmd_args[0], '/'))
+	{
 		cmd_path = cmd_args[0];
+		ispath = 1;
+	}
 	else
 		cmd_path = get_path(envp, cmd_args[0]);
 	if (execve(cmd_path, cmd_args, envp) == -1)
@@ -28,7 +33,8 @@ static void	try_exec_cmd(char *cmd, char **envp)
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(" not found !\n", 2);
 		ft_free_tab(cmd_args);
-		free(cmd_path);
+		if (!ispath)
+			free(cmd_path);
 		exit(0);
 	}
 }
