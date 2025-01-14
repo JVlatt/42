@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 11:24:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 15:02:02 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/23 16:53:02 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/14 16:58:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*str;
-	int		i;
-	int		j;
+	unsigned char	*cp1;
+	unsigned char	*cp2;
 
-	i = 0;
-	j = 0;
-	str = malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i])
+	cp1 = (unsigned char *) s1;
+	cp2 = (unsigned char *) s2;
+	while (*cp1 && *cp2)
 	{
-		str[i] = s1[i];
-		i++;
+		if (*cp1 != *cp2)
+			return (*cp1 - *cp2);
+		cp1++;
+		cp2++;
 	}
-	while (s2[j])
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = 0;
-	return (str);
+	return (*cp1 - *cp2);
 }

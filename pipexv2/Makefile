@@ -9,7 +9,10 @@ DIR_INCS = includes
 DIR_OBJS = .objs
 
 LST_SRCS =	main.c \
-			utils.c
+			utils.c \
+			path.c \
+			pipex.c \
+			here_doc.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = pipex.h
