@@ -6,17 +6,14 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:43:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 17:15:48 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:21:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-
-
 int	main(int argc, char **argv, char **envp)
 {
-	
 	if (ft_strcmp(argv[1], "here_doc") == 0)
 	{
 		if (argc < 6)

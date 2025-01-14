@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:28:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 17:16:48 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:02:17 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	try_exec_cmd(t_parse_infos *parse_infos, int index)
 	cmd_args = ft_split(parse_infos->argv[index], ' ');
 	if (!cmd_args[0])
 	{
-		perror("Invalid Argument");
+		ft_putstr_fd("Invalid Argument\n", 2);
 		ft_free_tab(cmd_args);
 		ft_exit(EXIT_FAILURE, parse_infos);
 	}
@@ -56,7 +56,8 @@ static int	redirect_child(int *pipe_fd, int index,
 	if (index == parse_infos->argc - 2)
 	{
 		close(pipe_fd[1]);
-		pipe_fd[1] = ft_open(parse_infos->argv[parse_infos->argc - 1], 1);
+		pipe_fd[1] = ft_open(parse_infos->argv[parse_infos->argc - 1],
+				start - 1);
 		if (pipe_fd[1] == -1)
 		{
 			close(pipe_fd[0]);
@@ -89,10 +90,16 @@ pid_t	exec_pipe(t_parse_infos *parse_infos, int index, int start)
 	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
+	{
+		perror("Pipe Error");
 		ft_exit(EXIT_FAILURE, parse_infos);
+	}
 	pid = fork();
 	if (pid == -1)
+	{
+		perror("Fork Error");
 		ft_exit(EXIT_FAILURE, parse_infos);
+	}
 	if (pid == 0)
 		child_process(pipe_fd, index, parse_infos, start);
 	else
@@ -106,9 +113,9 @@ pid_t	exec_pipe(t_parse_infos *parse_infos, int index, int start)
 
 void	parse_pipe(int argc, char **argv, char **envp)
 {
-	int i;
-	int exit_code;
-	t_parse_infos *parse_infos;
+	int				i;
+	int				exit_code;
+	t_parse_infos	*parse_infos;
 
 	parse_infos = init_infos(argc, argv, envp, argc - 3);
 	i = 2;

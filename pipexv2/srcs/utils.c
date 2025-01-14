@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 16:22:04 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:00:58 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	ft_open(char *path, int mode)
 
 	fd = -1;
 	if (mode == 0)
-		fd = open(path, O_RDONLY, 0777);
+		fd = open(path, O_RDONLY);
 	else if (mode == 1)
-		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (mode == 2)
-		fd = open(path, O_RDWR | O_CREAT | O_APPEND, 0777);
+		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	return (fd);
 }
 
