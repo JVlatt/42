@@ -5,100 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 14:54:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/06 19:53:55 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/08 20:19:01 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/14 20:00:58 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_exit(t_pipe *pipe, int code, char *msg, int exitcode)
+void	ft_free_tab(char **tab)
 {
-	ft_free_pipe(pipe, code);
-	if (exitcode == 1)
-		perror(msg);
-	exit(exitcode);
-}
+	int	i;
 
-void	ft_free_tab(int size, char **tab)
-{
-	int i;
-
-	if (size > 0)
+	i = 0;
+	while (tab[i])
 	{
-		i = size - 1;
-		while (i >= 0)
-		{
-			free(tab[i]);
-			i--;
-		}
-	}
-	else
-	{
-		i = 0;
-		while(tab[i])
-		{
-			free(tab[i]);
-			i++;
-		}
+		free(tab[i]);
+		i++;
 	}
 	free(tab);
 }
 
-void	ft_free_pipe(t_pipe *pipe, int code)
+int	ft_open(char *path, int mode)
 {
-	int	i;
+	int	fd;
 
-	i = 0;
-	if (code >= 2)
-	{
-		ft_free_tab(pipe->count, pipe->cmd_paths);
-	}
-	if (code >= 1)
-	{
-		while (i < pipe->count)
-		{
-			ft_free_tab(pipe->count, pipe->cmd_args[i]);
-			i++;			
-		}
-		free(pipe->cmd_args);
-	}
-	if (code >= 0)
-	{
-		free(pipe);
-	}
+	fd = -1;
+	if (mode == 0)
+		fd = open(path, O_RDONLY);
+	else if (mode == 1)
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (mode == 2)
+		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	return (fd);
 }
 
-void	ft_print_pipe_infos(t_pipe *pipe)
+t_parse_infos	*init_infos(int argc, char **argv, char **envp, int pid_count)
 {
-	int	i;
-	int j;
+	t_parse_infos	*parse_infos;
 
-	i = 0;
-	j = 0;
-	ft_printf("Input : %d \t Output : %d\n", pipe->infile, pipe->outfile);
-	ft_printf("Commands : %d \n", pipe->count);
-	while (i < pipe->count)
+	parse_infos = malloc(sizeof(t_parse_infos));
+	if (!parse_infos)
 	{
-		j = 0;
-		ft_printf("%d - \t %s \t", i, pipe->cmd_paths[i]);
-		while (pipe->cmd_args[i][j])
-		{
-			ft_printf("%d:%s ", j, pipe->cmd_args[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
+		perror("Malloc struct error");
+		exit(1);
 	}
+	parse_infos->pids = malloc(sizeof(pid_t) * (pid_count));
+	if (!parse_infos->pids)
+	{
+		perror("Malloc pids error");
+		free(parse_infos);
+		exit(1);
+	}
+	parse_infos->argc = argc;
+	parse_infos->argv = argv;
+	parse_infos->envp = envp;
+	return (parse_infos);
 }
 
-int	ft_isemptystr(char *str)
+void	ft_exit(int exitcode, t_parse_infos *parse_infos)
 {
-	while (*str != '\0')
-	{
-		if (!((*str >= 9 && *str <= 13) || *str == 32))
-			return (0);
-		str++;
-	}
-	return (1);
+	free(parse_infos->pids);
+	free(parse_infos);
+	exit(exitcode);
 }

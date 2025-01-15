@@ -2,6 +2,7 @@
 
 int close_handler(t_fractal *fractal)
 {
+	//mettre des verif
 	mlx_destroy_image(fractal->mlx_connection, fractal->img.img_ptr);
 	mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
 	mlx_destroy_display(fractal->mlx_connection);

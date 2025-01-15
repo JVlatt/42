@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:34:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/07 14:47:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:50:35 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,33 @@
 
 # include "../libft/includes/libft.h"
 # include "../libft/includes/ft_printf.h"
+# include "../libft/includes/get_next_line.h"
 # include <fcntl.h>
 # include <stdio.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
-typedef struct s_pipe
+typedef struct s_parse_infos
 {
-	int		infile;
-	int		outfile;
-	char	**cmd_paths;
-	char	***cmd_args;
-	int		count;
-}	t_pipe;
+	char	**argv;
+	char	**envp;
+	int		argc;
+	pid_t	*pids;
+}	t_parse_infos;
 
-// Args Parser
-t_pipe	*parse_args(int argc, char **args, char **envp);
-char	*merge_path(char *env_path, char *cmd);
-char	**get_path_list(t_pipe *pipe, char **envp);
+//File management
+int				ft_open(char *path, int mode);
 
-// Init, Free & Errors Management
-int		ft_isemptystr(char *str);
-void	ft_exit(t_pipe *pipe, int code, char *msg, int exitcode);
-void	ft_free_tab(int size, char **tab);
-void	ft_free_pipe(t_pipe *pipe, int code);
+//Path
+char			*get_path(t_parse_infos *parse_infos, char **cmd_args);
 
-// Pipe Execution
-void	execute_pipe(t_pipe	*pipe_infos);
+// Pipe & here_doc
+void			parse_pipe(int argc, char **argv, char **envp);
+void			parse_here_doc(int argc, char **argv, char **envp);
+pid_t			exec_pipe(t_parse_infos *parse_infos, int index, int start);
 
-// Debug
-void	ft_print_pipe_infos(t_pipe *pipe);
+//Init, Free & Error
+t_parse_infos	*init_infos(int argc, char **argv, char **envp, int pid_count);
+void			ft_free_tab(char **tab);
+void			ft_exit(int exitcode, t_parse_infos *parse_infos);
 
 #endif

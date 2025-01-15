@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 12:41:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/07 14:01:50 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/14 15:43:24 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/15 14:46:28 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,11 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_pipe	*pipe;
-
-	// char *args[3];
-	
-	// args[0] = "ls";
-	// args[1] = "-l";
-	// args[2] = NULL;
-	// execve("/bin/ls", args, NULL);
-	
-	if (argc >= 5)
+	if (argc != 5)
 	{
-		//Compute commands
-		argv++;
-		pipe = parse_args(argc - 1, argv, envp);
-		execute_pipe(pipe);
-		ft_free_pipe(pipe, 2);
-		return (0);
+		ft_putstr_fd("infile cmd1 cmd2 outfile", 2);
+		return (1);
 	}
-	return (1);
+	parse_pipe(argc, argv, envp);
+	return (0);
 }
