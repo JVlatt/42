@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:34:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 17:16:57 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:50:35 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				ft_open(char *path, int mode);
 //Path
 char			*get_path(t_parse_infos *parse_infos, char **cmd_args);
 
-// Pipe % here_doc
+// Pipe & here_doc
 void			parse_pipe(int argc, char **argv, char **envp);
 void			parse_here_doc(int argc, char **argv, char **envp);
 pid_t			exec_pipe(t_parse_infos *parse_infos, int index, int start);

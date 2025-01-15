@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:42:15 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/14 19:54:55 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:37:22 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	parse_here_doc(int argc, char **argv, char **envp)
 {
 	int				i;
 	int				exit_code;
-	int				in_fd;
 	t_parse_infos	*parse_infos;
 
 	get_here_doc(argv[2]);

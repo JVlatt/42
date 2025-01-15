@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:43:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/15 14:46:28 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:21:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,23 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	if (argc != 5)
+	if (ft_strcmp(argv[1], "here_doc") == 0)
 	{
-		ft_putstr_fd("infile cmd1 cmd2 outfile", 2);
-		return (1);
+		if (argc < 6)
+		{
+			ft_putstr_fd("here_doc LIMITER cmd cmd1 file", 2);
+			return (1);
+		}
+		parse_here_doc(argc, argv, envp);
 	}
-	parse_pipe(argc, argv, envp);
-	return (0);
+	else
+	{
+		if (argc < 5)
+		{
+			ft_putstr_fd("infile cmd1 ... cmdn outfile", 2);
+			return (1);
+		}
+		parse_pipe(argc, argv, envp);
+	}
+	return (1);
 }
