@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_stack_operations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:44:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/27 14:09:56 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:27:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_stack_push(t_list **from, t_list **to)
 	t_list	*tmp;
 	char	new_id;
 
-	if (from)
+	if (*from)
 	{
 		if ((*from)->stack_id == 'a')
 			new_id = 'b';

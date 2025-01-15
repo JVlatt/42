@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/27 14:13:03 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:07:34 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_list	*ft_lstnew(int value, char stackid)
 		return (NULL);
 	list_elem->value = value;
 	list_elem->next = NULL;
+	list_elem->actions = NULL;
 	list_elem->stack_id = stackid;
 	return (list_elem);
 }
