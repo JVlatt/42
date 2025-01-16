@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/16 16:56:56 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:59:36 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	ft_pixel_put(t_vector coords, t_img *img, int color)
 	int	offset;
 
 	offset = (coords.y * img->line_len)
-			+ (coords.x * (img->bpp / 8));
+		+ (coords.x * (img->bpp / 8));
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
-static void	pixel_render(t_vector coords, t_vector start, 
+static void	pixel_render(t_vector coords, t_vector start,
 			t_vector step, t_fractal *fractal)
 {
 	t_vector	z;
@@ -48,10 +48,12 @@ static void	pixel_render(t_vector coords, t_vector start,
 
 void	fractal_render(t_fractal *fractal)
 {
-	t_vector start;
-	t_vector step;
-	t_vector screen;
-	
+	t_vector	start;
+	t_vector	step;
+	t_vector	screen;
+
+	if (!fractal)
+		return ;
 	start = to_world(0, 0, fractal->zoom, fractal->shift);
 	step.x = (4.0 * fractal->zoom) / WDW_WIDTH;
 	step.y = (4.0 * fractal->zoom) / WDW_HEIGHT;

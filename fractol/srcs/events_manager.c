@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_manager.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/16 18:03:42 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/16 18:10:55 by mmanuell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int close_handler(t_fractal *fractal)
+int	close_handler(t_fractal *fractal)
 {
 	if (!fractal)
 		return (1);
@@ -14,7 +26,7 @@ int close_handler(t_fractal *fractal)
 		free(fractal->mlx_connection);
 	}
 	if (fractal->color_map)
-        free(fractal->color_map);
+		free(fractal->color_map);
 	return (0);
 }
 
@@ -33,13 +45,13 @@ int	key_handler(int keysym, t_fractal *fractal)
 	else if (keysym == XK_plus || keysym == XK_equal)
 	{
 		fractal->max_iteration += 10;
-		update_color_map(fractal); 
+		update_color_map(fractal);
 	}
 	else if (keysym == 41 || keysym == XK_minus)
 	{
 		fractal->max_iteration -= 10;
 		update_color_map(fractal);
-	}	 
+	}
 	else
 		return (1);
 	return (0);
@@ -47,19 +59,19 @@ int	key_handler(int keysym, t_fractal *fractal)
 
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-	t_vector 	world_position;
+	t_vector	world_position;
 	t_vector	newshift;
 
 	world_position = to_world(x, y, fractal->zoom, fractal->shift);
 	if (button == Button4)
-    {
-        fractal->zoom *= 0.95;
+	{
+		fractal->zoom *= 0.95;
 		newshift.x = (world_position.x - fractal->shift.x) * (0.05);
 		newshift.y = (world_position.y - fractal->shift.y) * (0.05);
 		fractal->shift.x += newshift.x;
-    	fractal->shift.y += newshift.y;
-    }
-    else if (button == Button5)
-        fractal->zoom *= 1.05;
-    return (0);
+		fractal->shift.y += newshift.y;
+	}
+	else if (button == Button5)
+		fractal->zoom *= 1.05;
+	return (0);
 }
