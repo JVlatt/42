@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/02 18:21:06 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:15:27 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	data_init(t_fractal *fractal)
 {
 	fractal->escape_value = 4;
 	fractal->max_iteration = 42;
-	fractal->shift_x = 0.0;
-	fractal->shift_y = 0.0;
+	fractal->shift.x = 0.0;
+	fractal->shift.y = 0.0;
 	fractal->zoom = 1.0;
 	fractal->color_map = malloc(sizeof(int) * fractal->max_iteration);
 }
@@ -31,7 +31,7 @@ void	update_color_map(t_fractal *fractal)
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < fractal->max_iteration; i++) {
-        fractal->color_map[i] = linear_interpolation(i, WHITE, BLACK, 0, fractal->max_iteration);
+        fractal->color_map[i] = color_interpolation(i, WHITE, BLACK, fractal->max_iteration);
     }
 }
 static void	events_init(t_fractal *fractal)

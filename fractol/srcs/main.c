@@ -3,6 +3,8 @@
 
 int render_frame(t_fractal* fractal)
 {
+	if (!fractal)
+		return(1);
 	fractal_render(fractal);
 	return (0);
 }
@@ -10,6 +12,7 @@ int render_frame(t_fractal* fractal)
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
+
 	(void) argv;
 	(void) argc;
 	fractal_init(&fractal);

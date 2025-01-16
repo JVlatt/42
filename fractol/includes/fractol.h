@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:32 by matt              #+#    #+#             */
-/*   Updated: 2024/12/02 18:36:09 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:45:00 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,39 @@ typedef struct s_img
 	int		line_len;
 }	t_img;
 
-typedef struct s_complex
+typedef struct s_vector
 {
 	double	x; //real
 	double	y; //i
-}	t_complex;
+}	t_vector;
 
 typedef struct s_fractal
 {
-	char	*name;
-	void	*mlx_connection;
-	void	*mlx_window;
-	t_img	img;
-	int		*color_map;
-	double	escape_value;
-	int		max_iteration;
-	double	shift_x;
-	double	shift_y;
-	double	zoom;
-	t_complex	c_start;
-	t_complex	c_step;
+	char		*name;
+	void		*mlx_connection;
+	void		*mlx_window;
+	t_img		img;
+	int			*color_map;
+	double		escape_value;
+	int			max_iteration;
+	t_vector	shift;
+	double		zoom;
 }	t_fractal;
 
-void	fractal_init(t_fractal *fractal);
-void	fractal_render(t_fractal *fractal);
+void		fractal_init(t_fractal *fractal);
+void		fractal_render(t_fractal *fractal);
 
-int	key_handler(int keysym, t_fractal *fractal);
-int close_handler(t_fractal *fractal);
-int	mouse_handler(int button, int x, int y, t_fractal *fractal);
-void	update_color_map(t_fractal *fractal) ;
+//		Events
+int			key_handler(int keysym, t_fractal *fractal);
+int 		close_handler(t_fractal *fractal);
+int			mouse_handler(int button, int x, int y, t_fractal *fractal);
+void		update_color_map(t_fractal *fractal) ;
 
+//		Maths
+t_vector	to_world(int screen_x, int screen_y, double zoom, t_vector shift);
+t_vector	to_screen(double world_x, double world_y, double zoom, t_vector shift);
+t_vector	sum_complex(t_vector z1, t_vector z2);
+t_vector	square_complex(t_vector z);
+double		color_interpolation(double unscaled_num, double new_min, double new_max, double old_max);
 double	linear_interpolation(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-t_complex	sum_complex(t_complex z1, t_complex z2);
-t_complex	square_complex(t_complex z);
-
 #endif
