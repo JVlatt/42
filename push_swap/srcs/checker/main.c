@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/15 17:38:48 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:57:50 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ static void	execute_action(char *action_name,
 		execute_rotate(action_name[1], stack_a, stack_b);
 	else if (action_name[0] == 'r' && ft_strlen(action_name) == 4)
 		execute_reverse_rotate(action_name[2], stack_a, stack_b);
+	else
+	{
+		ft_lstclear(stack_a, &delete_node_content);
+		ft_lstclear(stack_b, &delete_node_content);
+		free(action_name);
+		ft_printf("Error\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 static int	check_result(t_list *stack_a, t_list *stack_b)
