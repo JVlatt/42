@@ -83,8 +83,8 @@ re:	fclean all
 debug : libft/libft.a
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 
-checker : $(CHECKEROBJS)
-	@ $(CC) $(CHECKEROBJS) $(CFLAGS) ${LIBS} -o $@
+bonus : $(CHECKEROBJS)
+	@ $(CC) $(CHECKEROBJS) $(CFLAGS) ${LIBS} -o checker
 	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
 debugchecker : libft/libft.a

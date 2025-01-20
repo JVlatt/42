@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 13:57:50 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:56:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,9 @@ static void	execute_action(char *action_name,
 		ft_lstclear(stack_a, &delete_node_content);
 		ft_lstclear(stack_b, &delete_node_content);
 		free(action_name);
-		ft_printf("Error\n");
+		ft_printf("Operations Error\n");
 		exit(EXIT_FAILURE);
 	}
-}
-
-static int	check_result(t_list *stack_a, t_list *stack_b)
-{
-	t_list	*node;
-
-	if (stack_b)
-	{
-		ft_lstclear(&stack_b, &delete_node_content);
-		return (0);
-	}
-	node = stack_a;
-	while (node->next)
-	{
-		if (node->value > node->next->value)
-		{
-			return (0);
-		}
-		node = node->next;
-	}
-	return (1);
 }
 
 static void	read_inputs(t_list **stack_a, t_list **stack_b)
@@ -88,6 +67,11 @@ int	main(int argc, char **argv)
 		}
 		if (!stack_a)
 			return (1);
+		if (is_sorted(stack_a))
+		{
+			ft_lstclear(&stack_a, &delete_node_content);
+			return (1);
+		}
 		read_inputs(&stack_a, &stack_b);
 		ft_lstclear(&stack_a, &delete_node_content);
 	}

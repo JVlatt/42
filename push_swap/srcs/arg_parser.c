@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:07:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/19 16:14:56 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:37:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	is_valid_arg(t_list *head, char *arg)
 	t_list	*node;
 
 	if (!ft_isnum(arg))
+		return (0);
+	if (ft_strlen(arg) > 11)
 		return (0);
 	if (ft_atol(arg) > INT_MAX || ft_atol(arg) < INT_MIN)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:03:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/16 18:10:55 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:42:52 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	close_handler(t_fractal *fractal)
 		return (1);
 	if (fractal->mlx_connection)
 	{
+		mlx_loop_end(fractal->mlx_connection);
 		if (fractal->img.img_ptr)
 			mlx_destroy_image(fractal->mlx_connection, fractal->img.img_ptr);
 		if (fractal->mlx_window)
@@ -27,7 +28,7 @@ int	close_handler(t_fractal *fractal)
 	}
 	if (fractal->color_map)
 		free(fractal->color_map);
-	return (0);
+	exit (0);
 }
 
 int	key_handler(int keysym, t_fractal *fractal)

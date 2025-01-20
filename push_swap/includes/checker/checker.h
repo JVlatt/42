@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:05:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/27 14:16:41 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:03:17 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int			ft_lstsize(t_list *lst);
 int			ft_getlst_index(t_list *lst, t_list *node_to_find);
 t_list		*ft_lst_min_value(t_list *lst);
 t_list		*ft_lst_max_value(t_list *lst);
+
+//	Check Results
+int			is_sorted(t_list *stack);
+int			check_result(t_list *stack_a, t_list *stack_b);
 
 //	Debug
 void		ft_print_actions(t_list *node);

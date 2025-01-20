@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:32 by matt              #+#    #+#             */
-/*   Updated: 2025/01/20 11:56:11 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:33:03 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_fractal
 	int			max_iteration;
 	t_vector	shift;
 	double		zoom;
+	t_vector	c_value;
 }	t_fractal;
 
 void		fractal_init(t_fractal *fractal);
@@ -98,7 +99,8 @@ t_vector	to_screen(double world_x, double world_y, double zoom, t_vector shift);
 t_vector	sum_complex(t_vector z1, t_vector z2);
 t_vector	square_complex(t_vector z);
 double		color_interpolation(double unscaled_num, double new_min, double new_max, double old_max);
-double	linear_interpolation(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+double		linear_interpolation(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+double		ft_atod(const char *str);
 
 int	ft_strcmp(const char *s1, const char *s2);
 double	ft_fabs(double value);

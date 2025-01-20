@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractal_renderer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 12:05:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:19:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	select_fractal(t_vector *z, t_vector *c, t_fractal *fractal)
 {
 	if (!ft_strcmp(fractal->name, "julia"))
 	{
-		c->x = -0.8;
-		c->y = 0.156;
+		c->x = fractal->c_value.x;
+		c->y = fractal->c_value.y;
 	}
 	else if (!ft_strcmp(fractal->name, "burning_ship"))
 	{

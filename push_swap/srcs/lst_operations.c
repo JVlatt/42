@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:35 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/15 16:14:59 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:12:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,30 @@ t_list	*ft_lstnew(int value, char stackid)
 	list_elem->actions = NULL;
 	list_elem->stack_id = stackid;
 	return (list_elem);
+}
+
+int	is_sorted(t_list *stack)
+{
+	t_list	*node;
+
+	node = stack;
+	while (node->next)
+	{
+		if (node->value > node->next->value)
+		{
+			return (0);
+		}
+		node = node->next;
+	}
+	return (1);
+}
+
+int	check_result(t_list *stack_a, t_list *stack_b)
+{
+	if (stack_b)
+	{
+		ft_lstclear(&stack_b, &delete_node_content);
+		return (0);
+	}
+	return (is_sorted(stack_a));
 }

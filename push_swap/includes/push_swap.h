@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/19 17:11:11 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:03:04 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void		execute_cheapest_action(t_list **source_stack, t_list **dest_stack);
 void		execute_node_action(t_list **stack_a,
 				t_list **stack_b,
 				t_list *node);
+
+//	Check Results
+int			is_sorted(t_list *stack);
+int			check_result(t_list *stack_a, t_list *stack_b);
 
 //	Debug
 void		ft_print_actions(t_list *node);
