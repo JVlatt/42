@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:39:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/16 18:03:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:56:00 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,31 @@ t_vector	square_complex(t_vector z)
 	result.x = (z.x * z.x) - (z.y * z.y);
 	result.y = 2 * z.x * z.y;
 	return (result);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned char	*cp1;
+	unsigned char	*cp2;
+
+	cp1 = (unsigned char *) s1;
+	cp2 = (unsigned char *) s2;
+	while (*cp1 && *cp2)
+	{
+		if (*cp1 != *cp2)
+			return (*cp1 - *cp2);
+		cp1++;
+		cp2++;
+	}
+	return (*cp1 - *cp2);
+}
+
+double	ft_fabs(double value)
+{
+	int	sign;
+
+	sign = 1;
+	if (value < 0)
+		sign = -1;
+	return (value * sign);
 }

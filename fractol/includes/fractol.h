@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:32 by matt              #+#    #+#             */
-/*   Updated: 2025/01/16 16:45:00 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:56:11 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,7 @@ t_vector	sum_complex(t_vector z1, t_vector z2);
 t_vector	square_complex(t_vector z);
 double		color_interpolation(double unscaled_num, double new_min, double new_max, double old_max);
 double	linear_interpolation(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+
+int	ft_strcmp(const char *s1, const char *s2);
+double	ft_fabs(double value);
 #endif

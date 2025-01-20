@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:48 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/16 18:16:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:47:56 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 
 	(void) argv;
 	(void) argc;
+	fractal.name = argv[1];
 	fractal_init(&fractal);
 	fractal_render(&fractal);
 	mlx_loop_hook(fractal.mlx_connection, &render_frame, &fractal);

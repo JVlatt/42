@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/16 17:59:36 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:05:47 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@ static void	ft_pixel_put(t_vector coords, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
+static void	select_fractal(t_vector *z, t_vector *c, t_fractal *fractal)
+{
+	if (!ft_strcmp(fractal->name, "julia"))
+	{
+		c->x = -0.8;
+		c->y = 0.156;
+	}
+	else if (!ft_strcmp(fractal->name, "burning_ship"))
+	{
+		c->x = z->x;
+		c->y = z->y;
+		z->x = ft_fabs(z->x);
+		z->y = ft_fabs(z->y);
+	}
+	else
+	{
+		c->x = z->x;
+		c->y = z->y;
+	}
+}
+
 static void	pixel_render(t_vector coords, t_vector start,
 			t_vector step, t_fractal *fractal)
 {
@@ -29,12 +50,16 @@ static void	pixel_render(t_vector coords, t_vector start,
 	int			i;
 
 	i = 0;
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = start.x + (coords.x * step.x);
-	c.y = start.y - (coords.y * step.y);
+	z.x = start.x + (coords.x * step.x);
+	z.y = start.y - (coords.y * step.y);
+	select_fractal(&z, &c, fractal);
 	while (i < fractal->max_iteration)
 	{
+		if (!ft_strcmp(fractal->name, "burning_ship"))
+		{
+			z.x = ft_fabs(z.x);
+			z.y = ft_fabs(z.y);
+		}
 		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
