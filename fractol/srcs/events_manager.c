@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:03:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 20:09:01 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:07:47 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ int	key_handler(int keysym, t_fractal *fractal)
 	return (0);
 }
 
-int	mouse_handler(int button, int x, int y, t_fractal *fractal)
+int	mouse_btn_handler(int button, int x, int y, t_fractal *fractal)
 {
 	t_vector	newshift;
+	t_vector	mouseWorldPos;
 	
-	fractal->mouse_worldpos = to_world(x, y, fractal->zoom, fractal->shift);
+	mouseWorldPos = to_world(x, y, fractal->zoom, fractal->shift);
 	if (button == Button1)
 	{
 		if (!ft_strcmp(fractal->name, "julia"))
@@ -80,12 +81,18 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	else if (button == Button4)
 	{
 		fractal->zoom *= 0.95;
-		newshift.x = (fractal->mouse_worldpos.x - fractal->shift.x) * (0.05);
-		newshift.y = (fractal->mouse_worldpos.y - fractal->shift.y) * (0.05);
+		newshift.x = (mouseWorldPos.x - fractal->shift.x) * (0.05);
+		newshift.y = (mouseWorldPos.y - fractal->shift.y) * (0.05);
 		fractal->shift.x += newshift.x;
 		fractal->shift.y += newshift.y;
 	}
 	else if (button == Button5)
 		fractal->zoom *= 1.05;
+	return (0);
+}
+
+int	mouse_position_handler(int x, int y, t_fractal *fractal)
+{
+	fractal->mouse_worldpos = to_world(x, y, fractal->zoom, fractal->shift);
 	return (0);
 }

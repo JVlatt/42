@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 20:05:58 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:07:37 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	events_init(t_fractal *fractal)
 	mlx_hook(fractal->mlx_window, KeyPress,
 		KeyPressMask, key_handler, fractal);
 	mlx_hook(fractal->mlx_window, ButtonPress,
-		ButtonPressMask, mouse_handler, fractal);
+		ButtonPressMask, mouse_btn_handler, fractal);
+	mlx_hook(fractal->mlx_window, MotionNotify,
+		PointerMotionMask, mouse_position_handler, fractal);
 	mlx_hook(fractal->mlx_window, DestroyNotify,
 		StructureNotifyMask, close_handler, fractal);
 }
