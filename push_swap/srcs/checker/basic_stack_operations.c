@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:44:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/15 17:27:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:57:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,27 @@ void	ft_rotate(t_list **stack)
 {
 	t_list	*tmp;
 
-	tmp = (*stack)->next;
-	ft_lstadd_back(stack, *stack);
-	(*stack)->next = NULL;
-	*stack = tmp;
+	if (*stack)
+	{
+		tmp = (*stack)->next;
+		ft_lstadd_back(stack, *stack);
+		(*stack)->next = NULL;
+		*stack = tmp;
+	}
 }
 
 void	ft_reverse_rotate(t_list **stack)
 {
 	t_list	*tmp;
 
-	ft_lstadd_front(stack, ft_lstlast(*stack));
-	tmp = *stack;
-	while (tmp->next != *stack)
+	if (*stack)
 	{
-		tmp = tmp->next;
+		ft_lstadd_front(stack, ft_lstlast(*stack));
+		tmp = *stack;
+		while (tmp->next != *stack)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = NULL;
 	}
-	tmp->next = NULL;
 }

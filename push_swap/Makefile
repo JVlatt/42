@@ -54,7 +54,7 @@ END			=	\033[0m
 
 $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_OBJS)
-	@ $(CC) -I $(DIR_INCS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
 all : libft ${NAME}
@@ -92,7 +92,7 @@ debugchecker : libft/libft.a
 
 $(DIR_CHECKEROBJS)/%.o: ${DIR_CHECKERSRCS}/%.c $(CHECKERINCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_CHECKEROBJS)
-	@ $(CC) -I $(DIR_CHECKERINCS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -I $(DIR_CHECKERINCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
 .PHONY: all clean fclean re bonus libft debug debugchecker

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:42:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 16:03:04 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:02:46 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ t_actions	*get_actions(t_list *node_to_move,
 				t_list *stack_a,
 				t_list *stack_b,
 				int sort_order);
-t_actions	*get_moves_incr(t_actions *actions, t_list *node_to_move,
-				t_list *stack_source, t_list *stack_dest);
-t_actions	*get_moves_decr(t_actions *actions, t_list *node_to_move,
-				t_list *stack_source, t_list *stack_dest);
+void		get_moves_incr(t_actions *actions, t_list *node_to_move,
+				t_list *stack_dest);
+void		get_moves_decr(t_actions *actions, t_list *node_to_move,
+				t_list *stack_dest);
 void		get_moves_to_top(t_actions *actions, t_list *node_to_move,
 				t_list *stack, char stack_id);
 

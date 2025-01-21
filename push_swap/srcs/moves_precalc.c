@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_precalc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:58:44 by mmanuell          #+#    #+#             */
-/*   Updated: 2024/12/19 17:15:36 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:02:26 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static t_list	*get_biggest_inferior_value(t_list *stack, int value)
 	return (max_inferior_node);
 }
 
-t_actions	*get_moves_incr(t_actions *actions, t_list *node_to_move,
-			t_list *stack_source, t_list *stack_dest)
+void	get_moves_incr(t_actions *actions, t_list *node_to_move,
+			t_list *stack_dest)
 {
 	if (node_to_move->value > ft_lst_max_value(stack_dest)->value)
 		get_moves_to_bottom(actions, ft_lst_max_value(stack_dest),
@@ -97,8 +97,8 @@ t_actions	*get_moves_incr(t_actions *actions, t_list *node_to_move,
 			stack_dest, stack_dest->stack_id);
 }
 
-t_actions	*get_moves_decr(t_actions *actions, t_list *node_to_move,
-			t_list *stack_source, t_list *stack_dest)
+void	get_moves_decr(t_actions *actions, t_list *node_to_move,
+			t_list *stack_dest)
 {
 	if (node_to_move->value > ft_lst_max_value(stack_dest)->value)
 		get_moves_to_top(actions, ft_lst_max_value(stack_dest),

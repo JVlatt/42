@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 15:26:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:57:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,9 @@ int	main(int argc, char **argv)
 		}
 		if (!stack_a)
 			return (1);
-		if (is_sorted(stack_a))
-		{
-			ft_lstclear(&stack_a, &delete_node_content);
-			return (1);
-		}
 		read_inputs(&stack_a, &stack_b);
 		ft_lstclear(&stack_a, &delete_node_content);
+		return (0);
 	}
+	return (1);
 }

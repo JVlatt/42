@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:48:07 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/15 16:11:12 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:01:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_actions	*get_actions(t_list *node_to_move, t_list *stack_source,
 	if (stack_dest)
 	{
 		if (sort_order < 0)
-			get_moves_decr(actions, node_to_move, stack_source, stack_dest);
+			get_moves_decr(actions, node_to_move, stack_dest);
 		else
-			get_moves_incr(actions, node_to_move, stack_source, stack_dest);
+			get_moves_incr(actions, node_to_move, stack_dest);
 	}
 	return (optimize_actions(actions));
 }

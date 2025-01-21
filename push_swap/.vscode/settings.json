@@ -2,6 +2,7 @@
 	"files.associations": {
 		"push_swap.h": "c",
 		"libft.h": "c",
-		"checker.h": "c"
+		"checker.h": "c",
+		"type_traits": "c"
 	}
 }
