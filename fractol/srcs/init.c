@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 11:49:59 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:38:23 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_color_map(t_fractal *fractal)
 	fractal->color_map = malloc(sizeof(int) * fractal->max_iteration);
 	if (!fractal->color_map)
 	{
-		perror("Failed to allocate color map");
+		ft_putstr_fd("Failed to allocate color map", 2);
 		exit(EXIT_FAILURE);
 	}
 	i = 0;
@@ -57,7 +57,7 @@ static void	init_mlx_wdw_data(t_fractal *fractal)
 	fractal->mlx_connection = mlx_init();
 	if (NULL == fractal->mlx_connection)
 	{
-		perror("Failed to init mlx_connection");
+		ft_putstr_fd("Failed to init mlx_connection", 2);
 		exit(EXIT_FAILURE);
 	}
 	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
@@ -67,7 +67,7 @@ static void	init_mlx_wdw_data(t_fractal *fractal)
 	{
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
-		perror("Failed to init mlx (window)");
+		ft_putstr_fd("Failed to init mlx (window)", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -83,7 +83,7 @@ void	fractal_init(t_fractal *fractal)
 			fractal->mlx_window);
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
-		perror("Failed to init mlx (img_ptr)");
+		ft_putstr_fd("Failed to init mlx (img_ptr)", 2);
 		exit(EXIT_FAILURE);
 	}
 	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.img_ptr,
@@ -93,7 +93,7 @@ void	fractal_init(t_fractal *fractal)
 	if (NULL == fractal->img.pixels_ptr)
 	{
 		close_handler(fractal);
-		perror("Failed to init mlx (get_data_addr)");
+		ft_putstr_fd("Failed to init mlx (get_data_addr)", 2);
 		exit(EXIT_FAILURE);
 	}
 	data_init(fractal);

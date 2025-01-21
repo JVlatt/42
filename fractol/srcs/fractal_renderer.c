@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 14:19:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:02:36 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	pixel_render(t_vector coords, t_vector start,
 		}
 		i++;
 	}
-	ft_pixel_put(coords, &fractal->img, BLACK);
+	ft_pixel_put(coords, &fractal->img, WHITE);
 }
 
 void	fractal_render(t_fractal *fractal)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:32 by matt              #+#    #+#             */
-/*   Updated: 2025/01/21 11:45:04 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:29:40 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ typedef struct s_img
 {
 	void	*img_ptr;
 	char	*pixels_ptr;
-	int		bpp; // bytes per pixel
+	int		bpp;
 	int		endian;
 	int		line_len;
 }	t_img;
 
 typedef struct s_vector
 {
-	double	x; //real
-	double	y; //i
+	double	x;
+	double	y;
 }	t_vector;
 
 typedef struct s_fractal
@@ -109,4 +109,6 @@ t_vector	to_world(int screen_x, int screen_y, double zoom, t_vector shift);
 t_vector	to_screen(double world_x, double world_y,
 				double zoom, t_vector shift);
 
+//		Error
+void		ft_putstr_fd(char *s, int fd);
 #endif

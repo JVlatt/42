@@ -4,7 +4,8 @@ SRC =	events_manager.c\
 		main.c\
 		math_utils.c \
 		str_utils.c \
-		coordinate_utils.c
+		coordinate_utils.c \
+		ft_atod.c
 
 SRCS = ${addprefix ${CDIR},${SRC}}
 

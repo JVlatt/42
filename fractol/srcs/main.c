@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:48 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 11:42:03 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:44:00 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	render_frame(t_fractal *fractal)
 
 static int	parse_args(int argc, char **argv, t_fractal *fractal)
 {
-	if (argc >= 2)
+	if (argc >= 2 && argc <= 4)
 	{
 		if (!ft_strcmp("mandelbrot", argv[1]) || !ft_strcmp("julia", argv[1])
 			|| !ft_strcmp("burning_ship", argv[1]))
@@ -34,9 +34,15 @@ static int	parse_args(int argc, char **argv, t_fractal *fractal)
 				{
 					fractal->c_value.x = ft_atod(argv[2]);
 					fractal->c_value.y = ft_atod(argv[3]);
-					return (1);
+				}
+				else
+				{
+					fractal->c_value.x = -0.8;
+					fractal->c_value.y = 0.156;
 				}
 			}
+			else if (argc != 2)
+				return (0);
 			return (1);
 		}
 	}
@@ -49,7 +55,9 @@ int	main(int argc, char **argv)
 
 	if (!parse_args(argc, argv, &fractal))
 	{
-		perror("Error : Incorrect Arguments");
+		ft_putstr_fd("Error : Incorrect Arguments\n", 2);
+		ft_putstr_fd("./fract-ol <type> <if julia : c> <if julia : i> \n", 2);
+		ft_putstr_fd("Types : mandelbrot, julia, burning_ship\n", 2);
 		return (1);
 	}
 	fractal_init(&fractal);
