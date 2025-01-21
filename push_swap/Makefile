@@ -95,4 +95,4 @@ $(DIR_CHECKEROBJS)/%.o: ${DIR_CHECKERSRCS}/%.c $(CHECKERINCS) Makefile libft/lib
 	@ $(CC) -I $(DIR_CHECKERINCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
-.PHONY: all clean fclean re checker libft
+.PHONY: all clean fclean re bonus libft debug debugchecker

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:07:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 17:37:33 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:42:19 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_list	*parse_args(int argc, char **args)
 		else
 		{
 			ft_lstclear(&arg_list, &delete_node_content);
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			return (NULL);
 		}
 		i++;
