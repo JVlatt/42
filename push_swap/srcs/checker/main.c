@@ -6,31 +6,24 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 17:56:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:26:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker/checker.h"
 
-static void	execute_action(char *action_name,
+static int	execute_action(char *action_name,
 			t_list **stack_a, t_list **stack_b)
 {
 	if (action_name[0] == 's')
-		execute_swap(action_name[1], stack_a, stack_b);
+		return (execute_swap(action_name[1], stack_a, stack_b));
 	else if (action_name[0] == 'p')
-		execute_push(action_name[1], stack_a, stack_b);
+		return (execute_push(action_name[1], stack_a, stack_b));
 	else if (action_name[0] == 'r' && ft_strlen(action_name) == 3)
-		execute_rotate(action_name[1], stack_a, stack_b);
+		return (execute_rotate(action_name[1], stack_a, stack_b));
 	else if (action_name[0] == 'r' && ft_strlen(action_name) == 4)
-		execute_reverse_rotate(action_name[2], stack_a, stack_b);
-	else
-	{
-		ft_lstclear(stack_a, &delete_node_content);
-		ft_lstclear(stack_b, &delete_node_content);
-		free(action_name);
-		ft_printf("Operations Error\n");
-		exit(EXIT_FAILURE);
-	}
+		return (execute_reverse_rotate(action_name[2], stack_a, stack_b));
+	return (0);
 }
 
 static void	read_inputs(t_list **stack_a, t_list **stack_b)
@@ -40,7 +33,14 @@ static void	read_inputs(t_list **stack_a, t_list **stack_b)
 	input = get_next_line(0);
 	while (input)
 	{
-		execute_action(input, stack_a, stack_b);
+		if (!execute_action(input, stack_a, stack_b))
+		{
+			ft_lstclear(stack_a, &delete_node_content);
+			ft_lstclear(stack_b, &delete_node_content);
+			free(input);
+			ft_putstr_fd("Operations Error\n", 2);
+			exit(EXIT_FAILURE);
+		}
 		free(input);
 		input = get_next_line(0);
 	}

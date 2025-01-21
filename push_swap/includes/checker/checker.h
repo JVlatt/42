@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:05:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 16:03:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:26:33 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ t_list		*ft_lstnew(int value, char stackid);
 void		delete_node_content(t_list *node);
 
 // 	Execute Actions 
-void		execute_swap(char arg, t_list **stack_a, t_list **stack_b);
-void		execute_push(char arg, t_list **stack_a, t_list **stack_b);
-void		execute_rotate(char arg, t_list **stack_a, t_list **stack_b);
-void		execute_reverse_rotate(char arg,
+int			execute_swap(char arg, t_list **stack_a, t_list **stack_b);
+int			execute_push(char arg, t_list **stack_a, t_list **stack_b);
+int			execute_rotate(char arg, t_list **stack_a, t_list **stack_b);
+int			execute_reverse_rotate(char arg,
 				t_list **stack_a,
 				t_list **stack_b);
 
