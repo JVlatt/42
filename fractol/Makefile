@@ -2,8 +2,9 @@ SRC =	events_manager.c\
 		fractal_renderer.c\
 		init.c\
 		main.c\
-		utils.c \
-		ft_atod.c
+		math_utils.c \
+		str_utils.c \
+		coordinate_utils.c
 
 SRCS = ${addprefix ${CDIR},${SRC}}
 
