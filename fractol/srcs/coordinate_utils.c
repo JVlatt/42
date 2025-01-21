@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   coordinate_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 17:39:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 14:47:20 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/21 11:31:19 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/21 11:31:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-
-double	color_interpolation(double unscaled_num, double new_min,
-							double new_max, double old_max)
-{
-	return ((new_max - new_min) * (unscaled_num - 0)
-		/ (old_max - 0) + new_min);
-}
+#include "../includes/fractol.h"
 
 t_vector	to_world(int screen_x, int screen_y, double zoom, t_vector shift)
 {
@@ -44,49 +37,4 @@ t_vector	to_screen(double world_x, double world_y,
 	screen_position.x = ((normalized_x + 2.0) / 4.0) * WDW_WIDTH;
 	screen_position.y = ((2.0 - normalized_y) / 4.0) * WDW_HEIGHT;
 	return (screen_position);
-}
-
-t_vector	sum_complex(t_vector z1, t_vector z2)
-{
-	t_vector	result;
-
-	result.x = z1.x + z2.x;
-	result.y = z1.y + z2.y;
-	return (result);
-}
-
-t_vector	square_complex(t_vector z)
-{
-	t_vector	result;
-
-	result.x = (z.x * z.x) - (z.y * z.y);
-	result.y = 2 * z.x * z.y;
-	return (result);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned char	*cp1;
-	unsigned char	*cp2;
-
-	cp1 = (unsigned char *) s1;
-	cp2 = (unsigned char *) s2;
-	while (*cp1 && *cp2)
-	{
-		if (*cp1 != *cp2)
-			return (*cp1 - *cp2);
-		cp1++;
-		cp2++;
-	}
-	return (*cp1 - *cp2);
-}
-
-double	ft_fabs(double value)
-{
-	int	sign;
-
-	sign = 1;
-	if (value < 0)
-		sign = -1;
-	return (value * sign);
 }

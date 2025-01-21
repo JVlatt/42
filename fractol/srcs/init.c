@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 12:21:09 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:49:59 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	data_init(t_fractal *fractal)
 void	update_color_map(t_fractal *fractal)
 {
 	int	i;
-	
+
 	free(fractal->color_map);
 	fractal->color_map = malloc(sizeof(int) * fractal->max_iteration);
 	if (!fractal->color_map)
@@ -36,8 +36,8 @@ void	update_color_map(t_fractal *fractal)
 	i = 0;
 	while (i < fractal->max_iteration)
 	{
-		fractal->color_map[i] = color_interpolation(i, ELECTRIC_LIME, SPRING_GREEN,
-				fractal->max_iteration);
+		fractal->color_map[i] = color_interpolation(i, BLACK,
+				WHITE, fractal->max_iteration);
 		i++;
 	}
 }
@@ -52,7 +52,7 @@ static void	events_init(t_fractal *fractal)
 		StructureNotifyMask, close_handler, fractal);
 }
 
-void	fractal_init(t_fractal *fractal)
+static void	init_mlx_wdw_data(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
 	if (NULL == fractal->mlx_connection)
@@ -62,24 +62,28 @@ void	fractal_init(t_fractal *fractal)
 	}
 	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
 			WDW_WIDTH, WDW_HEIGHT,
-			"mandelbrot");
+			fractal->name);
 	if (NULL == fractal->mlx_window)
 	{
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
-		perror("Failed to init mlx_connection");
+		perror("Failed to init mlx (window)");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	fractal_init(t_fractal *fractal)
+{
+	init_mlx_wdw_data(fractal);
 	fractal->img.img_ptr = mlx_new_image(fractal->mlx_connection,
-			WDW_WIDTH,
-			WDW_HEIGHT);
+			WDW_WIDTH, WDW_HEIGHT);
 	if (NULL == fractal->img.img_ptr)
 	{
 		mlx_destroy_window(fractal->mlx_connection,
 			fractal->mlx_window);
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
-		perror("Failed to init mlx_connection");
+		perror("Failed to init mlx (img_ptr)");
 		exit(EXIT_FAILURE);
 	}
 	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.img_ptr,
@@ -89,7 +93,7 @@ void	fractal_init(t_fractal *fractal)
 	if (NULL == fractal->img.pixels_ptr)
 	{
 		close_handler(fractal);
-		perror("Failed to init mlx_connection");
+		perror("Failed to init mlx (get_data_addr)");
 		exit(EXIT_FAILURE);
 	}
 	data_init(fractal);

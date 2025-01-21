@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:48 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 18:42:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:42:03 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static int	parse_args(int argc, char **argv, t_fractal *fractal)
 			{
 				if (argc == 4)
 				{
-						fractal->c_value.x = ft_atod(argv[2]);
-						fractal->c_value.y = ft_atod(argv[3]);
-						return (1);
+					fractal->c_value.x = ft_atod(argv[2]);
+					fractal->c_value.y = ft_atod(argv[3]);
+					return (1);
 				}
 			}
 			return (1);
 		}
 	}
-	return (0);	
+	return (0);
 }
 
 int	main(int argc, char **argv)

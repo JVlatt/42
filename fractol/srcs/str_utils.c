@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atod.c                                          :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:47:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 15:20:12 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:41:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-double	get_left_part(const char *str, int *len)
+static double	get_left_part(const char *str, int *len)
 {
 	double		result;
 	int			sign;
@@ -39,7 +39,7 @@ double	get_left_part(const char *str, int *len)
 	return (sign * result);
 }
 
-double	get_right_part(const char *str)
+static double	get_right_part(const char *str)
 {
 	double		result;
 	int			len;
@@ -75,4 +75,21 @@ double	ft_atod(const char *str)
 		right = get_right_part((str + left_len));
 	}
 	return (sign * (left + right));
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned char	*cp1;
+	unsigned char	*cp2;
+
+	cp1 = (unsigned char *) s1;
+	cp2 = (unsigned char *) s2;
+	while (*cp1 && *cp2)
+	{
+		if (*cp1 != *cp2)
+			return (*cp1 - *cp2);
+		cp1++;
+		cp2++;
+	}
+	return (*cp1 - *cp2);
 }
