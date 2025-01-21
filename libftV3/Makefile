@@ -69,7 +69,7 @@ ${NAME}: ${OBJS}
 	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
 clean:
-	@ rm -f ${OBJS}
+	@ rm -rdf ${DIR_OBJS}
 	@ printf "$(YELLOW)$(DIR_OBJS) removed$(END)\n"
 
 fclean:	clean
