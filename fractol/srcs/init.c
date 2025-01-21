@@ -6,11 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 14:38:23 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 static void	data_init(t_fractal *fractal)
 {

@@ -6,11 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:31:28 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 14:02:36 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 static void	ft_pixel_put(t_vector coords, t_img *img, int color)
 {

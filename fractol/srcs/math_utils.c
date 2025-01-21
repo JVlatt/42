@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:39:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 11:31:41 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 double	color_interpolation(double unscaled_num, double new_min,
 							double new_max, double old_max)

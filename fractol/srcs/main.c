@@ -6,11 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:48 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 14:44:00 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	render_frame(t_fractal *fractal)
 {
