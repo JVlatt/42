@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:32 by matt              #+#    #+#             */
-/*   Updated: 2025/01/21 14:29:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:05:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_fractal
 	t_vector	shift;
 	double		zoom;
 	t_vector	c_value;
+	t_vector	mouse_worldpos;
+	int			mouse_mode;
 }	t_fractal;
 
 void		fractal_init(t_fractal *fractal);

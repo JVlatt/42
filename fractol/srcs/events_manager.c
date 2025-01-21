@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:03:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 19:51:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:09:01 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ int	key_handler(int keysym, t_fractal *fractal)
 	else if (keysym == XK_plus || keysym == XK_equal)
 	{
 		fractal->max_iteration += 10;
+		if (fractal->max_iteration > 1000)
+			fractal->max_iteration = 1000;
 		update_color_map(fractal);
 	}
 	else if (keysym == 41 || keysym == XK_minus)
 	{
 		fractal->max_iteration -= 10;
+		if (fractal->max_iteration < 0)
+			fractal->max_iteration = 1;
 		update_color_map(fractal);
 	}
 	else
@@ -60,15 +64,24 @@ int	key_handler(int keysym, t_fractal *fractal)
 
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-	t_vector	world_position;
 	t_vector	newshift;
-
-	world_position = to_world(x, y, fractal->zoom, fractal->shift);
-	if (button == Button4)
+	
+	fractal->mouse_worldpos = to_world(x, y, fractal->zoom, fractal->shift);
+	if (button == Button1)
+	{
+		if (!ft_strcmp(fractal->name, "julia"))
+		{
+			if (fractal->mouse_mode == 0)
+				fractal->mouse_mode = 1;
+			else
+				fractal->mouse_mode = 0;
+		}	
+	}
+	else if (button == Button4)
 	{
 		fractal->zoom *= 0.95;
-		newshift.x = (world_position.x - fractal->shift.x) * (0.05);
-		newshift.y = (world_position.y - fractal->shift.y) * (0.05);
+		newshift.x = (fractal->mouse_worldpos.x - fractal->shift.x) * (0.05);
+		newshift.y = (fractal->mouse_worldpos.y - fractal->shift.y) * (0.05);
 		fractal->shift.x += newshift.x;
 		fractal->shift.y += newshift.y;
 	}

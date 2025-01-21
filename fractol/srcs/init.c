@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:51:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:05:58 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	data_init(t_fractal *fractal)
 	fractal->shift.x = 0.0;
 	fractal->shift.y = 0.0;
 	fractal->zoom = 1.0;
+	fractal->mouse_mode = 0;
 	fractal->color_map = malloc(sizeof(int) * fractal->max_iteration);
 }
 

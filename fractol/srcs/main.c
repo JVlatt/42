@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:48 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 19:51:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:08:45 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	render_frame(t_fractal *fractal)
 {
 	if (!fractal)
 		return (1);
+	if (fractal->mouse_mode == 1)
+	{
+		fractal->c_value.x = fractal->mouse_worldpos.x;
+		fractal->c_value.y = fractal->mouse_worldpos.y;
+	}
 	fractal_render(fractal);
 	return (0);
 }
