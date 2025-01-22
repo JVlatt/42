@@ -4,7 +4,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LIBC_IS =	is/ft_isalnum.c is/ft_isalpha.c is/ft_isascii.c is/ft_isdigit.c is/ft_isprint.c 
+LIBC_IS =	is/ft_isalnum.c is/ft_isalpha.c is/ft_isascii.c is/ft_isdigit.c is/ft_isprint.c \
+			is/ft_isnbr.c
 
 LIBC_LST =	lst/ft_lstadd_back.c lst/ft_lstadd_front.c lst/ft_lstclear.c \
 			lst/ft_lstdelone.c lst/ft_lstiter.c lst/ft_lstlast.c \

@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isnbr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 01:53:02 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/22 12:20:10 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/22 12:27:34 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/22 12:33:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/libft.h"
 
-int	ft_isdigit(int c)
+int	ft_isnbr(const char *str, int space, int sign)
 {
-	return (c >= '0' && c <= '9');
-}
-
-int	ft_is_str_digit(const char *str)
-{
-	if (!str)
-		return (0);
-	if (!*str)
-		return (0);
-	while (*str)
+	while (*str != '\0' && ((*str >= 9 && *str <= 13) || *str == 32))
 	{
-		if (!ft_isdigit(*str))
+		if (!space)
 			return (0);
 		str++;
 	}
-	return (1);
+	if (*str != '\0' && (*str == '+' || *str == '-'))
+	{
+		if (!sign)
+			return (0);
+		str++;
+	}
+	if (!*str)
+		return (1);
+	if (ft_strlen(str) > 11)
+		return (0);
+	while (*str >= '0' && *str <= '9')
+	{
+		str++;
+	}
+	if (!*str)
+		return (1);
 }

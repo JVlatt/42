@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 19:35:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:33:35 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,16 @@ typedef struct s_list
 
 //	Is
 int		ft_isalnum(int c);
+int		ft_is_str_alnum(const char *str);
 int		ft_isalpha(int c);
+int		ft_is_str_alpha(const char *str);
 int		ft_isascii(int c);
+int		ft_is_str_ascii(const char *str);
 int		ft_isdigit(int c);
+int		ft_is_str_digit(const char *str);
 int		ft_isprint(int c);
-
+int		ft_is_str_print(const char *str);
+int		ft_isnbr(const char *str, int space, int sign);
 //	Lst
 void	ft_lstadd_front(t_list **alst, t_list *new);
 t_list	*ft_lstnew(void *content);
