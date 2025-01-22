@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/22 15:51:56 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:45:33 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	read_inputs(t_list **stack_a, t_list **stack_b)
 		input = get_next_line(0);
 	}
 	if (check_result(*stack_a, *stack_b))
-		ft_printf("OK");
+		ft_printf("OK\n");
 	else
-		ft_printf("K0");
+		ft_printf("K0\n");
 }
 
 int	main(int argc, char **argv)

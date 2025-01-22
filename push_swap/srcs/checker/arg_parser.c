@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:07:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 18:45:45 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:45:14 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	ft_isnum(char *str)
 		if (*str == '-' || *str == '+')
 		{
 			str++;
-			if (*str >= '0' && *str <= '9')
-				return (ft_isnum(str));
-			else
+			while (*str && *str >= '0' && *str <= '9')
+				str++;
+			if (*str)
 				return (0);
 		}
 		str++;

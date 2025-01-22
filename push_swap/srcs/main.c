@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/20 17:47:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:41:29 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	select_sort(t_list **stack_a, t_list **stack_b)
 {
-	if (ft_lstsize(*stack_a) == 3)
+	if (ft_lstsize(*stack_a) == 2)
+		execute_swap('a', stack_a, stack_b);
+	else if (ft_lstsize(*stack_a) == 3)
 		sort_three(stack_a);
 	else if (ft_lstsize(*stack_a) > 3)
 		sort_stacks(stack_a, stack_b);
