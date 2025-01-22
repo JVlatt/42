@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:38:14 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 18:57:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:51:56 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	read_inputs(t_list **stack_a, t_list **stack_b)
 			ft_lstclear(stack_a, &delete_node_content);
 			ft_lstclear(stack_b, &delete_node_content);
 			free(input);
-			ft_putstr_fd("Operations Error\n", 2);
+			ft_putstr_fd("Error\n", 2);
 			exit(EXIT_FAILURE);
 		}
 		free(input);
