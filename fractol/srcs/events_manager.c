@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:03:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/21 21:07:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:28:31 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ int	mouse_btn_handler(int button, int x, int y, t_fractal *fractal)
 
 int	mouse_position_handler(int x, int y, t_fractal *fractal)
 {
-	fractal->mouse_worldpos = to_world(x, y, fractal->zoom, fractal->shift);
+	t_vector	noshift;
+
+	noshift.x = 0;
+	noshift.y = 0;
+	fractal->mouse_worldpos = to_world(x, y, 1, noshift);
 	return (0);
 }
