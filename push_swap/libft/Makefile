@@ -31,7 +31,7 @@ SRCS = ${addprefix $(DIR_SRCS)/,${LIBC} ${FT_PRINTF} ${GNL}}
 OBJS = ${addprefix $(DIR_OBJS)/, ${LST_OBJS}}
 INCS = ${addprefix $(DIR_INCS)/, ${LST_INCS}}
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
