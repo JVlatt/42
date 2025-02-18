@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/06 16:23:12 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:25:59 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-	return (0);
+	t_manager	*manager;
+
+	if (check_args(argc, argv))
+	{
+		manager = init_manager(argc, argv);
+		if (!manager)
+		{
+			printf("Manager Init Failed\n");
+			return (1);
+		}
+		init_threads(manager);
+	}
+	else
+		printf("Invalid Arguments\n");
+	return (1);
 }
 
 // fsanatize=threads

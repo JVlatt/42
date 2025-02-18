@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/06 14:12:57 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/02/18 20:03:36 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,15 @@ NAME = philo
 CC = cc 
 CFLAGS = -Wall -Werror -Wextra -pthread
 
-SRCS	= main.c
+SRCS	= 	main.c \
+			parsing.c \
+			parsing_utils.c \
+			utils.c \
+			actions.c \
+			routine.c \
+			manager.c \
+			ft_time.c
+			
 DIR_OBJS = .objs
 OBJS = $(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
 
@@ -47,7 +55,7 @@ fclean:		clean
 re:	fclean all
 
 fsanitize :
-	$(CC) -fsanitize=threads -g $(SRCS) $(CFLAGS) -o $@
+	$(CC) -fsanitize=thread -g $(SRCS) $(CFLAGS) -o $@
 
 g3 : libft
 	$(CC) -g3 $(SRCS) $(CFLAGS) -o $@

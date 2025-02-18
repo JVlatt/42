@@ -5,59 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 16:46:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/06 16:54:01 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/02/18 19:30:35 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_isnum(char *str)
-{
-	if (!str)
-		return (0);
-	if (!*str)
-		return (0);
-	while (*str)
-	{
-		if (!(*str >= '0' && *str <= '9')
-			&& *str != '-' && *str != '+')
-			return (0);
-		if (*str == '-' || *str == '+')
-		{
-			str++;
-			while (*str && *str >= '0' && *str <= '9')
-				str++;
-			if (*str)
-				return (0);
-		}
-		str++;
-	}
-	return (1);
-}
-
-int	ft_atoi(const char *str)
-{
-	int		result;
-	int		sign;
-
-	sign = 1;
-	result = 0;
-	while (*str != '\0' && ((*str >= 9 && *str <= 13) || *str == 32))
-		str++;
-	if (*str != '\0' && (*str == '+' || *str == '-'))
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - 48;
-		str++;
-	}
-	return (sign * result);
-}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -76,4 +29,25 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		i++;
 	}
 	return (buffer);
+}
+
+void	print_philos_data(t_manager *manager)
+{
+	int	i;
+
+	i = 0;
+	printf ("==** %d Philosophers **==\n\n", manager->count);
+	while (i < manager->count)
+	{
+		printf ("===== Philosopher %d =====\n", i);
+		printf ("Thread ID : %lu\n", manager->philos[i].thread);
+		printf ("Time To Die : %d\n", manager->philos[i].die_time);
+		printf ("Time To Eat : %d\n", manager->philos[i].eat_time);
+		printf ("Time To Sleep : %d\n", manager->philos[i].sleep_time);
+		printf ("Number To Eat : %d\n", manager->philos[i].eat_nb);
+		printf ("Left Fork   : %p\n", &(manager->philos[i].l_fork));
+		printf ("Right Fork *: %p\n", manager->philos[i].r_fork);
+		printf ("==========================\n\n");
+		i++;
+	}
 }
