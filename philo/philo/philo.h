@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/18 20:01:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:52:59 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ typedef struct s_philosopher
 	unsigned int	die_time;
 	unsigned int	eat_time;
 	unsigned int	sleep_time;
-	unsigned int	eat_nb;
+	unsigned int	last_meal;
+	unsigned int	eat_count;
+	int				eat_nb;
 	unsigned int	state;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	l_fork;
 	pthread_t		thread;
 	pthread_mutex_t	*start_mutex;
+	unsigned int	start_eating;
+	unsigned int	id;
 }	t_philosopher;
 
 typedef struct s_manager
@@ -48,7 +52,7 @@ void			*philo_routine(void *arg);
 // PARSING
 
 int				check_args(int argc, char **argv);
-t_manager		*init_manager(int argc, char **argv);
+void			init_manager(t_manager *manager, int argc, char **argv);
 
 //	MANAGER
 
@@ -57,10 +61,15 @@ int				init_threads(t_manager *manager);
 //	ROUTINE
 
 void			*start_routine(void *pmanager);
+void			main_routine(t_philosopher *philo);
+void			eat_time(t_philosopher *philo);
+void			bed_time(t_philosopher *philo);
+
 //	TIME
 
 unsigned int	get_current_time(void);
 unsigned int	get_elapsed_time(unsigned int start_time);
+int				ft_usleep(unsigned int start_time, unsigned int duration);
 
 // UTILS
 

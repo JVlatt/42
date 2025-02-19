@@ -3,21 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:16:55 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/18 20:03:58 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:59:27 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_usleep(unsigned int milliseconds)
+void	bed_time(t_philosopher *philo)
 {
-	unsigned int	start;
+	printf("%u Philosopher %d is sleeping\n",
+		get_elapsed_time(philo->start_time),
+		philo->id);
+	ft_usleep(philo->start_time, philo->sleep_time);
+}
 
-	start = get_current_time();
-	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
-	return (0);
+void	eat_time(t_philosopher *philo)
+{
+	printf("%u Philosopher %d is eating\n",
+		get_elapsed_time(philo->start_time),
+		philo->id);
+	ft_usleep(philo->start_time, philo->eat_time);
+	philo->last_meal = get_current_time();
+	philo->eat_count += 1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/18 19:26:29 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:00:34 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static t_philosopher	*parse_data(int argc, char **argv)
 		philos[count].die_time = ft_atoi(argv[2]);
 		philos[count].eat_time = ft_atoi(argv[3]);
 		philos[count].sleep_time = ft_atoi(argv[4]);
+		philos[count].eat_count = 0;
 		if (argc == 6)
 			philos[count].eat_nb = ft_atoi(argv[5]);
 		else
@@ -57,14 +58,12 @@ static t_philosopher	*parse_data(int argc, char **argv)
 	return (philos);
 }
 
-t_manager	*init_manager(int argc, char **argv)
+void	init_manager(t_manager *manager, int argc, char **argv)
 {
-	t_manager	*manager;
-
-	manager = ft_calloc(1, sizeof(t_manager));
-	if (!manager)
-		return (NULL);
+	(void) argc;
+	(void) argv;
 	manager->count = ft_atoi(argv[1]);
 	manager->philos = parse_data(argc, argv);
-	return (manager);
+	if (!manager->philos)
+		printf("Error");
 }

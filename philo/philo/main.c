@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/18 18:25:59 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:06:53 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_manager	*manager;
+	t_manager	manager;
 
 	if (check_args(argc, argv))
 	{
-		manager = init_manager(argc, argv);
-		if (!manager)
-		{
-			printf("Manager Init Failed\n");
-			return (1);
-		}
-		init_threads(manager);
+		init_manager(&manager, argc, argv);
+		init_threads(&manager);
 	}
 	else
 		printf("Invalid Arguments\n");
@@ -33,13 +28,13 @@ int	main(int argc, char **argv)
 
 // fsanatize=threads
 
-// usleep (unsigned int usecs) 
+// usleep (unsigned int usecs)
 // => 0 | -1 + errno
 
 // int gettimeofday(struct timeval *tv, struct timezone *tz)
 // => 0 | -1 + errno					should be NULL
 
-// struct timeval 
+// struct timeval
 // {
 // 	time_t tv_sec;		 /* seconds */
 // 	suseconds_t tv_usec; /* microseconds */
@@ -72,7 +67,7 @@ int	main(int argc, char **argv)
 //										NULL
 // => 0 | errno
 //
-// int pthread_mutex_destroy(pthread_mutex_t *mutex) 
+// int pthread_mutex_destroy(pthread_mutex_t *mutex)
 //									=> ne pas destroy un mutex lock !!
 //
 // => 0 | errno
