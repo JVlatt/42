@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:51:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/19 17:07:59 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/21 13:02:59 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	main_routine(t_philosopher *philo)
 	printf("%u Philosopher %d is thinking\n",
 		get_elapsed_time(philo->start_time),
 		philo->id);
-	//main_routine(philo);
+	if (!philo->manager->sim_end)
+		main_routine(philo);
 }

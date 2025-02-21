@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/19 16:52:59 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/21 13:06:30 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-struct	s_philosopher;
+typedef struct	s_manager	t_manager;
 
 typedef struct s_philosopher
 {
@@ -29,7 +29,7 @@ typedef struct s_philosopher
 	unsigned int	eat_time;
 	unsigned int	sleep_time;
 	unsigned int	last_meal;
-	unsigned int	eat_count;
+	int				eat_count;
 	int				eat_nb;
 	unsigned int	state;
 	pthread_mutex_t	*r_fork;
@@ -38,6 +38,7 @@ typedef struct s_philosopher
 	pthread_mutex_t	*start_mutex;
 	unsigned int	start_eating;
 	unsigned int	id;
+	t_manager		*manager;
 }	t_philosopher;
 
 typedef struct s_manager
@@ -45,6 +46,7 @@ typedef struct s_manager
 	t_philosopher	*philos;
 	int				count;
 	pthread_mutex_t	start_mutex;
+	int				sim_end;
 }	t_manager;
 
 void			*philo_routine(void *arg);

@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:56:00 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/19 16:13:44 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/21 13:03:26 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	create_threads(t_manager *manager)
 	{
 		manager->philos[i].start_mutex = &(manager->start_mutex);
 		manager->philos[i].id = i;
+		manager->philos[i].manager = manager;
 		if (pthread_create(&(manager->philos[i].thread), NULL,
 				start_routine, &(manager->philos[i])) == -1)
 			return (0);

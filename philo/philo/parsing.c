@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/19 17:00:34 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/21 12:41:35 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_manager(t_manager *manager, int argc, char **argv)
 	(void) argv;
 	manager->count = ft_atoi(argv[1]);
 	manager->philos = parse_data(argc, argv);
+	manager->sim_end = 0;
 	if (!manager->philos)
 		printf("Error");
 }
