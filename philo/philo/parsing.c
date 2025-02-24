@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/21 12:41:35 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/24 13:59:07 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static t_philosopher	*parse_data(int argc, char **argv)
 		philos[count].sleep_time = ft_atoi(argv[4]);
 		philos[count].eat_count = 0;
 		if (argc == 6)
-			philos[count].eat_nb = ft_atoi(argv[5]);
+			philos[count].eat_goal = ft_atoi(argv[5]);
 		else
-			philos[count].eat_nb = -1;
+			philos[count].eat_goal = -1;
 	}
 	while (count++ < ft_atoi(argv[1]) - 2)
 	{

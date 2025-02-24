@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/21 13:06:30 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/24 14:03:08 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_philosopher
 	unsigned int	sleep_time;
 	unsigned int	last_meal;
 	int				eat_count;
-	int				eat_nb;
+	int				eat_goal;
+	unsigned int	eat_reached;
 	unsigned int	state;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	l_fork;
@@ -47,6 +48,7 @@ typedef struct s_manager
 	int				count;
 	pthread_mutex_t	start_mutex;
 	int				sim_end;
+	pthread_t		manager_thread;
 }	t_manager;
 
 void			*philo_routine(void *arg);
@@ -62,8 +64,8 @@ int				init_threads(t_manager *manager);
 
 //	ROUTINE
 
-void			*start_routine(void *pmanager);
-void			main_routine(t_philosopher *philo);
+void			*phi_start_routine(void *philop);
+void			*mngr_start_routine(void *managerp);
 void			eat_time(t_philosopher *philo);
 void			bed_time(t_philosopher *philo);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/18 19:30:35 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:44:17 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	print_philos_data(t_manager *manager)
 		printf ("Time To Die : %d\n", manager->philos[i].die_time);
 		printf ("Time To Eat : %d\n", manager->philos[i].eat_time);
 		printf ("Time To Sleep : %d\n", manager->philos[i].sleep_time);
-		printf ("Number To Eat : %d\n", manager->philos[i].eat_nb);
+		printf ("Number To Eat : %d\n", manager->philos[i].eat_goal);
 		printf ("Left Fork   : %p\n", &(manager->philos[i].l_fork));
 		printf ("Right Fork *: %p\n", manager->philos[i].r_fork);
+		printf ("Start Eating: %u\n", manager->philos[i].start_eating);
 		printf ("==========================\n\n");
 		i++;
 	}

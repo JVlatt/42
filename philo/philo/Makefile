@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
+#    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/18 20:03:36 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/02/24 14:01:08 by matt             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc 
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -pthread
 
 SRCS	= 	main.c \
@@ -20,10 +20,11 @@ SRCS	= 	main.c \
 			parsing_utils.c \
 			utils.c \
 			actions.c \
-			routine.c \
+			mngr_routine.c \
+			philo_routine.c \
 			manager.c \
 			ft_time.c
-			
+
 DIR_OBJS = .objs
 OBJS = $(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
 
@@ -59,5 +60,5 @@ fsanitize :
 
 g3 : libft
 	$(CC) -g3 $(SRCS) $(CFLAGS) -o $@
-	
+
 .PHONY: all clean fclean re libft fsanitize g3

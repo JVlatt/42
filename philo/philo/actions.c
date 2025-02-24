@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:16:55 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/21 13:06:03 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/24 13:29:03 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	eat_time(t_philosopher *philo)
 	ft_usleep(philo->start_time, philo->eat_time);
 	philo->last_meal = get_current_time();
 	philo->eat_count += 1;
-	if (philo->eat_nb > 0 && philo->eat_count > philo->eat_nb)
+	if (philo->eat_goal > 0 && philo->eat_count >= philo->eat_goal)
 	{
 
 	}
