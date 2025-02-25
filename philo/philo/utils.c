@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/24 15:44:17 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/25 18:21:04 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,30 @@ void	print_philos_data(t_manager *manager)
 	printf ("==** %d Philosophers **==\n\n", manager->count);
 	while (i < manager->count)
 	{
-		printf ("===== Philosopher %d =====\n", i);
+		printf ("===== %d =====\n", i);
 		printf ("Thread ID : %lu\n", manager->philos[i].thread);
-		printf ("Time To Die : %d\n", manager->philos[i].die_time);
-		printf ("Time To Eat : %d\n", manager->philos[i].eat_time);
-		printf ("Time To Sleep : %d\n", manager->philos[i].sleep_time);
+		printf ("Time To Die : %ld\n", manager->philos[i].die_time);
+		printf ("Time To Eat : %ld\n", manager->philos[i].eat_time);
+		printf ("Time To Sleep : %ld\n", manager->philos[i].sleep_time);
 		printf ("Number To Eat : %d\n", manager->philos[i].eat_goal);
 		printf ("Left Fork   : %p\n", &(manager->philos[i].l_fork));
 		printf ("Right Fork *: %p\n", manager->philos[i].r_fork);
-		printf ("Start Eating: %u\n", manager->philos[i].start_eating);
+		printf ("Start Eating: %d\n", manager->philos[i].start_eating);
 		printf ("==========================\n\n");
 		i++;
 	}
+}
+
+void	print_philo_data(t_philosopher *philo)
+{
+	printf("===== %d =====\n", philo->id);
+	printf("Thread ID : %lu\n", philo->thread);
+	printf("Time To Die : %ld\n", philo->die_time);
+	printf("Time To Eat : %ld\n", philo->eat_time);
+	printf("Time To Sleep : %ld\n", philo->sleep_time);
+	printf("Number To Eat : %d\n", philo->eat_goal);
+	printf("Left Fork   : %p\n", &(philo->l_fork));
+	printf("Right Fork *: %p\n", philo->r_fork);
+	printf("Start Eating: %d\n", philo->start_eating);
+	printf("==========================\n\n");
 }

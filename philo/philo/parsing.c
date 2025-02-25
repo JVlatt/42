@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/24 13:59:07 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/25 15:56:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	init_manager(t_manager *manager, int argc, char **argv)
 	manager->count = ft_atoi(argv[1]);
 	manager->philos = parse_data(argc, argv);
 	manager->sim_end = 0;
+	pthread_mutex_init(&manager->start_mutex, NULL);
+	pthread_mutex_init(&manager->end_mutex, NULL);
 	if (!manager->philos)
 		printf("Error");
 }

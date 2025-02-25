@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:56:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/19 13:41:57 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/25 18:30:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned int	get_current_time(void)
+long	get_current_time(void)
 {
 	struct timeval	time;
 
@@ -21,17 +21,27 @@ unsigned int	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-unsigned int	get_elapsed_time(unsigned int start_time)
+long	get_elapsed_time(long start_time)
 {
 	return (get_current_time() - start_time);
 }
 
-int	ft_usleep(unsigned int start_time, unsigned int duration)
+int	ft_usleep(long start_time, long duration,
+t_manager *manager)
 {
-	unsigned int	start;
+	long	start;
 
 	start = get_elapsed_time(start_time);
 	while ((get_elapsed_time(start_time) - start) < duration)
-		usleep(500);
+	{
+		pthread_mutex_lock(&manager->end_mutex);
+		if (manager->sim_end)
+		{
+			pthread_mutex_unlock(&manager->end_mutex);
+			exit (0);
+		}
+		pthread_mutex_unlock(&manager->end_mutex);
+		usleep(50);
+	}
 	return (0);
 }

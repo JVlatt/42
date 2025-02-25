@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:56:00 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/24 15:58:10 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/25 17:32:45 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ static int	create_threads(t_manager *manager)
 	while (i < manager->count)
 	{
 		manager->philos[i].start_mutex = &(manager->start_mutex);
-		manager->philos[i].id = i;
+		manager->philos[i].end_mutex = &(manager->end_mutex);
+		manager->philos[i].id = i + 1;
 		manager->philos[i].manager = manager;
 		manager->philos[i].start_eating = i % 2;
+		manager->philos[i].eat_reached = 0;
+		//print_philo_data(&manager->philos[i]);
+		pthread_mutex_init(&(manager->philos[i].update_meal), NULL);
 		if (pthread_create(&(manager->philos[i].thread), NULL,
 				phi_start_routine, &(manager->philos[i])) == -1)
 			return (0);
@@ -36,15 +40,6 @@ static int	create_threads(t_manager *manager)
 
 static int	join_threads(t_manager *manager)
 {
-	// int				i;
-
-	// i = 0;
-	// while (i < manager->count)
-	// {
-	// 	if (pthread_join(manager->philos[i].thread, NULL) != 0)
-	// 		return (0);
-	// 	i++;
-	// }
 	if (pthread_join(manager->manager_thread, NULL) != 0)
 		return (0);
 	return (1);
@@ -52,15 +47,10 @@ static int	join_threads(t_manager *manager)
 
 int	init_threads(t_manager *manager)
 {
-	pthread_mutex_t	mutex;
-
-	pthread_mutex_init(&mutex, NULL);
-	manager->start_mutex = mutex;
-	pthread_mutex_lock(&mutex);
+	pthread_mutex_lock(&manager->start_mutex);
 	if (!create_threads(manager))
 		return (0);
-	//print_philos_data(manager);
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_unlock(&manager->start_mutex);
 	if (!join_threads(manager))
 		return (0);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/24 14:03:08 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/25 18:24:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@ typedef struct	s_manager	t_manager;
 
 typedef struct s_philosopher
 {
-	unsigned int	start_time;
-	unsigned int	die_time;
-	unsigned int	eat_time;
-	unsigned int	sleep_time;
-	unsigned int	last_meal;
+	long			start_time;
+	long			die_time;
+	long			eat_time;
+	long			sleep_time;
+	long			last_meal;
 	int				eat_count;
 	int				eat_goal;
 	unsigned int	eat_reached;
-	unsigned int	state;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	l_fork;
+	pthread_mutex_t	update_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*start_mutex;
+	pthread_mutex_t	*end_mutex;
 	unsigned int	start_eating;
 	unsigned int	id;
 	t_manager		*manager;
@@ -47,6 +48,7 @@ typedef struct s_manager
 	t_philosopher	*philos;
 	int				count;
 	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	end_mutex;
 	int				sim_end;
 	pthread_t		manager_thread;
 }	t_manager;
@@ -68,12 +70,14 @@ void			*phi_start_routine(void *philop);
 void			*mngr_start_routine(void *managerp);
 void			eat_time(t_philosopher *philo);
 void			bed_time(t_philosopher *philo);
-
+void			take_fork(t_philosopher *philo, pthread_mutex_t *fork);
+int				check_simend(t_manager *manager);
 //	TIME
 
-unsigned int	get_current_time(void);
-unsigned int	get_elapsed_time(unsigned int start_time);
-int				ft_usleep(unsigned int start_time, unsigned int duration);
+long			get_current_time(void);
+long			get_elapsed_time(long start_time);
+int				ft_usleep(long start_time, long duration,
+					t_manager *manager);
 
 // UTILS
 
@@ -86,5 +90,5 @@ void			*ft_calloc(size_t nmemb, size_t size);
 //	DEBUG
 
 void			print_philos_data(t_manager *manager);
-
+void			print_philo_data(t_philosopher *philo);
 #endif
