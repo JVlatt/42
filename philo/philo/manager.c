@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:56:00 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/25 17:32:45 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:23:12 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	create_threads(t_manager *manager)
 	while (i < manager->count)
 	{
 		manager->philos[i].start_mutex = &(manager->start_mutex);
+		manager->philos[i].print_mutex = &(manager->print_mutex);
 		manager->philos[i].end_mutex = &(manager->end_mutex);
 		manager->philos[i].id = i + 1;
 		manager->philos[i].manager = manager;
 		manager->philos[i].start_eating = i % 2;
 		manager->philos[i].eat_reached = 0;
-		//print_philo_data(&manager->philos[i]);
 		pthread_mutex_init(&(manager->philos[i].update_meal), NULL);
 		if (pthread_create(&(manager->philos[i].thread), NULL,
 				phi_start_routine, &(manager->philos[i])) == -1)
@@ -40,6 +40,15 @@ static int	create_threads(t_manager *manager)
 
 static int	join_threads(t_manager *manager)
 {
+	int	i;
+
+	i = 0;
+	while (i < manager->count)
+	{
+		if (pthread_join(manager->philos->thread, NULL) != 0)
+			return (0);
+		i++;
+	}
 	if (pthread_join(manager->manager_thread, NULL) != 0)
 		return (0);
 	return (1);
@@ -53,7 +62,8 @@ int	init_threads(t_manager *manager)
 	pthread_mutex_unlock(&manager->start_mutex);
 	if (!join_threads(manager))
 		return (0);
-	return (1);
+	exit_mngr(manager);
+	return (0);
 }
 
 // int pthread_create(pthread_t *thread, const pthread_attr_t *attr,

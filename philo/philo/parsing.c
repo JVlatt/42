@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/25 15:56:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:26:36 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,18 @@ static t_philosopher	*parse_data(int argc, char **argv)
 			philos[count].eat_goal = -1;
 	}
 	while (count++ < ft_atoi(argv[1]) - 2)
-	{
 		philos[count].r_fork = &(philos[count + 1].l_fork);
-	}
-	if (ft_atoi(argv[1]) > 1)
-		philos[count].r_fork = &(philos[0].l_fork);
+	philos[count].r_fork = &(philos[0].l_fork);
 	return (philos);
 }
 
 void	init_manager(t_manager *manager, int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
 	manager->count = ft_atoi(argv[1]);
 	manager->philos = parse_data(argc, argv);
 	manager->sim_end = 0;
 	pthread_mutex_init(&manager->start_mutex, NULL);
+	pthread_mutex_init(&manager->print_mutex, NULL);
 	pthread_mutex_init(&manager->end_mutex, NULL);
 	if (!manager->philos)
 		printf("Error");

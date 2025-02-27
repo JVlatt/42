@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:56:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/25 18:30:05 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:00:12 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_current_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		write(2, "gettimeofday() error\n", 22);
+		return (-1);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
@@ -38,10 +38,10 @@ t_manager *manager)
 		if (manager->sim_end)
 		{
 			pthread_mutex_unlock(&manager->end_mutex);
-			exit (0);
+			return (0);
 		}
 		pthread_mutex_unlock(&manager->end_mutex);
 		usleep(50);
 	}
-	return (0);
+	return (1);
 }

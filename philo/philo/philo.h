@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/25 18:24:05 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:37:19 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef struct	s_manager	t_manager;
+typedef struct s_manager	t_manager;
 
 typedef struct s_philosopher
 {
@@ -37,6 +37,7 @@ typedef struct s_philosopher
 	pthread_mutex_t	update_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*start_mutex;
+	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*end_mutex;
 	unsigned int	start_eating;
 	unsigned int	id;
@@ -48,6 +49,7 @@ typedef struct s_manager
 	t_philosopher	*philos;
 	int				count;
 	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	end_mutex;
 	int				sim_end;
 	pthread_t		manager_thread;
@@ -68,10 +70,12 @@ int				init_threads(t_manager *manager);
 
 void			*phi_start_routine(void *philop);
 void			*mngr_start_routine(void *managerp);
-void			eat_time(t_philosopher *philo);
-void			bed_time(t_philosopher *philo);
-void			take_fork(t_philosopher *philo, pthread_mutex_t *fork);
+int				eat_time(t_philosopher *philo);
+int				bed_time(t_philosopher *philo);
+int				take_fork(t_philosopher *philo, pthread_mutex_t *fork);
 int				check_simend(t_manager *manager);
+void			print_action(t_philosopher *philo, const char *action);
+
 //	TIME
 
 long			get_current_time(void);
@@ -86,6 +90,8 @@ int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 size_t			ft_strlen(const char *s);
 void			*ft_calloc(size_t nmemb, size_t size);
+int				exit_philo(t_philosopher *philosopher);
+int				exit_mngr(t_manager *manager);
 
 //	DEBUG
 

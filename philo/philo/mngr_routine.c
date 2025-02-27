@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   mngr_routine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:59:48 by matt              #+#    #+#             */
-/*   Updated: 2025/02/25 18:40:31 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:39:10 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	kill_philo(t_manager *manager, int i)
+{
+	pthread_mutex_lock(&manager->print_mutex);
+	pthread_mutex_lock(&manager->end_mutex);
+	printf("%ld %d %s\n",
+		get_elapsed_time(manager->philos[i].start_time),
+		manager->philos[i].id,
+		"died");
+	manager->sim_end = 1;
+	pthread_mutex_unlock(&manager->end_mutex);
+	pthread_mutex_unlock(&manager->print_mutex);
+}
 
 static int	check_meals_reached(t_manager *manager)
 {
@@ -52,16 +65,7 @@ static void	mngr_main_routine(t_manager *manager)
 			if (get_elapsed_time(manager->philos[i].last_meal)
 				>= manager->philos[i].die_time)
 			{
-				printf("%ld %d died\n",
-					get_elapsed_time(manager->philos[i].start_time),
-					manager->philos[i].id);
-				// printf("start time : %ld \n", manager->philos[i].start_time);
-				// printf("current time : %ld \n", get_current_time());
-				// printf("die time : %ld \n", manager->philos[i].die_time);
-				// printf("last meal: %ld \n", get_elapsed_time(manager->philos[i].last_meal));
-				pthread_mutex_lock(&manager->end_mutex);
-				manager->sim_end = 1;
-				pthread_mutex_unlock(&manager->end_mutex);
+				kill_philo(manager, i);
 			}
 			pthread_mutex_unlock(&(manager->philos[i].update_meal));
 			i++;

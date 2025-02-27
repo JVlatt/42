@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:16:55 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/25 18:25:01 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:37:25 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	print_action(t_philosopher *philo, const char *action)
+{
+	pthread_mutex_lock(philo->print_mutex);
+	if (!check_simend(philo->manager))
+		printf("%ld %d %s\n",
+			get_elapsed_time(philo->start_time),
+			philo->id,
+			action);
+	pthread_mutex_unlock(philo->print_mutex);
+}
 
 int	check_simend(t_manager *manager)
 {
@@ -22,43 +33,38 @@ int	check_simend(t_manager *manager)
 	return (ret);
 }
 
-void	bed_time(t_philosopher *philo)
+int	bed_time(t_philosopher *philo)
 {
 	if (check_simend(philo->manager))
-		exit (0);
-	printf("%ld %d is sleeping\n",
-		get_elapsed_time(philo->start_time),
-		philo->id);
-	ft_usleep(philo->start_time, philo->sleep_time, philo->manager);
-	printf("%ld %d is thinking\n",
-		get_elapsed_time(philo->start_time),
-		philo->id);
+		return (0);
+	print_action(philo, "is sleeping");
+	if (!ft_usleep(philo->start_time, philo->sleep_time, philo->manager))
+		return (0);
+	print_action(philo, "is thinking");
+	return (1);
 }
 
-void	eat_time(t_philosopher *philo)
+int	eat_time(t_philosopher *philo)
 {
 	if (check_simend(philo->manager))
-		exit (0);
+		return (0);
 	pthread_mutex_lock(&philo->update_meal);
-	printf("%ld %d is eating\n",
-		get_elapsed_time(philo->start_time),
-		philo->id);
+	print_action(philo, "is eating");
 	philo->last_meal = get_current_time();
 	philo->eat_count += 1;
 	if (philo->eat_count >= philo->eat_goal)
 		philo->eat_reached = 1;
 	pthread_mutex_unlock(&philo->update_meal);
-	ft_usleep(philo->start_time, philo->eat_time, philo->manager);
+	return (ft_usleep(philo->start_time, philo->eat_time, philo->manager));
 }
 
-void	take_fork(t_philosopher *philo, pthread_mutex_t *fork)
+int	take_fork(t_philosopher *philo, pthread_mutex_t *fork)
 {
 	if (check_simend(philo->manager))
-		exit (0);
+		return (0);
 	pthread_mutex_lock(fork);
 	if (check_simend(philo->manager))
-		exit (0);
-	printf("%ld %d has taken a fork\n",
-		get_elapsed_time(philo->start_time),
-		philo->id);
+		return (0);
+	print_action(philo, "has taken a fork");
+	return (1);
 }
