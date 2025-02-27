@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 13:53:09 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:31:32 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-int	exit_philo(t_philosopher *philosopher)
-{
-	pthread_mutex_destroy(&philosopher->update_meal);
-	return (0);
-}
-
 int	exit_mngr(t_manager *manager)
 {
 	int	i;
@@ -48,6 +42,7 @@ int	exit_mngr(t_manager *manager)
 	while (i < manager->count)
 	{
 		pthread_mutex_destroy(&manager->philos[i].l_fork);
+		pthread_mutex_destroy(&manager->philos[i].update_meal);
 		i++;
 	}
 	free(manager->philos);

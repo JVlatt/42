@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 11:37:19 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 15:32:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 size_t			ft_strlen(const char *s);
 void			*ft_calloc(size_t nmemb, size_t size);
-int				exit_philo(t_philosopher *philosopher);
 int				exit_mngr(t_manager *manager);
 
 //	DEBUG

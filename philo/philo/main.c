@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 13:57:19 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:09:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv))
 	{
 		init_manager(&manager, argc, argv);
-		if (init_threads(&manager))
-			exit_mngr(&manager);
+		init_threads(&manager);
 	}
 	else
 		printf("Invalid Arguments\n");

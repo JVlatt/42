@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:56:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 11:00:12 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 15:46:18 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ long	get_current_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
+	{
+		printf("gettimeofday Error\n");
 		return (-1);
+	}
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 

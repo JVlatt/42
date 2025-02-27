@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:16:55 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 13:32:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:37:23 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,9 @@ int	eat_time(t_philosopher *philo)
 
 int	take_fork(t_philosopher *philo, pthread_mutex_t *fork)
 {
-	if (check_simend(philo->manager))
-		return (0);
 	pthread_mutex_lock(fork);
 	if (check_simend(philo->manager))
-	{
-		pthread_mutex_unlock(fork);
 		return (0);
-	}
 	print_action(philo, "has taken a fork");
 	return (1);
 }

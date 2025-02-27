@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:56:00 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 14:03:29 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:10:18 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	init_threads(t_manager *manager)
 	pthread_mutex_unlock(&manager->start_mutex);
 	if (!join_threads(manager))
 		return (0);
+	exit_mngr(manager);
 	return (1);
 }
 
