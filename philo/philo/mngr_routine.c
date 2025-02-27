@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:59:48 by matt              #+#    #+#             */
-/*   Updated: 2025/02/27 11:39:10 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:57 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	*mngr_start_routine(void *managerp)
 	manager = (t_manager *) managerp;
 	pthread_mutex_lock(&manager->start_mutex);
 	pthread_mutex_unlock(&manager->start_mutex);
-	ft_usleep(get_current_time(), 10, manager);
+	ft_usleep(get_current_time(), 50, manager);
 	mngr_main_routine(manager);
 	return (NULL);
 }

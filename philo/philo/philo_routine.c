@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:51:42 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 15:42:32 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:19 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,16 @@ static int	phi_main_routine(t_philosopher *philo)
 		take_fork(philo, philo->r_fork);
 	}
 	eat_time(philo);
-	pthread_mutex_unlock(&(philo->l_fork));
-	pthread_mutex_unlock(philo->r_fork);
+	if (philo->start_eating)
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(&(philo->l_fork));
+	}
+	else
+	{
+		pthread_mutex_unlock(&(philo->l_fork));
+		pthread_mutex_unlock(philo->r_fork);
+	}
 	if (bed_time(philo))
 		return (phi_main_routine(philo));
 	return (1);
