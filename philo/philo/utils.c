@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 11:10:55 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 13:53:09 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,23 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 int	exit_philo(t_philosopher *philosopher)
 {
-	pthread_mutex_destroy(&philosopher->l_fork);
 	pthread_mutex_destroy(&philosopher->update_meal);
 	return (0);
 }
 
 int	exit_mngr(t_manager *manager)
 {
+	int	i;
+
 	pthread_mutex_destroy(&manager->start_mutex);
 	pthread_mutex_destroy(&manager->print_mutex);
 	pthread_mutex_destroy(&manager->end_mutex);
+	i = 0;
+	while (i < manager->count)
+	{
+		pthread_mutex_destroy(&manager->philos[i].l_fork);
+		i++;
+	}
 	free(manager->philos);
 	return (0);
 }

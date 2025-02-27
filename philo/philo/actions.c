@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:16:55 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 10:37:25 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 13:32:40 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int	take_fork(t_philosopher *philo, pthread_mutex_t *fork)
 		return (0);
 	pthread_mutex_lock(fork);
 	if (check_simend(philo->manager))
+	{
+		pthread_mutex_unlock(fork);
 		return (0);
+	}
 	print_action(philo, "has taken a fork");
 	return (1);
 }

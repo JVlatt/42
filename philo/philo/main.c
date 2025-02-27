@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 10:41:00 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 13:57:19 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv))
 	{
 		init_manager(&manager, argc, argv);
-		init_threads(&manager);
+		if (init_threads(&manager))
+			exit_mngr(&manager);
 	}
 	else
 		printf("Invalid Arguments\n");

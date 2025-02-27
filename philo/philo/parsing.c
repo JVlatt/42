@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 11:26:36 by matt             ###   ########.fr       */
+/*   Updated: 2025/02/27 13:22:39 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,4 @@ void	init_manager(t_manager *manager, int argc, char **argv)
 	pthread_mutex_init(&manager->start_mutex, NULL);
 	pthread_mutex_init(&manager->print_mutex, NULL);
 	pthread_mutex_init(&manager->end_mutex, NULL);
-	if (!manager->philos)
-		printf("Error");
 }
