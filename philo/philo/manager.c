@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:56:00 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/03/03 16:53:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:47:33 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ int	init_threads(t_manager *manager)
 	exit_mngr(manager);
 	return (1);
 }
-

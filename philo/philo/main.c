@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:11 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/03/03 16:54:33 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:47:28 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,3 @@ int	main(int argc, char **argv)
 		printf("Invalid Arguments\n");
 	return (1);
 }
-
