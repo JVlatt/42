@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:21:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 15:31:32 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:46:09 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-int	exit_mngr(t_manager *manager)
+void	exit_mngr(t_manager *manager)
 {
 	int	i;
 
@@ -46,7 +46,6 @@ int	exit_mngr(t_manager *manager)
 		i++;
 	}
 	free(manager->philos);
-	return (0);
 }
 
 void	print_philos_data(t_manager *manager)

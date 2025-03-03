@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:56:20 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 15:46:18 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:29:41 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_manager *manager)
 			return (0);
 		}
 		pthread_mutex_unlock(&manager->end_mutex);
-		usleep(50);
+		usleep(100);
 	}
 	return (1);
 }

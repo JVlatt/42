@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:49:03 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 15:32:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:46:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			*philo_routine(void *arg);
 // PARSING
 
 int				check_args(int argc, char **argv);
-void			init_manager(t_manager *manager, int argc, char **argv);
+int				init_manager(t_manager *manager, int argc, char **argv);
 
 //	MANAGER
 
@@ -69,6 +69,7 @@ int				init_threads(t_manager *manager);
 //	ROUTINE
 
 void			*phi_start_routine(void *philop);
+void			*phi_solo_routine(void *philop);
 void			*mngr_start_routine(void *managerp);
 int				eat_time(t_philosopher *philo);
 int				bed_time(t_philosopher *philo);
@@ -90,7 +91,7 @@ int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 size_t			ft_strlen(const char *s);
 void			*ft_calloc(size_t nmemb, size_t size);
-int				exit_mngr(t_manager *manager);
+void			exit_mngr(t_manager *manager);
 
 //	DEBUG
 

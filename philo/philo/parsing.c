@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:35:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/27 13:22:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:44:57 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,18 @@ static t_philosopher	*parse_data(int argc, char **argv)
 	return (philos);
 }
 
-void	init_manager(t_manager *manager, int argc, char **argv)
+int	init_manager(t_manager *manager, int argc, char **argv)
 {
 	manager->count = ft_atoi(argv[1]);
 	manager->philos = parse_data(argc, argv);
+	if (!manager->philos)
+		return (0);
 	manager->sim_end = 0;
-	pthread_mutex_init(&manager->start_mutex, NULL);
-	pthread_mutex_init(&manager->print_mutex, NULL);
-	pthread_mutex_init(&manager->end_mutex, NULL);
+	if (pthread_mutex_init(&manager->start_mutex, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&manager->print_mutex, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&manager->end_mutex, NULL) != 0)
+		return (0);
+	return (1);
 }
