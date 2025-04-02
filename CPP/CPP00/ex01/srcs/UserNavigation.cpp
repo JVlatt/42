@@ -6,7 +6,7 @@ static void	exitApp(PhoneBook _phoneBook)
 	(void) _phoneBook;
 
 	std::cout << GREEN
-			<< "Thank you for using my Awesome PhoneBook !"
+			<< "\nThank you for using my Awesome PhoneBook !"
 			<< std::endl;
 }
 
@@ -19,6 +19,11 @@ static void finalInput(PhoneBook _phoneBook, const char *choice,
 	{
 		std::cout << choice << " [Y/n] ";
 		std::getline(std::cin, finalInput);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	if (finalInput == "Y")
 	{
@@ -108,6 +113,11 @@ static void searchContact(PhoneBook _phoneBook)
 		{
 			std::cout << "Select Index to Display : ";
 			std::getline(std::cin, indexStr);
+			if(std::cin.eof())
+			{
+				exitApp(_phoneBook);
+				return ;
+			}
 			selectedIndex = convertIndex(indexStr, _phoneBook.GetContactsNb());
 			if (selectedIndex == -1)
 				std::cout << RED << "Invalid Index !" << RESET << std::endl;
@@ -129,26 +139,51 @@ static void	addContact(PhoneBook _phoneBook)
 	{
 		std::cout << YELLOW << "\t[] First Name : " << RESET;
 		std::getline(std::cin, newContact.firstName);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	while (newContact.lastName.empty())
 	{
 		std::cout << YELLOW << "\t[] Last Name : " << RESET;
 		std::getline(std::cin, newContact.lastName);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	while (newContact.nickName.empty())
 	{
 		std::cout << YELLOW << "\t[] Nick Name : " << RESET;
 		std::getline(std::cin, newContact.nickName);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	while (newContact.phoneNumber.empty())
 	{
 		std::cout << YELLOW << "\t[] Phone Number : " << RESET;
 		std::getline(std::cin, newContact.phoneNumber);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	while (newContact.darkestSecret.empty())
 	{
 		std::cout << YELLOW << "\t[] Darkest Secret : " << RESET;
 		std::getline(std::cin, newContact.darkestSecret);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	_phoneBook.AddContact(newContact);
 	system("clear");
@@ -171,6 +206,11 @@ void	selectAction(PhoneBook _phoneBook)
 	{
 		std::cout << RESET << "> ";
 		std::getline(std::cin,query);
+		if(std::cin.eof())
+		{
+			exitApp(_phoneBook);
+			return ;
+		}
 	}
 	if (query == "ADD")
 		addContact(_phoneBook);

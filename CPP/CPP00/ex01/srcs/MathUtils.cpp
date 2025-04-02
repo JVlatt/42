@@ -25,3 +25,4 @@ int ft_atoi(char const *str)
 	}
 	return negate ? result : -result;
 }
+
