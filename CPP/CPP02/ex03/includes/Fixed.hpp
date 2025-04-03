@@ -36,16 +36,15 @@ public:
 	static Fixed& max(Fixed& a, Fixed& b);
 	static const Fixed& max(const Fixed& a, const Fixed& b);
 
-	friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
-
 	int		getRawBits(void) const;
 	void	setRawBits(int const _raw);
 	float	toFloat(void) const;
 	int		toInt(void) const;
 
-private:
+	private:
 	int					m_value;
 	static const int	m_bits = 8;
 };
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
 #endif
