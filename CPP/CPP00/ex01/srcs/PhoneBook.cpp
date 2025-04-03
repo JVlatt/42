@@ -23,7 +23,7 @@ int PhoneBook::GetContactsNb()
 
 	for (int i = 0; i < MAX_SIZE; ++i)
 	{
-		if (!contacts[i].firstName.empty())
+		if (!contacts[i].getFirstName().empty())
 			count ++;
 	}
 	return (count);

@@ -8,6 +8,7 @@ void	ft_sed(std::ifstream &fin, std::ofstream &fout, std::string &s1, std::strin
 	std::string	oline;
 	std::size_t	found;
 
+	//lire tout en meme temps
 	while (fin)
 	{
 		oline.clear();

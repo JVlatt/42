@@ -11,7 +11,7 @@ public:
 	DiamondTrap(std::string _name);
 	DiamondTrap(const DiamondTrap& _other);
 	DiamondTrap& operator=(const DiamondTrap& _other);
-	~DiamondTrap();
+	virtual ~DiamondTrap();
 
 	void	whoAmI();
 	using ScavTrap::attack;

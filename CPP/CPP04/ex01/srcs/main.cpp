@@ -5,21 +5,26 @@
 
 int main(void)
 {
-	const Animal* meta = new Animal("Meta");
-	const Animal* dog = new Dog("Bruno");
-	const Animal* cat = new Cat("Felix");
+	Animal	*animals[10];
 
-	meta->whoAmI();
-	dog->whoAmI();
-	cat->whoAmI();
-	dog->makeSound();
-	cat->makeSound();
-	meta->makeSound();
+	for (int i = 0; i < 10; ++i)
+	{
+		if (i % 2 == 0)
+			animals[i] = new Dog("Bruno");
+		else
+			animals[i] = new Cat("Felix");
+	}
 
-	delete (meta);
-	delete (dog);
-	delete (cat);
+	for (int i = 0; i < 10; ++i)
+	{
+		animals[i]->whoAmI();
+		animals[i]->makeSound();
+	}
 
+	for (int i = 0; i < 10; ++i)
+	{
+		delete(animals[i]);
+	}
 	return (0);
 }
 

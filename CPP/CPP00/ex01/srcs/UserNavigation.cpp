@@ -70,8 +70,8 @@ static void	printContact(Contact _contactToPrint)
 {
 	system("clear");
 	std::cout << GREEN << "Contact Infos :" << std::endl;
-	std::cout << YELLOW << "\t[] First Name : " << RESET <<_contactToPrint.firstName << std::endl;
-	std::cout << YELLOW << "\t[] Last Name : " << RESET <<_contactToPrint.lastName << std::endl;
+	std::cout << YELLOW << "\t[] First Name : " << RESET <<_contactToPrint.getFirstName() << std::endl;
+	std::cout << YELLOW << "\t[] Last Name : " << RESET <<_contactToPrint.getLastName << std::endl;
 	std::cout << YELLOW << "\t[] Nick Name : " << RESET <<_contactToPrint.nickName << std::endl;
 	std::cout << YELLOW << "\t[] Phone Number : " << RESET <<_contactToPrint.phoneNumber << std::endl;
 	std::cout << YELLOW << "\t[] Darkest Secret : " << RESET <<_contactToPrint.darkestSecret << std::endl;
@@ -91,8 +91,8 @@ static bool printPhoneBook(PhoneBook _phoneBook)
 		for (int i = 0; i < _phoneBook.GetContactsNb(); ++i)
 		{
 			std::cout << std::setw(10) << "[" << i << "]";
-			std::cout << "|" << std::setw(10) << formatString(_phoneBook.contacts[i].firstName);
-			std::cout << "|" << std::setw(10) << formatString(_phoneBook.contacts[i].lastName);
+			std::cout << "|" << std::setw(10) << formatString(_phoneBook.contacts[i].getFirstName());
+			std::cout << "|" << std::setw(10) << formatString(_phoneBook.contacts[i].getLastName);
 			std::cout << "|" << std::setw(10) << formatString(_phoneBook.contacts[i].nickName);
 			std::cout << std::endl;
 		}
@@ -130,53 +130,55 @@ static void searchContact(PhoneBook _phoneBook)
 static void	addContact(PhoneBook _phoneBook)
 {
 	Contact		newContact;
+	std::string	contactInfo;
 
 	system("clear");
 	std::cout << GREEN << "New Contact Informations :" << std::endl;
-	while (newContact.firstName.empty() || ft_strisspace(newContact.firstName))
+	while (newContact.getFirstName().empty() || ft_strisspace(newContact.getFirstName()))
 	{
 		std::cout << YELLOW << "\t[] First Name : " << RESET;
-		std::getline(std::cin, newContact.firstName);
+		std::getline(std::cin, contactInfo);
 		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.lastName.empty() || ft_strisspace(newContact.lastName))
+	while (newContact.getLastName().empty() || ft_strisspace(newContact.getLastName))
 	{
 		std::cout << YELLOW << "\t[] Last Name : " << RESET;
-		std::getline(std::cin, newContact.lastName);
+		std::getline(std::cin, contactInfo);
 		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
+
 	}
-	while (newContact.nickName.empty() || ft_strisspace(newContact.nickName))
+	while (newContact.getNickName().empty() || ft_strisspace(newContact.nickName))
 	{
 		std::cout << YELLOW << "\t[] Nick Name : " << RESET;
-		std::getline(std::cin, newContact.nickName);
+		std::getline(std::cin, contactInfo);
 		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.phoneNumber.empty() || ft_strisspace(newContact.phoneNumber))
+	while (newContact.getPhoneNumber().empty() || ft_strisspace(newContact.phoneNumber))
 	{
 		std::cout << YELLOW << "\t[] Phone Number : " << RESET;
-		std::getline(std::cin, newContact.phoneNumber);
+		std::getline(std::cin, contactInfo);
 		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.darkestSecret.empty() || ft_strisspace(newContact.darkestSecret))
+	while (newContact.getDarkestSecret().empty() || ft_strisspace(newContact.darkestSecret))
 	{
 		std::cout << YELLOW << "\t[] Darkest Secret : " << RESET;
-		std::getline(std::cin, newContact.darkestSecret);
+		std::getline(std::cin, contactInfo);
 		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
@@ -186,7 +188,7 @@ static void	addContact(PhoneBook _phoneBook)
 	_phoneBook.AddContact(newContact);
 	system("clear");
 	std::cout << GREEN << "New Contact \""
-		<< YELLOW << newContact.firstName
+		<< YELLOW << newContact.getFirstName()
 		<< GREEN << "\" added to PhoneBook !"
 		<< RESET << std::endl;
 	finalInput(_phoneBook, "Would you like to add another one ?", addContact, selectAction);

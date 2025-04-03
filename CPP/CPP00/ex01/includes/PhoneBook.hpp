@@ -11,9 +11,9 @@ class PhoneBook
 {
 private:
 	int m_last;
+	Contact contacts[MAX_SIZE];
 
 public:
-	Contact contacts[MAX_SIZE];
 	PhoneBook();
 	~PhoneBook();
 	void	AddContact(Contact _newContact);
