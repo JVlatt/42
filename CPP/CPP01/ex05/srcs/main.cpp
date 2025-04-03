@@ -1,13 +1,19 @@
 #include "Harl.hpp"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	Harl	harl;
+	Harl		harl;
+	std::string	input;
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	harl.complain("UNKNOWN");
+	if (argc == 1)
+	{
+		harl.complain("UNKNOWN");
+		return (0);
+	}
+	for (int i = 1; i < argc; ++i)
+	{
+		input = argv[i];
+		harl.complain(argv[i]);
+	}
 	return (0);
 }

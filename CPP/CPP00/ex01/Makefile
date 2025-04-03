@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/03/27 16:12:23 by matt             ###   ########.fr        #
+#    Updated: 2025/04/03 15:16:08 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp PhoneBook.cpp UserNavigation.cpp MathUtils.cpp
-LST_INCS = Colors.hpp Contact.hpp PhoneBook.hpp UserNavigation.hpp MathUtils.hpp
+LST_SRCS = main.cpp PhoneBook.cpp UserNavigation.cpp Utils.cpp
+LST_INCS = Colors.hpp Contact.hpp PhoneBook.hpp UserNavigation.hpp Utils.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

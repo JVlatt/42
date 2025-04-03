@@ -12,6 +12,8 @@ void	ft_sed(std::ifstream &fin, std::ofstream &fout, std::string &s1, std::strin
 	{
 		oline.clear();
 		getline(fin, iline);
+		if (iline.empty() && !fin)
+			break ;
 		found = iline.find(s1);
 		if (found != std::string::npos)
 		{

@@ -1,13 +1,13 @@
 #include "UserNavigation.hpp"
-#include "MathUtils.hpp"
+#include "Utils.hpp"
 
 static void	exitApp(PhoneBook _phoneBook)
 {
 	(void) _phoneBook;
 
 	std::cout << GREEN
-			<< "\nThank you for using my Awesome PhoneBook !"
-			<< std::endl;
+		<< "\nThank you for using my Awesome PhoneBook !"
+		<< RESET << std::endl;
 }
 
 static void finalInput(PhoneBook _phoneBook, const char *choice,
@@ -19,7 +19,7 @@ static void finalInput(PhoneBook _phoneBook, const char *choice,
 	{
 		std::cout << choice << " [Y/n] ";
 		std::getline(std::cin, finalInput);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
@@ -36,8 +36,6 @@ static void finalInput(PhoneBook _phoneBook, const char *choice,
 		nofunc(_phoneBook);
 	}
 }
-
-
 
 static int	convertIndex(std::string str, int limit)
 {
@@ -113,7 +111,7 @@ static void searchContact(PhoneBook _phoneBook)
 		{
 			std::cout << "Select Index to Display : ";
 			std::getline(std::cin, indexStr);
-			if(std::cin.eof())
+			if(std::cin.eof() || std::cin.fail())
 			{
 				exitApp(_phoneBook);
 				return ;
@@ -135,51 +133,51 @@ static void	addContact(PhoneBook _phoneBook)
 
 	system("clear");
 	std::cout << GREEN << "New Contact Informations :" << std::endl;
-	while (newContact.firstName.empty())
+	while (newContact.firstName.empty() || ft_strisspace(newContact.firstName))
 	{
 		std::cout << YELLOW << "\t[] First Name : " << RESET;
 		std::getline(std::cin, newContact.firstName);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.lastName.empty())
+	while (newContact.lastName.empty() || ft_strisspace(newContact.lastName))
 	{
 		std::cout << YELLOW << "\t[] Last Name : " << RESET;
 		std::getline(std::cin, newContact.lastName);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.nickName.empty())
+	while (newContact.nickName.empty() || ft_strisspace(newContact.nickName))
 	{
 		std::cout << YELLOW << "\t[] Nick Name : " << RESET;
 		std::getline(std::cin, newContact.nickName);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.phoneNumber.empty())
+	while (newContact.phoneNumber.empty() || ft_strisspace(newContact.phoneNumber))
 	{
 		std::cout << YELLOW << "\t[] Phone Number : " << RESET;
 		std::getline(std::cin, newContact.phoneNumber);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
 		}
 	}
-	while (newContact.darkestSecret.empty())
+	while (newContact.darkestSecret.empty() || ft_strisspace(newContact.darkestSecret))
 	{
 		std::cout << YELLOW << "\t[] Darkest Secret : " << RESET;
 		std::getline(std::cin, newContact.darkestSecret);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;
@@ -206,7 +204,7 @@ void	selectAction(PhoneBook _phoneBook)
 	{
 		std::cout << RESET << "> ";
 		std::getline(std::cin,query);
-		if(std::cin.eof())
+		if(std::cin.eof() || std::cin.fail())
 		{
 			exitApp(_phoneBook);
 			return ;

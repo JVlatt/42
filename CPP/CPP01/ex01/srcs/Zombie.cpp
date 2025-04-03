@@ -2,7 +2,7 @@
 
 Zombie::Zombie()
 {
-	std::cout << YELLOW << m_name << "is alive" << RESET << std::endl;
+	std::cout << YELLOW << "A Zombie is alive" << RESET << std::endl;
 }
 
 Zombie::~Zombie()

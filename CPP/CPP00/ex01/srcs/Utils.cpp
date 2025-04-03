@@ -1,6 +1,6 @@
-#include "MathUtils.hpp"
+#include "Utils.hpp"
 
-int ft_atoi(char const *str)
+int	ft_atoi(char const *str)
 {
 	int result = 0;
 	bool negate;
@@ -26,3 +26,12 @@ int ft_atoi(char const *str)
 	return negate ? result : -result;
 }
 
+bool	ft_strisspace(std::string _str)
+{
+	for (int i = 0; _str[i]; ++i)
+	{
+		if ((!std::isspace(_str[i])))
+			return (false);
+	}
+	return (true);
+}
