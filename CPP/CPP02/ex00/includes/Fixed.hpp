@@ -13,8 +13,8 @@ public:
 	void	setRawBits(int const _raw);
 
 private:
-	int					m_value;
-	static const int	m_bits = 8;
+	int					_value;
+	static const int	_bits = 8;
 };
 
 #endif

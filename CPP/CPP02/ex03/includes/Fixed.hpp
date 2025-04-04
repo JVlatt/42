@@ -42,8 +42,8 @@ public:
 	int		toInt(void) const;
 
 	private:
-	int					m_value;
-	static const int	m_bits = 8;
+	int					_value;
+	static const int	_bits = 8;
 };
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
