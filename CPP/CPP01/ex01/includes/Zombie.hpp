@@ -12,10 +12,10 @@ private:
 
 public:
 	Zombie();
-	Zombie(std::string _name) : m_name(_name) {}
+	Zombie(std::string _name);
 	~Zombie();
 	void	announce(void);
-	inline void	setName(std::string _name){m_name = _name;}
+	void	setName(std::string _name);
 };
 
 Zombie	*zombieHorde(int _N, std::string _name);

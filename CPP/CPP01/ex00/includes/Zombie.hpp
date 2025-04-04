@@ -12,7 +12,7 @@ private:
 	std::string m_name;
 
 public:
-	Zombie(std::string _name) : m_name(_name) {}
+	Zombie(std::string _name);
 	~Zombie();
 	void	announce(void);
 };
