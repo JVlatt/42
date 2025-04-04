@@ -1,39 +1,34 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 void	ft_sed(std::ifstream &fin, std::ofstream &fout, std::string &s1, std::string &s2)
 {
-	std::string	iline;
-	std::string	oline;
-	std::size_t	found;
+	std::string			iline;
+	std::string			oline;
+	std::size_t			found;
+	std::string			buffer;
 
-	//lire tout en meme temps
+	getline(fin, iline);
 	while (fin)
 	{
-		oline.clear();
+		buffer += iline + "\n";
+		iline.clear();
 		getline(fin, iline);
-		if (iline.empty() && !fin)
-			break ;
-		found = iline.find(s1);
-		if (found != std::string::npos)
-		{
-			while (found != std::string::npos)
-			{
-				oline.append(iline, 0, found);
-				oline.append(s2);
-				iline = iline.substr(found + s1.length());
-				found = iline.find(s1);
-			}
-			if (iline.length())
-				oline.append(iline);
-		}
-		else
-		{
-			oline = iline;
-		}
-		fout << oline << std::endl;
 	}
+	found = buffer.find(s1);
+	while (found != std::string::npos)
+	{
+		oline.append(buffer, 0, found);
+		if (s2.length() > 0)
+			oline.append(s2);
+		buffer = buffer.substr(found + s1.length());
+		found = buffer.find(s1);
+	}
+	oline.append(buffer, 0);
+	buffer.clear();
+	fout << oline;
 }
 
 bool	check_files(char **argv, std::ifstream &fin, std::ofstream &fout)
@@ -69,9 +64,9 @@ bool	try_sed(char **argv)
 		return (false);
 	s1 = argv[2];
 	s2 = argv[3];
-	if (s1.length() == 0 || s2.length() == 0)
+	if (s1.length() == 0)
 	{
-		std::cerr << "Error Empty Arguments !" << std::endl;
+		std::cerr << "Error Arg2 cannot be empty !" << std::endl;
 		return (false);
 	}
 	ft_sed(fin, fout, s1, s2);
