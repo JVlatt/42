@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/03/31 16:29:15 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/04/04 13:18:04 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp HumanA.cpp HumanB.cpp
+LST_SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 LST_INCS = Colors.hpp Weapon.hpp HumanA.hpp HumanB.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 

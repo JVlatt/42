@@ -9,9 +9,9 @@ private:
 	std::string	m_type;
 
 public:
-	Weapon(std::string _type) : m_type(_type) {}
-	inline const std::string& getType() {return m_type;}
-	inline void	setType(const std::string _type) {m_type = _type;}
+	Weapon(std::string _type);
+	const	std::string& getType();
+	void	setType(const std::string _type);
 };
 
 #endif
