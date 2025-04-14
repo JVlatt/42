@@ -7,9 +7,7 @@ DiamondTrap::DiamondTrap()
 	std::cout << GREEN
 		<< "A New DiamondTrap is alive !"
 		<< RESET << std::endl;
-	this->m_hp = FragTrap::m_hp;
-	this->m_energy = ScavTrap::m_energy;
-	this->m_attack = FragTrap::m_attack;
+	this->m_energy = 50;
 }
 
 DiamondTrap::DiamondTrap(std::string _name)
@@ -18,9 +16,12 @@ DiamondTrap::DiamondTrap(std::string _name)
 	std::cout << GREEN << "DiamondTrap "
 		<< m_name << " is alive !"
 		<< RESET << std::endl;
-	this->m_hp = FragTrap::m_hp;
-	this->m_energy = ScavTrap::m_energy;
-	this->m_attack = FragTrap::m_attack;
+	this->m_energy = 50;
+
+	std::cout << BRIGHT_RED
+		<< "I have : " << m_hp << " hps," << std::endl
+		<< "I have : " << m_energy << " energy," << std::endl
+		<< "I have : " << m_attack << " attack !" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& _other)
