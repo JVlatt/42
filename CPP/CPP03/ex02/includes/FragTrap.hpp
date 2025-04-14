@@ -14,8 +14,6 @@ public:
 
 	void	highFivesGuys(void);
 
-private:
-
 };
 
 #endif

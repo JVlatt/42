@@ -8,7 +8,7 @@ int main(void)
 	ClapTrap trap = ClapTrap("Trap");
 
 	clap.attack("Trap");
-	trap.takeDamage(10);
+	trap.takeDamage(0);
 	trap.beRepaired(5);
 	return (0);
 }
