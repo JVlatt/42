@@ -2,13 +2,14 @@
 #include "Colors.hpp"
 
 DiamondTrap::DiamondTrap()
+	: ClapTrap("DefaultDT_clap_name"), m_name("DefaultDT")
 {
 	std::cout << GREEN
 		<< "A New DiamondTrap is alive !"
 		<< RESET << std::endl;
-	m_hp = FragTrap::m_hp;
-	m_energy = ScavTrap::m_energy;
-	m_attack = FragTrap::m_attack;
+	this->m_hp = FragTrap::m_hp;
+	this->m_energy = ScavTrap::m_energy;
+	this->m_attack = FragTrap::m_attack;
 }
 
 DiamondTrap::DiamondTrap(std::string _name)
@@ -17,9 +18,9 @@ DiamondTrap::DiamondTrap(std::string _name)
 	std::cout << GREEN << "DiamondTrap "
 		<< m_name << " is alive !"
 		<< RESET << std::endl;
-	m_hp = FragTrap::m_hp;
-	m_energy = ScavTrap::m_energy;
-	m_attack = FragTrap::m_attack;
+	this->m_hp = FragTrap::m_hp;
+	this->m_energy = ScavTrap::m_energy;
+	this->m_attack = FragTrap::m_attack;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& _other)
@@ -52,4 +53,5 @@ void DiamondTrap::whoAmI()
 		<< "I am " << m_name
 		<< " and my ClapTrap name is " << ClapTrap::m_name
 		<< RESET << std::endl;
+
 }

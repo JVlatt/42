@@ -15,6 +15,7 @@ public:
 
 	void	whoAmI();
 	using ScavTrap::attack;
+
 private:
 	std::string m_name;
 };

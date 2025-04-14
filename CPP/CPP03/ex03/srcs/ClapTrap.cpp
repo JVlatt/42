@@ -91,3 +91,4 @@ void ClapTrap::beRepaired(unsigned int _amount)
 	m_energy -= 1;
 	m_hp += _amount;
 }
+

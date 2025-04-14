@@ -6,9 +6,9 @@ ScavTrap::ScavTrap()
 	std::cout << GREEN
 		<< "A New ScavTrap is alive !"
 		<< RESET << std::endl;
-	m_hp = 100;
-	m_energy = 50;
-	m_attack = 20;
+	this->m_hp = 100;
+	this->m_energy = 50;
+	this->m_attack = 20;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& _other)

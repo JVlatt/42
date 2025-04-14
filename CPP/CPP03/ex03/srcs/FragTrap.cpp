@@ -6,9 +6,9 @@ FragTrap::FragTrap()
 	std::cout << GREEN
 		<< "A New FragTrap is alive !"
 		<< RESET << std::endl;
-	m_hp = 100;
-	m_energy = 100;
-	m_attack = 30;
+	this->m_hp = 100;
+	this->m_energy = 100;
+	this->m_attack = 30;
 }
 
 FragTrap::FragTrap(const FragTrap& _other)

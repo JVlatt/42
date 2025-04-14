@@ -13,9 +13,6 @@ public:
 	virtual ~FragTrap();
 
 	void	highFivesGuys(void);
-
-private:
-
 };
 
 #endif
