@@ -25,7 +25,7 @@ DiamondTrap::DiamondTrap(std::string _name)
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& _other)
-	: ClapTrap(_other), FragTrap(_other), ScavTrap(_other), m_name(_other.m_name)
+	: ClapTrap(_other), ScavTrap(_other), FragTrap(_other), m_name(_other.m_name)
 {
 }
 
