@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mastah <mastah@student.42.fr>              +#+  +:+       +#+         #
+#    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/04/05 12:18:55 by mastah           ###   ########.fr        #
+#    Updated: 2025/04/22 14:03:09 by matt             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = AbstracAnimals
+NAME = Interfaces
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp AMateria.cpp Cure.cpp Ice.cpp
-LST_INCS = AMateria.hpp Cure.hpp Ice.hpp Colors.hpp
+LST_SRCS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp Inventory.cpp MateriaSource.cpp
+LST_INCS = AMateria.hpp Character.hpp Cure.hpp Ice.hpp Inventory.hpp MateriaSource.hpp Colors.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

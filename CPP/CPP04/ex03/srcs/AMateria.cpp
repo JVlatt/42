@@ -1,22 +1,8 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria()
+AMateria::AMateria(std::string const &type)
 {
-
-}
-
-AMateria::AMateria(const AMateria& _other)
-{
-	*this = _other;
-}
-
-AMateria& AMateria::operator=(const AMateria& _other)
-{
-	if (this != &_other)
-	{
-		m_type = _other.m_type;
-	}
-	return (*this);
+	m_type = type;
 }
 
 AMateria::~AMateria()
@@ -27,4 +13,9 @@ AMateria::~AMateria()
 std::string const &AMateria::getType() const
 {
 	return (m_type);
+}
+
+void AMateria::use(ICharacter &target)
+{
+	(void) target;
 }

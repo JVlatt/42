@@ -23,7 +23,7 @@ class Character : public ICharacter
 
 	private:
 	std::string	m_name;
-	Inventory	*m_inventory;
+	Inventory	m_inventory;
 };
 
 #endif
