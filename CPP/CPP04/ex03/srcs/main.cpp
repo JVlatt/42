@@ -23,7 +23,7 @@ int	main(void)
 		delete bob;
 		delete me;
 		delete src;
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 	}
 	{
 		std::cout << "1. Create new MateriaSource and learn materias (check maximum too):" << std::endl;
@@ -34,14 +34,14 @@ int	main(void)
 		src->learnMateria(new Cure());
 		AMateria *mat = new Cure();
 		src->learnMateria(mat);
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 
 		std::cout << "2. Create 2 new characters and test deep copy:" << std::endl;
 		Character *dur0 = new Character("Alice");
 		ICharacter *dur1 = new Character(*dur0);
 		delete dur0;
 		delete dur1;
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 
 		std::cout << "3. Create materias and equip them (also check unknown materias):" << std::endl;
 		AMateria* tmp;
@@ -53,7 +53,7 @@ int	main(void)
 		tmp = src->createMateria("hi");
 		dur2->equip(tmp);
 		delete src;
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 
 		std::cout << "4. Check maximum equipped too:" << std::endl;
 		AMateria *cure = new Cure();
@@ -65,7 +65,7 @@ int	main(void)
 		delete cure; // Cure must be deleted manually when unequipped
 		dur2->unequip(2);
 		dur2->unequip(6);
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 
 		std::cout << "5. Use materias on new character:" << std::endl;
 		ICharacter* bob = new Character("Bob");
@@ -76,7 +76,7 @@ int	main(void)
 		dur2->use(-4, *bob);
 		dur2->use(3, *bob);
 		delete bob;
-		std::cout << BRIGHT_GREEN << "OK \u2714" << RESET << std::endl;
+		std::cout << BRIGHT_GREEN << "OK \u2714 \n" << RESET << std::endl;
 
 		delete dur2;
 

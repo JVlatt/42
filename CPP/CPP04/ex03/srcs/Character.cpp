@@ -12,7 +12,6 @@ Character& Character::operator=(const Character& _other)
 {
 	if (this != &_other) {
 		m_name = _other.m_name;
-		m_inventory.clear();
 		m_inventory = _other.m_inventory;
 	}
 	return (*this);
