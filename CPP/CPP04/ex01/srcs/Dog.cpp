@@ -12,8 +12,9 @@ Dog::Dog()
 Dog::Dog(const Dog& _other)
 	: Animal(_other)
 {
+	m_type = _other.m_type;
 	if (_other.m_brain)
-		m_brain = _other.m_brain;
+		m_brain = new Brain(*_other.m_brain);
 	else
 		m_brain = new Brain();
 }
@@ -29,6 +30,7 @@ Dog& Dog::operator=(const Dog& _other)
 	if (this != &_other)
 	{
 		m_type = _other.m_type;
+		m_brain = new Brain(*_other.m_brain);
 	}
 	return (*this);
 }

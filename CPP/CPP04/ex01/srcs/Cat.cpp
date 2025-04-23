@@ -18,8 +18,9 @@ Cat::Cat(std::string _name)
 Cat::Cat(const Cat& _other)
 	: Animal(_other)
 {
+	m_type = _other.m_type;
 	if (_other.m_brain)
-		m_brain = _other.m_brain;
+		*m_brain = *(_other.m_brain);
 	else
 		m_brain = new Brain();
 }
@@ -29,6 +30,7 @@ Cat& Cat::operator=(const Cat& _other)
 	if (this != &_other)
 	{
 		m_type = _other.m_type;
+		*m_brain = *(_other.m_brain);
 	}
 	return (*this);
 }

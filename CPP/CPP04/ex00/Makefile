@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/04/02 14:24:19 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/04/23 14:39:44 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp
-LST_INCS = Animal.hpp Dog.hpp Cat.hpp Colors.hpp
+LST_SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+LST_INCS = Animal.hpp Dog.hpp Cat.hpp Colors.hpp WrongAnimal.hpp WrongCat.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

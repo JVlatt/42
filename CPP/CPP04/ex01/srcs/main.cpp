@@ -25,6 +25,7 @@ int main(void)
 	{
 		delete(animals[i]);
 	}
+
 	return (0);
 }
 
