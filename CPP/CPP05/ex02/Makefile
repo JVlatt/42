@@ -6,11 +6,11 @@
 #    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/04/24 12:37:18 by matt             ###   ########.fr        #
+#    Updated: 2025/04/24 16:49:07 by matt             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Bureaucrats
+NAME = MultiForm
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -19,8 +19,12 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp Bureaucrat.cpp
-LST_INCS = Bureaucrat.hpp Colors.hpp
+LST_SRCS = 	main.cpp Bureaucrat.cpp AForm.cpp \
+			ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp
+LST_INCS =	Bureaucrat.hpp Colors.hpp AForm.hpp \
+			ShrubberyCreationForm.hpp RobotomyRequestForm.hpp \
+			PresidentialPardonForm.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

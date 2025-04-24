@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "Colors.hpp"
 
 Bureaucrat::Bureaucrat()
@@ -18,8 +19,8 @@ Bureaucrat::Bureaucrat(int _grade, std::string _name)
 		throw Bureaucrat::GradeTooLowException("Grade too low : Grade must be within 1-150 range !");
 	m_grade = _grade;
 	std::cout << GREEN
-		<< "A New Bureaucrat got hired"
-		<< RESET << std::endl;
+		<< "A New Bureaucrat got hired : "
+		<< *this << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& _other)
@@ -93,3 +94,28 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat)
 	return (os);
 }
 
+void Bureaucrat::signForm(Form& _form)
+{
+	if (_form.getIsSigned())
+	{
+		std::cout << BRIGHT_RED
+			<< m_name << " couldn't sign "
+			<< _form.getName()
+			<< " because it is already signed !"
+			<< RESET << std::endl;
+		return ;
+	}
+	try
+	{
+		_form.beSigned(*this);
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << BRIGHT_RED
+			<< m_name << " couldn't sign "
+			<< _form.getName() << " because "
+			<< e.what()
+			<< RESET << std::endl;
+	}
+
+}
