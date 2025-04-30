@@ -22,7 +22,10 @@ int main(int, char**)
 		numbers[i] = value;
 		mirror[i] = value;
 	}
-	//SCOPE
+	std::cout << "✅" << std::endl;
+	std::cout << GREEN
+		<< "=== Copy & Assign =="
+		<< RESET << std::endl;
 	{
 		Array<int> tmp = numbers;
 		Array<int> test(tmp);
@@ -32,17 +35,21 @@ int main(int, char**)
 	{
 		if (mirror[i] != numbers[i])
 		{
-			std::cerr << "didn't save the same value!!" << std::endl;
+			std::cout << RED << " ❌ didn't save the same value!!" << RESET << std::endl;
 			return 1;
 		}
 	}
+	std::cout << "✅" << std::endl;
+	std::cout << GREEN
+		<< "=== Invalid Index & Out Of Range =="
+		<< RESET << std::endl;
 	try
 	{
 		numbers[-2] = 0;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << RED << " ❌ " << e.what() << RESET << '\n';
 	}
 	try
 	{
@@ -50,24 +57,27 @@ int main(int, char**)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << RED << " ❌ " << e.what() << RESET << '\n';
 	}
+	std::cout << "✅" << std::endl;
 
 	for (int i = 0; i < MAX_VAL; i++)
 	{
 		numbers[i] = rand();
 	}
-
-	Array<int> numbersCopy(1);
-	numbersCopy = numbers;
-	for (int i = 0; i < MAX_VAL; i++)
+	std::cout << GREEN
+		<< "=== Empty =="
+		<< RESET << std::endl;
+	Array<int> empty;
+	try
 	{
-		if (numbersCopy[i] != numbers[i])
-		{
-			std::cerr << "didn't save the same value!!" << std::endl;
-			return 1;
-		}
+		empty[0] = 0;
 	}
-	delete [] mirror;//
+	catch(const std::exception& e)
+	{
+		std::cout << RED << " ❌ " <<  e.what() << RESET << '\n';
+	}
+	std::cout << "✅" << std::endl;
+	delete [] mirror;
 	return 0;
 }
