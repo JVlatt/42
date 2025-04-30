@@ -6,11 +6,11 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/04/30 14:10:27 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/04/30 19:33:34 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = find
+NAME = span
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
