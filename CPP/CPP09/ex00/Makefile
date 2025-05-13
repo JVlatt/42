@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/05/12 19:50:30 by matt             ###   ########.fr        #
+#    Updated: 2025/05/13 12:07:11 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp parsing.cpp
-LST_INCS = parsing.hpp Colors.hpp
+LST_SRCS = main.cpp BitcoinExchange.cpp
+LST_INCS = BitcoinExchange.hpp Colors.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

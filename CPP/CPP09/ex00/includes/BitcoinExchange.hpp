@@ -1,5 +1,5 @@
-#ifndef PARSING_HPP
-#define PARSING_HPP
+#ifndef BITCOIN_EXCHANGE_HPP
+#define BITCOIN_EXCHANGE_HPP
 
 #include <map>
 #include <string>

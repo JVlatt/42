@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matt <matt@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/05/12 20:32:46 by matt             ###   ########.fr        #
+#    Updated: 2025/05/13 14:46:48 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = span
+NAME = RPN
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp
-LST_INCS = Colors.hpp
+LST_SRCS = main.cpp RPN.cpp
+LST_INCS = Colors.hpp RPN.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})
