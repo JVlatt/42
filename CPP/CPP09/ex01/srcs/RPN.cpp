@@ -4,30 +4,30 @@
 #include "Colors.hpp"
 #include "RPN.hpp"
 
-static void execOperation(std::stack<int, std::list<int> > _slist, char _operand)
+static int execOperation(std::stack<int, std::list<int> > _slist, char _operand)
 {
-	int result = _slist.top();
+	int b = _slist.top();
 	_slist.pop();
-	std::cout << result << _operand << _slist.top() << std::endl;
+	int a = _slist.top();
+	_slist.pop();
 	switch (_operand)
 	{
 	case '-':
-		result -= _slist.top();
+		return (a - b);
 		break;
 	case '+':
-		result += _slist.top();
+		return (a + b);
 		break;
 	case '*':
-		result *= _slist.top();
+		return (a * b);
 		break;
 	case '/':
-		result /= _slist.top();
+		return (a / b);
 		break;
 	default:
 		break;
 	}
-	_slist.pop();
-	_slist.push(result);
+	return (-1);
 }
 
 void parse_input(char *_input)
@@ -35,43 +35,60 @@ void parse_input(char *_input)
 	std::stack<int, std::list<int> > s_list;
 	std::stringstream sstream(_input);
 	std::string element;
+	int operations = 0;
 
 	while (std::getline(sstream, element, ' '))
 	{
-		if (element.length() != 1)
+		int i = 0;
+		if (element.length() > 2)
 		{
 			std::cout << RED
 				<< "Error"
 				<< RESET << std::endl;
+			return ;
 		}
-		if (element[0] >= '0' && element[0] <= '9')
+		if (element.length() == 2) // sign + number
+		{
+			if (element[0] == '-' || element[0] == '+')
+				i = 1;
+			else
+			{
+				std::cout << RED
+					<< "Error"
+					<< RESET << std::endl;
+				return ;
+			}
+		}
+		if (element[0 + i] >= '0' && element[0 + i] <= '9')
 		{
 			s_list.push(std::atoi(element.c_str()));
 		}
 		else if (s_list.size() > 1 && (element[0] == '*' || element[0] == '+' || element[0] == '-' || element[0] == '/'))
 		{
-			execOperation(s_list, element[0]);
+			int result = execOperation(s_list, element[0]);
+			s_list.pop();
+			s_list.pop();
+			s_list.push(result);
+			operations ++;
 		}
 		else
 		{
 			std::cout << RED
-				<< "Error : " << element
+				<< "Error"
 				<< RESET << std::endl;
+			return ;
 		}
 	}
-	if (s_list.size() != 1)
+	if (s_list.size() != 1 || operations < 1)
 	{
 		std::cout << RED
 			<< "Error"
 			<< RESET << std::endl;
-		while (s_list.size() != 1)
-		{
-			std::cout << s_list.top() << std::endl;
-			s_list.pop();
-		}
+		return ;
 	}
 	else
 		std::cout << GREEN
 			<< s_list.top()
+			<< " (" << operations << " operations)"
 			<< RESET << std::endl;
 }
