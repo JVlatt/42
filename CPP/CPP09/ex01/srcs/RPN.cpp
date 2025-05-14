@@ -22,6 +22,8 @@ static int execOperation(std::stack<int, std::list<int> > _slist, char _operand)
 		return (a * b);
 		break;
 	case '/':
+		if (b == 0)
+			throw (std::runtime_error("Error: Attempted to divide by zero"));
 		return (a / b);
 		break;
 	default:
@@ -43,7 +45,7 @@ void parse_input(char *_input)
 		if (element.length() > 2)
 		{
 			std::cout << RED
-				<< "Error"
+				<< "Error: invalid argument"
 				<< RESET << std::endl;
 			return ;
 		}
@@ -54,7 +56,7 @@ void parse_input(char *_input)
 			else
 			{
 				std::cout << RED
-					<< "Error"
+					<< "Error: invalid argument"
 					<< RESET << std::endl;
 				return ;
 			}
@@ -65,7 +67,18 @@ void parse_input(char *_input)
 		}
 		else if (s_list.size() > 1 && (element[0] == '*' || element[0] == '+' || element[0] == '-' || element[0] == '/'))
 		{
-			int result = execOperation(s_list, element[0]);
+			int result = 0;
+			try
+			{
+				result = execOperation(s_list, element[0]);
+			}
+			catch(std::exception &e)
+			{
+				std::cout << RED
+					<< e.what()
+					<< RESET << std::endl;
+				return ;
+			}
 			s_list.pop();
 			s_list.pop();
 			s_list.push(result);
@@ -74,7 +87,7 @@ void parse_input(char *_input)
 		else
 		{
 			std::cout << RED
-				<< "Error"
+				<< "Error: invalid argument"
 				<< RESET << std::endl;
 			return ;
 		}
@@ -82,7 +95,7 @@ void parse_input(char *_input)
 	if (s_list.size() != 1 || operations < 1)
 	{
 		std::cout << RED
-			<< "Error"
+			<< "Error: more than 1 element in stack"
 			<< RESET << std::endl;
 		return ;
 	}
