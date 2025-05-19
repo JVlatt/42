@@ -4,7 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-
+#include <deque>
 #include "Colors.hpp"
 
 class PmergeMe
@@ -13,7 +13,27 @@ class PmergeMe
 	static int nbr_of_comps;
 };
 
+std::vector<int> ft_sort_vec(std::vector<int> &_vec);
+std::deque<int> ft_sort_deque(std::vector<int> &_vec);
+
 long get_jacobsthal(long _n);
+
+template <typename T>
+bool is_sorted(T &_container)
+{
+	typedef typename T::iterator Iter;
+	Iter a = _container.begin();
+	Iter b = a + 1;
+	while (b != _container.end())
+	{
+		if (*a > *b)
+			return (false);
+		a++;
+		b++;
+	}
+	return (true);
+}
+
 
 template <typename T>
 bool ft_comp(T lv, T rv)
@@ -41,21 +61,23 @@ template <typename T> void ft_swap(T _it, int _level)
 }
 
 template <typename T>
-void printArray(T &_container, int _level)
+void printArray(T &_container, int _level, bool _split)
 {
 	typedef typename T::iterator Iter;
 
 	bool color = true;
 	size_t count = 0;
-	std::cout << RESET << "Level " << _level << " : ";
 	for (Iter it = _container.begin(); it != _container.end(); it++)
 	{
-		if (color)
+		if (_split)
 		{
-			std::cout << GREEN;
+			if (color)
+			{
+				std::cout << GREEN;
+			}
+			if (_container.size() - count + 1 < static_cast<long unsigned int>(_level * 2) && _container.size() % (_level * 2) != 0)
+				std::cout << RED;
 		}
-		if (_container.size() - count + 1 < static_cast<long unsigned int>(_level * 2) && _container.size() % (_level * 2) != 0)
-			std::cout << RED;
 
 		std::cout << *it << " ";
 		if (count + 1 > 0 && (count + 1) % (_level * 2) == 0)
@@ -99,7 +121,7 @@ void mergeInsterFJ(T &_container, int _level)
 	// RECURSIVE
 	mergeInsterFJ(_container, _level * 2);
 
-	//printArray(_container, _level);
+	//printArray(_container, _level, true);
 
 	/* STEP 2 : MAIN & PEND */
 

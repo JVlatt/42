@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/05/13 12:07:11 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/05/19 15:26:12 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS = main.cpp BitcoinExchange.cpp
-LST_INCS = BitcoinExchange.hpp Colors.hpp
+LST_SRCS = main.cpp BitcoinExchange.cpp Utils.cpp
+LST_INCS = BitcoinExchange.hpp Colors.hpp Utils.hpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 SRCS = $(addprefix ${DIR_SRCS}/, ${LST_SRCS})

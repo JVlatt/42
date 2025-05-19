@@ -1,4 +1,5 @@
 #include "Colors.hpp"
+#include "Utils.hpp"
 #include "BitcoinExchange.hpp"
 
 int main(int argc, char **argv)
