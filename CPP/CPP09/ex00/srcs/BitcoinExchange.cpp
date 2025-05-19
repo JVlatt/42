@@ -66,23 +66,7 @@ static bool check_date_format(std::stringstream &_date_stream)
 		try
 		{
 			day = ft_atoi(day_str.c_str());
-		}
-		catch (std::exception &e)
-		{
-			return (false);
-		}
-
-		try
-		{
 			month = ft_atoi(month_str.c_str());
-		}
-		catch (std::exception &e)
-		{
-			return (false);
-		}
-
-		try
-		{
 			year = ft_atoi(year_str.c_str());
 		}
 		catch (std::exception &e)
