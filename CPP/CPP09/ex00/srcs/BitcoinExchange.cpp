@@ -140,6 +140,20 @@ void parse_input(std::map<std::string, float> _data, const char *_input)
 				try
 				{
 					value = ft_atof(value_str.c_str());
+					if (value < 0)
+						std::cout << RED
+								  << "Error: not a positive number."
+								  << value_str
+								  << " (line " << line_count << ")"
+								  << RESET << std::endl;
+					else if (value > 1000)
+						std::cout << RED
+								  << "Error: too large a number."
+								  << value_str
+								  << " (line " << line_count << ")"
+								  << RESET << std::endl;
+					else
+						find_data(_data, date, value);
 				}
 				catch (const std::exception &e)
 				{
@@ -148,27 +162,6 @@ void parse_input(std::map<std::string, float> _data, const char *_input)
 							  << " (line " << line_count << ")"
 							  << RESET << std::endl;
 				}
-				// if(valueStream >> value)
-				// {
-					if (value < 0)
-						std::cout << RED
-								  << "Error: not a positive number."
-								  << " (line " << line_count << ")"
-								  << RESET << std::endl;
-					else if (value > 1000)
-						std::cout << RED
-								  << "Error: too large a number."
-								  << " (line " << line_count << ")"
-								  << RESET << std::endl;
-					else
-						find_data(_data, date, value);
-				// }
-				// else
-				// 	std::cout << RED
-				// 			  << "Error: bad input value => " << value_str
-				// 			  << " (line " << line_count << ")"
-				// 			  << RESET << std::endl;
-
 			}
 			else
 			{
