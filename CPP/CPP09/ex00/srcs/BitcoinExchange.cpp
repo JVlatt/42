@@ -6,7 +6,7 @@ std::map<std::string, float> parse_data()
 {
 	std::ifstream file("data.csv");
 	if (!file)
-		throw(std::invalid_argument("Failed to open file"));
+		throw(std::invalid_argument("Failed to open data file"));
 
 	std::map<std::string, float> data_map;
 	std::string line;
@@ -105,7 +105,9 @@ void parse_input(std::map<std::string, float> _data, const char *_input)
 	int line_count = 2;
 	std::ifstream file(_input);
 	if (!file)
-		throw(std::invalid_argument("Failed to open file"));
+	{
+		throw(std::invalid_argument("Failed to open input file"));
+	}
 
 	std::string line;
 	std::getline(file, line); // skip first line
