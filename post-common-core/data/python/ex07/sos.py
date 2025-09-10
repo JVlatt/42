@@ -66,6 +66,7 @@ try:
         else:
             result += NESTED_MORSE[character.upper()]
 
+    result = result[:-1]
     print(result)
 
 except AssertionError as e:
