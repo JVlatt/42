@@ -1,5 +1,4 @@
 import sys
-import string
 
 
 def count_characters(text):

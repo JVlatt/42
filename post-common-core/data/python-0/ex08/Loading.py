@@ -1,5 +1,4 @@
 import time
-import sys
 
 
 def ft_tqdm(iterable):
@@ -39,7 +38,10 @@ out  : decorated iterator."""
             f"<{int(remaining//60):02d}:{int(remaining % 60):02d}, "
             f"{rate:0.2f}it/s]"
         )
-        sys.stdout.write("\r" + line.ljust(len(line) + 10))
-        sys.stdout.flush()
+        print(
+            "\r" + line.ljust(len(line) + 7),
+            end="",
+            flush=True
+        )
         yield item
-    sys.stdout.write("\n")
+    print("\n")
