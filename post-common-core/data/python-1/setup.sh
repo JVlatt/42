@@ -4,16 +4,10 @@
 set -e
 
 # Create virtual environment in venv folder
-python3 -m venv .env
+python -m venv .env
+./.env/bin/pip install --upgrade pip
+./.env/bin/pip install Pillow numpy flake8
 
-# Activate virtual environment
-source .env/bin/activate
-
-# Upgrade pip
-pip install --upgrade pip
-
-# Install required packages
-pip install Pillow numpy flake8
 
 echo "✅ Virtual environment setup complete!"
 echo "To activate it in the future, run: source venv/bin/activate"
