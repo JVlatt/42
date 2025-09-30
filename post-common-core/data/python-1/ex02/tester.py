@@ -1,14 +1,32 @@
-from find_ft_type import all_thing_is_obj
+from load_image import ft_load
 
-ft_list = ["Hello", "tata!"]
-ft_tuple = ("Hello", "toto!")
-ft_set = {"Hello", "tutu!"}
-ft_dict = {"Hello" : "titi!"}
 
-all_thing_is_obj(ft_list)
-all_thing_is_obj(ft_tuple)
-all_thing_is_obj(ft_set)
-all_thing_is_obj(ft_dict)
-all_thing_is_obj("Brian")
-all_thing_is_obj("Toto")
-print(all_thing_is_obj(10))
+def test_image_load():
+    print("\n--- Test: Valid Image ---")
+    try:
+        pixels = ft_load("landscape.jpg")
+        print(pixels)
+    except Exception as e:
+        print(e)
+
+
+def test_file_not_found():
+    print("\n--- Test: File Not Found ---")
+    try:
+        ft_load("nonexistent.jpg")
+    except Exception as e:
+        print(e)
+
+
+def test_invalid_file():
+    print("\n--- Test: Invalid Image File ---")
+    try:
+        ft_load("not_an_image.txt")
+    except Exception as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    test_image_load()
+    test_file_not_found()
+    test_invalid_file()

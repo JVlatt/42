@@ -8,8 +8,8 @@ values = [
     ]
 
 for tuple in values:
-    print ("Heights:", tuple[0])
-    print ("Weights:", tuple[1])
+    print("Heights:", tuple[0])
+    print("Weights:", tuple[1])
     try:
         bmi = give_bmi(tuple[0], tuple[1])
         print("BMIs :", bmi, type(bmi))
