@@ -9,6 +9,7 @@ def test_image_load_jpeg():
     except Exception as e:
         print(e)
 
+
 def test_image_load_jpg():
     print("\n--- Test: Valid Image JPG ---")
     try:
@@ -34,8 +35,28 @@ def test_invalid_file():
         print(e)
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Run a series of tests for the ft_load function.
+
+    This function executes multiple test cases to verify the behavior of
+    ft_load, including:
+
+    - Loading a valid JPG image file.
+    - Loading a valid JPEG image file.
+    - Attempting to load a non-existent file.
+    - Attempting to load an invalid/non-image file.
+
+    For each test, it prints the results or the error message if an exception
+    is raised.
+
+    No parameters or return values.
+    """
     test_image_load_jpg()
     test_image_load_jpeg()
     test_file_not_found()
     test_invalid_file()
+
+
+if __name__ == "__main__":
+    main()

@@ -4,6 +4,14 @@ import numpy as np
 
 
 def display(pixels: np.ndarray):
+    """
+    Display an image array with padding and coordinate tick marks.
+
+    Adds margins, draws borders, and displays tick marks for reference.
+
+    Parameters:
+        pixels (np.ndarray): Image array to display.
+    """
 
     img = np.squeeze(pixels)
     img = Image.fromarray(img.astype('uint8'))
@@ -94,7 +102,24 @@ def zoom(img: np.ndarray, center: tuple) -> np.ndarray:
     return zoomed
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Main execution function to test image loading, zooming, and display.
+
+    This function performs the following steps:
+    1. Loads an image from the file "animal.jpeg" using ft_load.
+    2. Prints the loaded image pixel array.
+    3. Applies zoom on the loaded image at coordinates (650, 300).
+    4. Prints the zoomed pixel array.
+    5. Displays the zoomed image with axes and margin.
+
+    If any error occurs (e.g., file not found, invalid image,
+    invalid zoom coordinates),
+    the function prints the error and exits.
+
+    No parameters or return values.
+    """
+
     try:
         img = ft_load("animal.jpeg")
         print(img)
@@ -104,3 +129,7 @@ if __name__ == "__main__":
         exit(1)
     print(zoom_pxl)
     display(zoom_pxl)
+
+
+if __name__ == "__main__":
+    main()

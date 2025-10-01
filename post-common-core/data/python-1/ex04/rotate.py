@@ -4,10 +4,23 @@ import numpy as np
 
 
 def rotate(pixels: np.ndarray) -> np.ndarray:
+    """
+    Rotate a 2D or 3D image array 90° counter-clockwise.
+
+    This function manually rotates the image by transposing and reversing rows.
+
+    Parameters:
+        pixels (np.ndarray): Input image array (H, W) or (H, W, C).
+
+    Returns:
+        np.ndarray: Rotated image array.
+    """
+
     if not isinstance(pixels, np.ndarray):
         raise ValueError("pixels must be a NumPy array")
 
-    pixels = pixels.tolist()
+    img = np.squeeze(pixels)
+    pixels = img.tolist()
     n = len(pixels)
 
     res = [[0] * n for _ in range(n)]
@@ -18,12 +31,20 @@ def rotate(pixels: np.ndarray) -> np.ndarray:
     resarray = np.array(res)
     print("New shape after Transpose:", resarray.shape)
     print(resarray)
-    return res
+    return resarray
 
 
 def display(pixels: np.ndarray):
-    img = np.array(pixels)
-    img = Image.fromarray(img.astype('uint8'))
+    """
+    Display an image array with padding and coordinate tick marks.
+
+    Adds margins, draws borders, and displays tick marks for reference.
+
+    Parameters:
+        pixels (np.ndarray): Image array to display.
+    """
+
+    img = Image.fromarray(pixels.astype('uint8'))
 
     margin = 40
     new_width = img.width + margin * 2
@@ -105,15 +126,19 @@ def zoom(img: np.ndarray, center: tuple) -> np.ndarray:
     x_start = max(0, x - half)
     x_end = min(img.shape[1], x + half)
 
-    zoomed = img[y_start:y_end, x_start:x_end, 1]
-    print("New shape after slicing:", zoomed.shape)
+    zoomed = img[y_start:y_end, x_start:x_end, 0:1]
+    print("The shape of image is:",
+          zoomed.shape, "or", np.squeeze(zoomed).shape)
     return zoomed
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Main function: loads an image, zooms, rotates, and displays it.
+    """
+
     try:
         img = ft_load("animal.jpeg")
-        print(img)
         zoom_pxl = zoom(img, (650, 300))
     except Exception as e:
         print(e)
@@ -121,3 +146,7 @@ if __name__ == "__main__":
     print(zoom_pxl)
     rotate_pxl = rotate(zoom_pxl)
     display(rotate_pxl)
+
+
+if __name__ == "__main__":
+    main()
