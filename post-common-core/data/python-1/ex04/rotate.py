@@ -7,7 +7,7 @@ def rotate(pixels: np.ndarray) -> np.ndarray:
     if not isinstance(pixels, np.ndarray):
         raise ValueError("pixels must be a NumPy array")
 
-    pixels = pixels.tolist()  # Convert ndarray to list of lists
+    pixels = pixels.tolist()
     n = len(pixels)
 
     res = [[0] * n for _ in range(n)]

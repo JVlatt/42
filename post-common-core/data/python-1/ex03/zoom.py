@@ -36,7 +36,7 @@ def display(pixels: np.ndarray):
     except Exception:
         font = ImageFont.load_default()
 
-    num_ticks = 8
+    num_ticks = int(img.width / 50)
     tick_size = 5
     for i in range(num_ticks):
         tick_x = x_start + i * 50
@@ -89,7 +89,8 @@ def zoom(img: np.ndarray, center: tuple) -> np.ndarray:
     x_end = min(img.shape[1], x + half)
 
     zoomed = img[y_start:y_end, x_start:x_end, 0:1]
-    print("New shape after slicing:", zoomed.shape)
+    print("New shape after slicing:",
+          zoomed.shape, "or", np.squeeze(zoomed).shape)
     return zoomed
 
 

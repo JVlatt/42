@@ -36,5 +36,6 @@ def ft_load(path: str) -> np.ndarray:
     img = Image.open(path).convert("RGB")
     pixels = np.array(img)
     print("The shape of image is:", pixels.shape)
+    print(pixels)
 
     return pixels

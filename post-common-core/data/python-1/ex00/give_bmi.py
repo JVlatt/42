@@ -46,7 +46,7 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
     """
     if any(b <= 0 for b in bmi):
         raise ValueError("BMI must be positive and non-zero")
-    elif any(li < 0 for li in limit):
+    elif limit < 0:
         raise ValueError("Limit must be positive")
     else:
         return [value > limit for value in bmi]

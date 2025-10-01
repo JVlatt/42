@@ -32,7 +32,7 @@ def slice_me(family: list, start: int, end: int) -> list:
     rows = len(family)
 
     if any(len(row) != cols for row in family):
-        raise ValueError("Rows have inconsistent number of row")
+        raise ValueError("Cols have inconsistent number of rows")
 
     output = family[start:end]
 
