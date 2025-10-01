@@ -88,7 +88,7 @@ def zoom(img: np.ndarray, center: tuple) -> np.ndarray:
     x_start = max(0, x - half)
     x_end = min(img.shape[1], x + half)
 
-    zoomed = img[y_start:y_end, x_start:x_end, 1:2]
+    zoomed = img[y_start:y_end, x_start:x_end, 0:1]
     print("New shape after slicing:", zoomed.shape)
     return zoomed
 
