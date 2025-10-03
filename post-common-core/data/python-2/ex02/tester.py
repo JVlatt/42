@@ -1,6 +1,6 @@
 from sys import argv, exit
 from load_csv import load
-from aff_life import aff
+from aff_pop import compare_pop
 
 
 def main():
@@ -9,10 +9,10 @@ def main():
     """
     argnb = len(argv)
     try:
-        assert argnb == 3, "Two arguments needed"
+        assert argnb == 4, "Three arguments needed"
         df = load(argv[1])
         if df is not None:
-            aff(df, argv[2])
+            compare_pop(df, argv[2], argv[3])
     except AssertionError as e:
         print("AssertionError:", e)
         exit(1)

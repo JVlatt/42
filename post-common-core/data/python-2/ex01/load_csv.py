@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+
 def load(path: str) -> pd.DataFrame:
 
     """
@@ -36,7 +37,7 @@ def load(path: str) -> pd.DataFrame:
     except pd.errors.ParserError:
         print(f"❌ Error: File '{path}' could not be parsed as CSV.")
     except UnicodeDecodeError:
-        print(f"❌ Error: Encoding problem reading '{path}'. Try specifying encoding.")
+        print(f"❌ Error: Encoding problem reading '{path}'")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
 
