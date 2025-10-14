@@ -5,7 +5,7 @@ from aff_life import aff
 
 def main():
     """
-    Main function to load and print a csv informations.
+    Main function to load and display a graph from csv informations.
     """
     argnb = len(argv)
     try:
