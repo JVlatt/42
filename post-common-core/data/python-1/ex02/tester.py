@@ -2,6 +2,7 @@ from load_image import ft_load
 
 
 def test_image_load_jpeg():
+    """Test loading an .jpeg file."""
     print("\n--- Test: Valid Image JPEG ---")
     try:
         pixels = ft_load("animal.jpeg")
@@ -11,6 +12,7 @@ def test_image_load_jpeg():
 
 
 def test_image_load_jpg():
+    """Test loading an .jpg file."""
     print("\n--- Test: Valid Image JPG ---")
     try:
         pixels = ft_load("landscape.jpg")
@@ -20,6 +22,7 @@ def test_image_load_jpg():
 
 
 def test_file_not_found():
+    """Test loading a non-existent file."""
     print("\n--- Test: File Not Found ---")
     try:
         ft_load("nonexistent.jpg")
@@ -28,6 +31,7 @@ def test_file_not_found():
 
 
 def test_invalid_file():
+    """Test loading an invalid file."""
     print("\n--- Test: Invalid Image File ---")
     try:
         ft_load("not_an_image.txt")
