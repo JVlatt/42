@@ -2,6 +2,8 @@ from S1E7 import Baratheon, Lannister
 
 
 def main():
+    """Program to test the implementation of
+    two new class. One can be instantiated with a class method"""
     Robert = Baratheon("Robert")
     print(Robert.__dict__)
     print(Robert.__str__)

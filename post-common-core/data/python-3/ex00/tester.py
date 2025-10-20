@@ -2,6 +2,8 @@ from S1E9 import Stark
 
 
 def main():
+    """Program to test the implementation of
+    an abstract class and a child classes."""
     Ned = Stark("Ned")
     print(Ned.__dict__)
     print(Ned.is_alive)

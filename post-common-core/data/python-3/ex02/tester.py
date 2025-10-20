@@ -2,6 +2,7 @@ from DiamondTrap import King
 
 
 def main():
+    """Program to test the implementation of attributes in a class"""
     Joffrey = King("Joffrey")
     print(Joffrey.__dict__)
     Joffrey.set_eyes("blue")

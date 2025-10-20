@@ -2,6 +2,8 @@ from ft_calculator import calculator
 
 
 def main():
+    """Program to test the implementation of a calculator
+    using base operations."""
     v1 = calculator([0.0, 1.0, 2.0, 3.0, 4.0, 5.0])
     v1 + 5
     print("---")
