@@ -1,4 +1,4 @@
-import math
+from math import isclose
 
 
 class calculator:
@@ -47,7 +47,7 @@ class calculator:
         """Divide input value to values stored in calculator."""
         if not isinstance(value, (int, float)):
             raise TypeError("Object must be numeric.")
-        if math.isclose(value, 0.0):
+        if isclose(value, 0.0):
             raise ValueError("Cannot divide by zero")
 
         self.numbers = [num / value for num in self.numbers]
