@@ -7,8 +7,7 @@ class Baratheon(Character):
 
     def __init__(self, first_name, is_alive=True):
         """Initialize a Baratheon with name and life status."""
-        self.first_name = first_name
-        self.is_alive = is_alive
+        super.__init__(first_name, is_alive)
         self.family_name = "Baratheon"
         self.eyes = "brown"
         self.hairs = "dark"
@@ -27,12 +26,12 @@ class Baratheon(Character):
         """Same as __str__ so printing/inspection yields a readable string."""
         return self.__str__()
 
-    @classmethod
-    def create_baratheon(cls, first_name, is_alive=True):
+    @staticmethod
+    def create_baratheon(first_name, is_alive=True):
         """
         Class method to create a Baratheon instance.
         """
-        return cls(first_name, is_alive)
+        return __class__(first_name, is_alive)
 
 
 class Lannister(Character):
@@ -40,8 +39,7 @@ class Lannister(Character):
 
     def __init__(self, first_name, is_alive=True):
         """Initialize a Lannister with name and life status."""
-        self.first_name = first_name
-        self.is_alive = is_alive
+        super.__init__(first_name, is_alive)
         self.family_name = "Lannister"
         self.eyes = "blue"
         self.hairs = "light"
@@ -60,9 +58,9 @@ class Lannister(Character):
         """Same as __str__ so printing/inspection yields a readable string."""
         return self.__str__()
 
-    @classmethod
-    def create_lannister(cls, first_name, is_alive=True):
+    @staticmethod
+    def create_lannister(first_name, is_alive=True):
         """
         Class method to create a Lannister instance.
         """
-        return cls(first_name, is_alive)
+        return __class__(first_name, is_alive)
