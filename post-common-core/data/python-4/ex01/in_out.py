@@ -7,6 +7,7 @@ def pow(x: int | float) -> int | float:
     """Return x raised to the power of itself."""
     return x ** x
 
+
 def outer(x: int | float, function) -> object:
 
     count = 0

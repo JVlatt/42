@@ -10,7 +10,7 @@ def ft_statistics(*args: Any, **kwargs: Any) -> None:
         try:
             data = [float(x) for x in args]
             data.sort()
-        except Exception :
+        except Exception:
             data = None
 
     for arg in request:
