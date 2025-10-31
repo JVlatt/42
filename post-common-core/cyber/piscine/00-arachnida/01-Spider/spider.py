@@ -15,7 +15,7 @@ def main():
     try:
         scrapURL(args.URL, args.path, args.levels if args.levels is not None else 0)
     except Exception as e:
-        print(e)
+        print("Error:", e)
 
 
 if __name__ == "__main__":
