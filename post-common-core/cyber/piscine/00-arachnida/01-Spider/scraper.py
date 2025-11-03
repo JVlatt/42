@@ -9,6 +9,7 @@ from selenium.common.exceptions import (
     StaleElementReferenceException,
 )
 from selenium.webdriver.common.by import By
+from scrap_settings import ScrapSettings
 
 class ConnectionErrorException(Exception):
     """Raised when a browser/driver/network error prevents navigation."""
@@ -70,12 +71,11 @@ def validate_output_path(path_str: str, default: str = "./datas") -> Path:
     return images_dir
 
 
-def scrap_imgs_from_url(driver: webdriver.Chrome, url: str, path: str, downloadcount = 0) -> None:
-
-    verify_url(driver, url)
+def scrap_imgs_from_url(driver: webdriver.Chrome, url: str, path: str, downloadcount = 0, downloaded_imgs: set = set()) -> int:
 
     img_html_nodes = driver.find_elements(By.TAG_NAME, "img")
     img_urls = []
+    active_count = 0
 
     for node in img_html_nodes:
         try:
@@ -90,27 +90,52 @@ def scrap_imgs_from_url(driver: webdriver.Chrome, url: str, path: str, downloadc
             continue
 
     valid_extension = ['.jpeg', '.jpg', '.gif', '.svg', '.bmp', '.png']
-    image_name_counter = 0
     for image_url in img_urls:
-        print(f"downloading image no. {image_name_counter} ...")
+        if image_url in downloaded_imgs:
+            print(f"⚠️ Image '{image_url}' already downloaded. Skipping...")
+            continue
+        print(f"downloading image no. {downloadcount + active_count} ...")
         try:
             suffix = Path(image_url).suffix.lower()
             if suffix in valid_extension and len(suffix) > 0:
-                file_name = path / f"{image_name_counter}{suffix}"
+                file_name = path / f"{downloadcount + active_count}{suffix}"
             else:
-                file_name = path / f"{image_name_counter}.jpg"
+                file_name = path / f"{downloadcount + active_count}.jpg"
 
             urllib.request.urlretrieve(image_url, str(file_name))
             print(f"✅ Image downloaded to {file_name}")
+            downloaded_imgs.add(image_url)
         except Exception as e:
             print(f"⚠️ Failed to download image '{image_url}': {e}")
         finally:
-            image_name_counter += 1
+            active_count += 1
+
+    return active_count
 
 
-# def recursive_scrap(driver: webdriver.Chrome, url: str, path: str,
-#                     activeDepth: int = 0, limit: int = 0, downloadcount: int = 0) -> None:
+def recursive_scrap(driver: webdriver.Chrome, settings: ScrapSettings, active_url: str,
+                    activeDepth: int = 0, downloadCount: int = 0, visited_url: set = set()) -> int:
 
+    if (active_url in visited_url):
+        print (f"⚠️ '{active_url}' already visited. Skipping...")
+        return 0
+    print (f"✅ Visiting '{active_url}'...")
+    verify_url(driver, active_url)
+    visited_url.add(driver.current_url)
+
+    if activeDepth < settings.limit:
+        href_html_nodes = driver.find_elements(By.TAG_NAME, "a")
+        for node in href_html_nodes:
+            try:
+                href = node.get_attribute("href")
+                if not href:
+                    continue
+            except StaleElementReferenceException:
+                continue
+            downloadCount += recursive_scrap(driver, settings, href, activeDepth + 1, downloadCount)
+
+    print (f"✅ Scrapping '{driver.current_url}' at recursion level {activeDepth}...")
+    return scrap_imgs_from_url(driver, driver.current_url, settings.output, downloadCount)
 
 def scrapURL(url: str, path: str, is_recursive: bool, levels: int = 5) -> None:
     options = Options()
@@ -125,10 +150,11 @@ def scrapURL(url: str, path: str, is_recursive: bool, levels: int = 5) -> None:
             print("Warning: maximize_window failed (continuing in headless):", e)
 
         images_dir = validate_output_path(path)
-        scrap_imgs_from_url(driver, url, images_dir)
+        settings = ScrapSettings(url, images_dir, levels)
+        recursive_scrap(driver, settings, settings.root_url)
 
     except ConnectionErrorException as e:
-        raise
+        raise ConnectionErrorException(f"Connection: {e}")
     except Exception as e:
         raise ScrapingException(e) from e
     finally:
