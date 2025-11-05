@@ -12,8 +12,15 @@ def main():
     if args.levels is not None and not args.recursive:
         parser.error("argument -l/--levels requires -r/--recursive")
 
+    if args.levels and args.levels < 0:
+        parser.error("argument -l/--levels must be positive or null")
+
+    level = 0
+    if args.recursive:
+        level = args.levels if args.levels is not None else 5
+
     try:
-        scrapURL(args.URL, args.path, args.levels if args.levels is not None else 0)
+        scrapURL(args.URL, args.path, level)
     except Exception as e:
         print("Error:", e)
 
