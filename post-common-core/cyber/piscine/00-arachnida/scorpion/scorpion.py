@@ -5,25 +5,96 @@ from datetime import datetime
 import stat
 import os
 
-def timeConvert(atime):
+def timeConvert(atime: float) -> str:
+    """
+    Convert given absolute time to readable dateTime format.
+
+    Parameters:
+        atime(float): absolute time to convert
+
+    Returns:
+        Formated string
+    """
     dt = atime
     newtime = datetime.fromtimestamp(dt)
     return (f"{newtime.date()} at {newtime.time()}")
 
 
-def sizeFormat(size):
+def sizeFormat(size: int) -> str:
+    """
+    Convert given file size to KB.
+
+    Parameters:
+        size(int): file size in B
+
+    Returns:
+        Converted size string
+    """
     newform = format(size/1024, ".2f")
     return newform + " KB"
 
 
+def ft_print_file_data(data: dict[str, Any]) -> None:
+    """
+    Print data stored in given dictionnary.
+
+    Parameters:
+        data(dict[str,Any]): Dictionnary that store file datas
+
+    Returns:
+        None
+    """
+    for key, val in data.items():
+        printstr = ""
+        if key != "Separator" and key != "Title":
+            printstr += f"{key}: "
+        printstr += f"{val}"
+        print(printstr)
+
+
 def ft_get_basic_file_data(filepath: str, data: dict[str, Any])-> None:
-    print("Filename:", os.path.basename(filepath))
-    print("Directory:", os.path.dirname(filepath))
-    print("Absolute Path:", os.path.abspath(filepath))
-    print("Size:", sizeFormat(os.path.getsize(filepath)))
-    print("Last Modified:", timeConvert(os.path.getmtime(filepath)))
-    print("Created:", timeConvert(os.path.getctime(filepath)))
-    print("File Permission:", stat.filemode(os.stat(filepath).st_mode))
+    """
+    Get and store file basic information in a given dictionnary.
+
+    Parameters:
+        filepath(str): Path to file
+        data(dict[str, Any]): dictionnary where we store the file datas
+
+    Returns:
+        None
+    """
+    data["Title"] = "=============== FILE DATA ==============="
+    data["Filename"] = os.path.basename(filepath)
+    data["Directory"] = os.path.dirname(filepath)
+    data["Absolute Path"] = os.path.abspath(filepath)
+    data["Size"] = sizeFormat(os.path.getsize(filepath))
+    data["Last Modified"] = timeConvert(os.path.getmtime(filepath))
+    data["Created"] = timeConvert(os.path.getctime(filepath))
+    data["File Permission"] = stat.filemode(os.stat(filepath).st_mode)
+
+
+def ft_get_exif_data(img: Image, data: dict[str, Any]) -> None:
+    """
+    Get and store image EXIF data in a given dictionnary.
+
+    Parameters:
+        img(Image): Image loaded previously with PIL
+        data(dict[str, Any]): dictionnary where we store the file datas
+
+    Returns:
+        None
+    """
+
+    exif_data = img._getexif()
+    if exif_data is None:
+        data["Separator"] = "\nSorry, image has no exif data."
+    else:
+        data["Separator"] = "\n=============== EXIF DATA ==============="
+        for key, val in exif_data.items():
+            if key in ExifTags.TAGS:
+                data[ExifTags.TAGS[key]] = val
+            else:
+                data[key] = val
 
 
 def ft_load_image(filepath: str) -> Image:
@@ -60,6 +131,12 @@ def ft_load_image(filepath: str) -> Image:
 
 
 def main():
+    """
+    Program try to load an Image at the specified path.
+    then print the file's datas if the file is valid.
+    Usage :
+        scorpion.py <PathToFile>
+    """
     argnb = len(argv)
 
     if argnb < 2:
@@ -69,9 +146,10 @@ def main():
     for filepath in filepaths:
         try:
             data = {}
-            ft_load_image(filepath)
+            img = ft_load_image(filepath)
             ft_get_basic_file_data(filepath, data)
-            print (data)
+            ft_get_exif_data(img, data)
+            ft_print_file_data(data)
         except Exception as e:
             print(e)
 
