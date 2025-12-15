@@ -1,0 +1,9 @@
+Log notice stdout
+
+HiddenServiceDir /var/lib/tor/hs_site
+HiddenServiceVersion 3
+HiddenServicePort 80 web:80
+
+SocksPort 0
+ClientOnly 1
+ExitRelay 0

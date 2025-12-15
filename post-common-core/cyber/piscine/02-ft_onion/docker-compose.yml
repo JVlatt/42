@@ -1,0 +1,41 @@
+services:
+  web:
+    image: nginx:alpine
+    read_only: true
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    tmpfs:
+      - /var/cache/nginx
+      - /var/cache/nginx/client_temp
+      - /var/cache/nginx/proxy_temp
+      - /var/cache/nginx/fastcgi_temp
+      - /var/cache/nginx/uwsgi_temp
+      - /var/cache/nginx/scgi_temp
+      - /tmp
+    user: ${NGINX_UID}:${NGINX_GID}
+    security_opt: [ no-new-privileges:true ]
+    networks: [ hidden ]
+    restart: unless-stopped
+
+  tor:
+    build: ./tor
+    volumes:
+      - ./data/tor:/var/lib/tor
+    read_only: true
+    cap_drop: [ ALL ]
+    security_opt: [ no-new-privileges:true ]
+    networks: [ hidden, tor_out ]
+    depends_on: [ web ]
+    healthcheck:
+      test: ["CMD-SHELL", "tor --verify-config -f /etc/tor/torrc"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+networks:
+  hidden:
+    internal: true              # private LAN – no Internet
+  tor_out:
+    driver: bridge              # only Tor joins – outbound TCP allowed
