@@ -1,6 +1,6 @@
 DIR_OBJS = .objs
 
-LIBASM = ft_read.s ft_strcmp.s ft_strlen.s ft_write.s
+LIBASM = ft_read.s ft_strcmp.s ft_strlen.s ft_write.s ft_strcpy.s ft_strdup.s
 
 LST_OBJS = ${LIBASM:.s=.o}
 
